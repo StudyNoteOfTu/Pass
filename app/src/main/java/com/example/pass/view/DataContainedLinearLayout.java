@@ -1,0 +1,74 @@
+package com.example.pass.view;
+
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+public class DataContainedLinearLayout extends LinearLayout {
+
+    private TextView containedTextView;
+    private ImageView containedImageView;
+
+    private OnSwipeItemOpenListener l;
+
+    public void setOnSwipeItemOpenListener(OnSwipeItemOpenListener l){
+        this.l = l;
+    }
+
+    private boolean isShowingPicture = false;
+
+    public void setShowingPicture(boolean showingPicture) {
+        isShowingPicture = showingPicture;
+    }
+
+    public void setContainedImageView(ImageView containedImageView) {
+        this.containedImageView = containedImageView;
+    }
+
+
+    public void setContainedTextView(TextView containedTextView) {
+        this.containedTextView = containedTextView;
+    }
+
+    private int indexInAdapterList = -1;
+
+    private boolean isNeeded = true;
+
+    public DataContainedLinearLayout(Context context) {
+        super(context);
+    }
+
+    public DataContainedLinearLayout(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public DataContainedLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    public DataContainedLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+
+    public int getIndexInAdapterList() {
+        return indexInAdapterList;
+    }
+
+    public void setIndexInAdapterList(int indexInAdapterList) {
+        this.indexInAdapterList = indexInAdapterList;
+    }
+
+
+    public void onOpenStateChanged(boolean isOpen) {
+        if (l!=null){
+            l.onOpenStateChanged(isOpen);
+        }
+    }
+}
+

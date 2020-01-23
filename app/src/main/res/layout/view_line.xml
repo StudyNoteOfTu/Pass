@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.pass.view.SwipeItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.example.pass.view.DataContainedLinearLayout
+        android:id="@+id/dataContainedLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minWidth="360dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <com.example.pass.view.DataContainedImageView
+            android:id="@+id/image_select"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="top|center"
+            android:background="@drawable/ic_launcher_background" />
+
+        <ImageView
+            android:id="@+id/image_title"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+        <ImageView
+            android:id="@+id/image_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/tv_line_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:textSize="18sp" />
+
+    </com.example.pass.view.DataContainedLinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="70dp"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
+</com.example.pass.view.SwipeItemLayout>
