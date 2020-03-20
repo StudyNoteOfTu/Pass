@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?slide version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,11 +15,18 @@
         android:id="@+id/textview"
         android:layout_width="match_parent"
 
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_weight="1"
         android:lineSpacingExtra="1.1dp"
         android:scrollbars="vertical" />
 
+
+    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+        android:id="@+id/bigview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 </LinearLayout>

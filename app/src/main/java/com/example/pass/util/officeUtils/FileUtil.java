@@ -4,6 +4,7 @@ package com.example.pass.util.officeUtils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.os.FileUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -18,6 +19,22 @@ public class FileUtil {
 
     private final static String TAG = "FileUtil";
 
+    /*
+     * 创建文件
+     */
+    public static String createFile(String url){
+        File target_file = new File(url);
+        if (!target_file.getParentFile().exists()){
+            target_file.getParentFile().mkdirs();
+        }
+        return url;
+    }
+
+    /**
+     * 获取文件名，不带后缀
+     * @param pathandname 文件路径
+     * @return
+     */
     public static String getFileName(String pathandname) {
         int start = pathandname.lastIndexOf("/");
         int end = pathandname.lastIndexOf(".");
@@ -28,6 +45,27 @@ public class FileUtil {
         }
     }
 
+    /**
+     * 获取文件名，带后缀
+     * @param pathandname 文件路径
+     * @return
+     */
+    public static String getCompleteFileName(String pathandname){
+        int start = pathandname.lastIndexOf("/");
+        if (start != -1){
+            return pathandname.substring(start);
+        }
+        else{
+            return "";
+        }
+    }
+
+    /**
+     * 创建文件
+     * @param dir_name
+     * @param file_name
+     * @return
+     */
     public static String createFile(String dir_name, String file_name) {
         String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
         String dir_path = String.format("%s/%s", sdcard_path, dir_name);
@@ -47,30 +85,17 @@ public class FileUtil {
         return file_path;
     }
 
-    public static ZipEntry getWordPicEntry(ZipFile docxFile, int pic_index) {
-        String entry_jpg = "word/media/image" + pic_index + ".jpeg";
-        String entry_png = "word/media/image" + pic_index + ".png";
-        String entry_gif = "word/media/image" + pic_index + ".gif";
-        String entry_wmf = "word/media/image" + pic_index + ".wmf";
-        ZipEntry pic_entry = null;
-        pic_entry = docxFile.getEntry(entry_jpg);
-        // 以下为读取docx的图片 转化为流数组
-        if (pic_entry == null) {
-            pic_entry = docxFile.getEntry(entry_png);
-        }
-        if (pic_entry == null) {
-            pic_entry = docxFile.getEntry(entry_gif);
-        }
-        if (pic_entry == null) {
-            pic_entry = docxFile.getEntry(entry_wmf);
-        }
-        return pic_entry;
-    }
 
-    public static byte[] getPictureBytes(ZipFile docxFile, ZipEntry pic_entry) {
+    /**
+     * 从压缩文件中读取图片
+     * @param zipFile  压缩文件
+     * @param pic_entry 对应图片压缩Entry
+     * @return
+     */
+    public static byte[] getPictureBytes(ZipFile zipFile, ZipEntry pic_entry) {
         byte[] pictureBytes = null;
         try {
-            InputStream pictIS = docxFile.getInputStream(pic_entry);
+            InputStream pictIS = zipFile.getInputStream(pic_entry);
             ByteArrayOutputStream pOut = new ByteArrayOutputStream();
             byte[] b = new byte[1000];
             int len = 0;
@@ -94,6 +119,11 @@ public class FileUtil {
 
     }
 
+    /**
+     * 将图片写入文件
+     * @param pic_path 目标文件路径
+     * @param pictureBytes 图片文件
+     */
     public static void writePicture(String pic_path, byte[] pictureBytes) {
         File myPicture = new File(pic_path);
         try {
@@ -105,6 +135,11 @@ public class FileUtil {
         }
     }
 
+    /**
+     * 获取转为Bitmap格式的本地图片
+     * @param url
+     * @return
+     */
     public static Bitmap getLocalBitmap(String url){
         try {
             FileInputStream fis = new FileInputStream(url);

@@ -20,6 +20,7 @@ import android.util.Xml;
 
 import com.example.pass.util.officeUtils.FileUtil;
 import com.example.pass.util.officeUtils.XmlTags;
+import com.example.pass.util.spans.ClickableImageSpan;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -83,7 +84,8 @@ public class XmlToSpanUtil {
                         if (tagBegin.equalsIgnoreCase("pic")) {
                             Bitmap bitmap = FileUtil.getLocalBitmap(xmlPullParser.nextText());
                             if (bitmap != null) {
-                                ImageSpan imageSpan = new ImageSpan(context, bitmap);
+//                                ImageSpan imageSpan = new ImageSpan(context, bitmap);
+                                ImageSpan imageSpan = new ClickableImageSpan(context,bitmap);
                                 spannableStringBuilder = new SpannableStringBuilder();
                                 spannableStringBuilder.append("pic");
                                 spannableStringBuilder.setSpan(imageSpan, 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

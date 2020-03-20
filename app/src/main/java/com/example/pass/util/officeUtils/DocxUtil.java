@@ -78,7 +78,7 @@ public class DocxUtil {
                     case XmlPullParser.START_TAG:
                         String tagBegin = xmlParser.getName();
                         if (tagBegin.equalsIgnoreCase("pic")) {
-                            ZipEntry pic_entry = FileUtil.getWordPicEntry(docxFile, pic_ndex);
+                            ZipEntry pic_entry = getWordPicEntry(docxFile, pic_ndex);
                             if (pic_entry != null) {
                                 byte[] pictureBytes = FileUtil.getPictureBytes(docxFile, pic_entry);
                                 writeDocumentPicture(docPath, outputStream, pictureBytes);
@@ -192,6 +192,35 @@ public class DocxUtil {
             e.printStackTrace();
         }
     }
+
+
+
+    /**
+     * 获得word文档中的图片Entry
+     * @param docxFile
+     * @param pic_index
+     * @return
+     */
+    public static ZipEntry getWordPicEntry(ZipFile docxFile, int pic_index) {
+        String entry_jpg = "word/media/image" + pic_index + ".jpeg";
+        String entry_png = "word/media/image" + pic_index + ".png";
+        String entry_gif = "word/media/image" + pic_index + ".gif";
+        String entry_wmf = "word/media/image" + pic_index + ".wmf";
+        ZipEntry pic_entry = null;
+        pic_entry = docxFile.getEntry(entry_jpg);
+        // 以下为读取docx的图片 转化为流数组
+        if (pic_entry == null) {
+            pic_entry = docxFile.getEntry(entry_png);
+        }
+        if (pic_entry == null) {
+            pic_entry = docxFile.getEntry(entry_gif);
+        }
+        if (pic_entry == null) {
+            pic_entry = docxFile.getEntry(entry_wmf);
+        }
+        return pic_entry;
+    }
+
 
 
 }
