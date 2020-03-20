@@ -176,7 +176,7 @@ public class DocxUtil {
     }
 
     public void writeDocumentPicture(String docPath, FileOutputStream output, byte[] pictureBytes) {
-        String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + "Pass";
+        String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pass";
         File dirFile = new File(dir_path);
         if (!dirFile.exists()) {
             dirFile.mkdir();

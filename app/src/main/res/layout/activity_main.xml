@@ -12,6 +12,7 @@
         android:layout_height="0dp" />
 
     <TextView
+        android:textSize="18sp"
         android:id="@+id/textview"
         android:layout_width="match_parent"
 

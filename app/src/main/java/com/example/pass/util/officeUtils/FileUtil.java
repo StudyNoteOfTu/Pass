@@ -53,7 +53,7 @@ public class FileUtil {
     public static String getCompleteFileName(String pathandname){
         int start = pathandname.lastIndexOf("/");
         if (start != -1){
-            return pathandname.substring(start);
+            return pathandname.substring(start+1);
         }
         else{
             return "";

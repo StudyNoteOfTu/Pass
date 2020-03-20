@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.pass.util.officeUtils.FileUtil;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class PptxSlideEntryUtil {
                     Log.d(TAG,"写入图片 get byte[]");
                     String key = FileUtil.getCompleteFileName(zipEntryName);
                     byte[] pic = FileUtil.getPictureBytes(zipFile,zipEntry);
+                    Log.d(TAG,"写入图片 byte.size ="+pic.length);
                     images.put(key,pic);
                 }
             }
