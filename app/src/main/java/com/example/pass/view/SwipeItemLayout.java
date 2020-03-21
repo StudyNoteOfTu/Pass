@@ -16,6 +16,8 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SwipeItemLayout extends ViewGroup{
+
+    private static final String TAG = "SwipeItemLayout";
     //枚举几个Mode
     enum Mode {
         RESET, DRAG, FLING, TAP
@@ -35,9 +37,30 @@ public class SwipeItemLayout extends ViewGroup{
 
     private boolean isOpen = false;
 
+
+    private boolean hasInit = false;
+
+    //初始化张开
+    public void initOpenState(boolean open){
+        if(hasInit) return;
+        if (open){
+            open();
+        }
+        hasInit = true;
+    }
+
+    public boolean isHasInit() {
+        return hasInit;
+    }
+
+    public void setHasInit(boolean hasInit) {
+        this.hasInit = hasInit;
+    }
+
     public void setOpen(boolean open) {
         isOpen = open;
         if (mMainView instanceof DataContainedLinearLayout){
+            Log.d(TAG,"mainView is Open ?"+isOpen);
             ((DataContainedLinearLayout)mMainView).onOpenStateChanged(isOpen);
         }
 

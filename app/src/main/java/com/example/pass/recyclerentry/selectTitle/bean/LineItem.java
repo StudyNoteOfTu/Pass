@@ -1,6 +1,10 @@
 package com.example.pass.recyclerentry.selectTitle.bean;
 
+import android.text.TextUtils;
 import android.util.Log;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LineItem {
     private final static String TAG = "LineItem";
@@ -40,9 +44,30 @@ public class LineItem {
     }
 
     public void setDataWithXml(String xml) {
-        //先判断是不是图片
+        //正则提取该<p>的状态信息
+        String key=null;
+        String value=null;
+        String regex = "<pass:p key=\"(.*?)\" val=\"(.*?)\">";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(xml);
+        //如果有匹配的，只需要最前面一段
+        if (matcher.find()){
+            key = matcher.group(1);
+            value = matcher.group(2);
+        }
+
+
+        if (!TextUtils.isEmpty(key)&&!TextUtils.isEmpty(value)){
+            //如果均不为空
+
+        }
+
+
+
+        //先判断是否包含图片
         String picBegin = "<pass:pic>";
         String picEnd ="</pass:pic>";
+        //判断是否包含图片
         if (xml.contains(picBegin)){
             this.picPath = xml.substring(xml.indexOf(picBegin)+picBegin.length(),xml.indexOf(picEnd));
             Log.d(TAG,"pic path is "+picPath);

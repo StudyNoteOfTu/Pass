@@ -19,6 +19,8 @@ import com.example.pass.recyclerentry.selectTitle.bean.LineItem;
 import com.example.pass.view.DataContainedImageView;
 import com.example.pass.view.OnSwipeItemOpenListener;
 
+import org.apache.poi.sl.usermodel.Line;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,35 +102,31 @@ public class LineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        ((LineHolder)holder).imageSelect.setOnClickListener(this);
-        ((LineHolder)holder).imageSelect.setOnLongClickListener(this);
-        ((LineHolder)holder).imageSelect.setIndexInAdapterList(position);
-        ((LineHolder)holder).linearLayout.setIndexInAdapterList(position);
-        ((LineHolder)holder).linearLayout.setOnSwipeItemOpenListener(new OnSwipeItemOpenListener() {
+        final LineHolder lineHolder = (LineHolder)holder;
+        LineItem lineItem = items.get(position);
+
+        //初始化
+        if (!lineHolder.swipeItemLayout.isHasInit()){
+            lineHolder.swipeItemLayout.initOpenState(true);
+            changeStateToOpen(lineHolder,position);
+            lineHolder.swipeItemLayout.setHasInit(true);
+        }
+
+
+        lineHolder.imageSelect.setOnClickListener(this);
+        lineHolder.imageSelect.setOnLongClickListener(this);
+        lineHolder.imageSelect.setIndexInAdapterList(position);
+        lineHolder.linearLayout.setIndexInAdapterList(position);
+        lineHolder.linearLayout.setOnSwipeItemOpenListener(new OnSwipeItemOpenListener() {
             @Override
             public void onOpenStateChanged(boolean isOpen) {
                 if (isOpen){
                     items.get(position).setIgnored(true);
                     Log.d("DataContainedLinearLayout","isOpen");
-                    if (((LineHolder)holder).tvLineContent!=null){
-                        ((LineHolder)holder).tvLineContent.getPaint().setFlags(((LineHolder)holder).tvLineContent.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-                        ((LineHolder)holder).tvLineContent.setTextColor(Color.GRAY);
-                    }
-                    if (!TextUtils.isEmpty(items.get(position).getPicPath())){
-                        ((LineHolder)holder).linearLayout.setShowingPicture(true);
-                        ((LineHolder)holder).imagePicture.setImageAlpha(50);
-                    }
+                    changeStateToOpen(lineHolder, position);
                 }else{
                     items.get(position).setIgnored(false);
-                    if (((LineHolder)holder).tvLineContent!=null){
-                        ((LineHolder)holder).tvLineContent.getPaint().setFlags(((LineHolder)holder).tvLineContent.getPaintFlags()&~Paint.STRIKE_THRU_TEXT_FLAG);
-                        ((LineHolder)holder).tvLineContent.setTextColor(Color.BLACK);
-                    }
-                    if (!TextUtils.isEmpty(items.get(position).getPicPath())){
-                        ((LineHolder)holder).linearLayout.setShowingPicture(true);
-                        ((LineHolder)holder).imagePicture.setImageAlpha(255);
-
-                    }
+                    changeStateToClose(lineHolder, position);
                 }
 
             }
@@ -147,6 +145,28 @@ public class LineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         }
     }
 
+    private void changeStateToClose(LineHolder lineHolder, int position) {
+        if (lineHolder.tvLineContent!=null){
+            lineHolder.tvLineContent.getPaint().setFlags(lineHolder.tvLineContent.getPaintFlags()&~Paint.STRIKE_THRU_TEXT_FLAG);
+            lineHolder.tvLineContent.setTextColor(Color.BLACK);
+        }
+        if (!TextUtils.isEmpty(items.get(position).getPicPath())){
+            lineHolder.linearLayout.setShowingPicture(true);
+            lineHolder.imagePicture.setImageAlpha(255);
+
+        }
+    }
+
+    private void changeStateToOpen(LineHolder lineHolder, int position) {
+        if (lineHolder.tvLineContent!=null){
+            lineHolder.tvLineContent.getPaint().setFlags(lineHolder.tvLineContent.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+            lineHolder.tvLineContent.setTextColor(Color.GRAY);
+        }
+        if (!TextUtils.isEmpty(items.get(position).getPicPath())){
+            lineHolder.linearLayout.setShowingPicture(true);
+            lineHolder.imagePicture.setImageAlpha(50);
+        }
+    }
 
 
     @Override

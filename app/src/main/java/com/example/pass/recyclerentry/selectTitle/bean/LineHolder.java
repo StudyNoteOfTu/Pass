@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pass.R;
 import com.example.pass.view.DataContainedImageView;
 import com.example.pass.view.DataContainedLinearLayout;
+import com.example.pass.view.SwipeItemLayout;
 
 public class LineHolder extends RecyclerView.ViewHolder {
 
@@ -17,9 +18,11 @@ public class LineHolder extends RecyclerView.ViewHolder {
     public ImageView imagePicture;
     public TextView tvLineContent;
     public DataContainedLinearLayout linearLayout;
+    public SwipeItemLayout swipeItemLayout;
 
     public LineHolder(View itemView) {
         super(itemView);
+        swipeItemLayout = itemView.findViewById(R.id.swipeItemLayout);
         imageSelect = itemView.findViewById(R.id.image_select);
         imageTitle = itemView.findViewById(R.id.image_title);
         tvLineContent = itemView.findViewById(R.id.tv_line_content);
