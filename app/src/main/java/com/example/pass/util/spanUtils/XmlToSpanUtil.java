@@ -21,6 +21,14 @@ import android.util.Xml;
 import com.example.pass.util.officeUtils.FileUtil;
 import com.example.pass.util.officeUtils.XmlTags;
 import com.example.pass.util.spans.ClickableImageSpan;
+import com.example.pass.util.spans.customSpans.MyForegroundColorSpan;
+import com.example.pass.util.spans.customSpans.MyHighLightColoSpan;
+import com.example.pass.util.spans.customSpans.MyImageSpan;
+import com.example.pass.util.spans.customSpans.MyNormalSpan;
+import com.example.pass.util.spans.customSpans.MyStrikethroughSpan;
+import com.example.pass.util.spans.customSpans.MyStyleSpan;
+import com.example.pass.util.spans.customSpans.MyUnderlineSpan;
+import com.example.pass.view.DataContainedImageView;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -38,10 +46,11 @@ public class XmlToSpanUtil {
     private static final String TAG = "XmlToSpanUtil";
 
     //将String类型的Xml解析为Span修饰的Editable
-    public List<SpannableStringBuilder> xmlToEditable(Context context, String xml) {
+    public List<DataContainedSpannableStringBuilder> xmlToEditable(Context context, String xml) {
 
-
-        List<SpannableStringBuilder> editables = new ArrayList<>();
+        String p_key = "";
+        String p_value ="";
+        List<DataContainedSpannableStringBuilder> editables = new ArrayList<>();
 
         StringBuilder sb = new StringBuilder();
         sb.append(XmlTags.getXmlBegin());
@@ -75,37 +84,41 @@ public class XmlToSpanUtil {
             String valueOfColor = "";
             String valueOfHightlight = "";
 
-            SpannableStringBuilder spannableStringBuilder = null;
+            DataContainedSpannableStringBuilder spannableStringBuilder = null;
 
             int event_type = xmlPullParser.getEventType();
             while (event_type != XmlPullParser.END_DOCUMENT) {
                 switch (event_type) {
                     case XmlPullParser.START_TAG:
                         String tagBegin = xmlPullParser.getName();
+
+                        if (tagBegin.equalsIgnoreCase("p")) {
+                            p_key = xmlPullParser.getAttributeValue("","key");//key
+                            p_value = xmlPullParser.getAttributeValue("","val");//value
+
+                        }
+
                         if (tagBegin.equalsIgnoreCase("pic")) {
                             String path = xmlPullParser.nextText();
                             Bitmap bitmap = FileUtil.getLocalBitmap(path);
                             if (bitmap != null) {
 //                                ImageSpan imageSpan = new ImageSpan(context, bitmap);
-                                ImageSpan imageSpan = new ClickableImageSpan(context,bitmap);
-                                spannableStringBuilder = new SpannableStringBuilder();
+                                MyImageSpan imageSpan = new MyImageSpan(context,bitmap);
+                                spannableStringBuilder = new DataContainedSpannableStringBuilder();
                                 //将pic的文字部分变为路径，这样就可以提取了
                                 spannableStringBuilder.append(path);
                                 spannableStringBuilder.setSpan(imageSpan, 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                                //设置spannableStringbuilder属性
+                                spannableStringBuilder = setSBAttributes(spannableStringBuilder,p_key,p_value,false);
+
                                 editables.add(spannableStringBuilder);
-                            }
-                        }
-                        //暂时没用
-                        if (tagBegin.equalsIgnoreCase("p")) {
-                            String key = xmlPullParser.getAttributeValue(0);//key
-                            if (key.equalsIgnoreCase("title")) {
-                                isTitle = true;
                             }
                         }
 
                         //所有span片段都被<r></r>包围,先设置文字，再设置span, 在TAG寻找END中 设置span
                         if (tagBegin.equalsIgnoreCase("r")) {
-                            spannableStringBuilder = new SpannableStringBuilder();
+                            spannableStringBuilder = new DataContainedSpannableStringBuilder();
                         }
 
                         if (tagBegin.equalsIgnoreCase("style")) {
@@ -138,27 +151,30 @@ public class XmlToSpanUtil {
 //                                }
                                 spannableStringBuilder.append(xmlPullParser.nextText());
 
+                                //全都至少加上一个Normal标识
+                                spannableStringBuilder.setSpan(new MyNormalSpan(),0,spannableStringBuilder.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                                 if (isBold) {
                                     if (spannableStringBuilder.length() != 0)
 
                                         Log.d("TestBold","setBoldSpan");
                                         Log.d("TestBold","content is"+spannableStringBuilder.toString());
-                                        spannableStringBuilder.setSpan(new StyleSpan(Typeface.BOLD), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                        spannableStringBuilder.setSpan(new MyStyleSpan(Typeface.BOLD), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                                     isBold = false;
                                 }
                                 if (isItalic) {
                                     if (spannableStringBuilder.length() != 0)
-                                        spannableStringBuilder.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                        spannableStringBuilder.setSpan(new MyStyleSpan(Typeface.ITALIC), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                                     isItalic = false;
                                 }
                                 if (isUnderline) {
                                     if (spannableStringBuilder.length() != 0)
-                                        spannableStringBuilder.setSpan(new UnderlineSpan(), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                        spannableStringBuilder.setSpan(new MyUnderlineSpan(), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                                     isUnderline = false;
                                 }
                                 if (isLinethrough) {
                                     if (spannableStringBuilder.length() != 0)
-                                        spannableStringBuilder.setSpan(new StrikethroughSpan(), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                        spannableStringBuilder.setSpan(new MyStrikethroughSpan(), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                                     isLinethrough = false;
                                 }
                                 if (isColor) {
@@ -167,7 +183,7 @@ public class XmlToSpanUtil {
                                             if (!valueOfColor.equalsIgnoreCase("000000")) {
                                                 Log.d("TestForeground", "setForegroundColorSpan");
                                                 Log.d("TestForeground", "content is" + spannableStringBuilder.toString());
-                                                spannableStringBuilder.setSpan(new ForegroundColorSpan(Color.parseColor(colorToString(valueOfColor))), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                                spannableStringBuilder.setSpan(new MyForegroundColorSpan(Color.parseColor(colorToString(valueOfColor))), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                                             }
                                         }
                                     isColor = false;
@@ -175,10 +191,11 @@ public class XmlToSpanUtil {
                                 if (isHighlight) {
                                     if (spannableStringBuilder.length() != 0)
                                         if (!TextUtils.isEmpty(valueOfHightlight))
-                                            spannableStringBuilder.setSpan(new BackgroundColorSpan(getFieldValueByFieldName(valueOfHightlight, new Color())), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                            spannableStringBuilder.setSpan(new MyHighLightColoSpan(getFieldValueByFieldName(valueOfHightlight, new Color())), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                                     isHighlight = false;
                                 }
 
+                                spannableStringBuilder = setSBAttributes(spannableStringBuilder,p_key,p_value,false);
                                 editables.add(spannableStringBuilder);
                             }
                         }
@@ -186,7 +203,9 @@ public class XmlToSpanUtil {
                     case XmlPullParser.END_TAG:
                         String tagEnd = xmlPullParser.getName();
                         if (tagEnd.equalsIgnoreCase("p")) {
-                            editables.add(new SpannableStringBuilder("\n"));
+                            DataContainedSpannableStringBuilder dsb = new DataContainedSpannableStringBuilder("\n");
+                            dsb = setSBAttributes(dsb,p_key,p_value,true);
+                            editables.add(dsb);
                         }
                         break;
 
@@ -207,6 +226,13 @@ public class XmlToSpanUtil {
         }
 
         return editables;
+    }
+
+    private DataContainedSpannableStringBuilder setSBAttributes(DataContainedSpannableStringBuilder spannableStringBuilder, String key, String value, boolean isLineEnd) {
+        spannableStringBuilder.setKey(key);
+        spannableStringBuilder.setValue(value);
+        spannableStringBuilder.setLineEnd(isLineEnd);
+        return spannableStringBuilder;
     }
 
     private int getFieldValueByFieldName(String fieldName, Object object) {

@@ -21,6 +21,7 @@ import com.example.pass.util.officeUtils.MyXmlReader;
 import com.example.pass.util.officeUtils.PPTX.PptxSlideEntry;
 import com.example.pass.util.officeUtils.PPTX.PptxSlideEntryUtil;
 import com.example.pass.util.officeUtils.PPTX.PptxUtil;
+import com.example.pass.util.spanUtils.DataContainedSpannableStringBuilder;
 import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spanUtils.XmlToSpanUtil;
 import com.example.pass.util.spans.callbacks.ClickMovementMethodCallback;
@@ -33,6 +34,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     RecyclerView recyclerView;
     LineAdapter adapter;
 
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         //解析xml并合成editable呈现在textview上
         XmlToSpanUtil xmlToSpanUtil = new XmlToSpanUtil();
-        List<SpannableStringBuilder> editables = xmlToSpanUtil.xmlToEditable(this, content);
+        List<DataContainedSpannableStringBuilder> editables = xmlToSpanUtil.xmlToEditable(this, content);
         SpannableStringBuilder sb = new SpannableStringBuilder();
         for (int i = 0; i < editables.size(); i++) {
             sb.append(editables.get(i));
@@ -102,11 +104,16 @@ public class MainActivity extends AppCompatActivity {
 
         //解析xml并合成editable呈现在textview上
         XmlToSpanUtil xmlToSpanUtil = new XmlToSpanUtil();
-        List<SpannableStringBuilder> editables = xmlToSpanUtil.xmlToEditable(this, content);
+        List<DataContainedSpannableStringBuilder> editables = xmlToSpanUtil.xmlToEditable(this, content);
+
         SpannableStringBuilder sb = new SpannableStringBuilder();
         for (int i = 0; i < editables.size(); i++) {
+            DataContainedSpannableStringBuilder dcSb = editables.get(i);
+            Log.d(TAG,"key = "+dcSb.getKey()+" val = "+dcSb.getValue() + " isLineEnd = "+dcSb.isLineEnd());
+            Log.d(TAG,"string = "+dcSb);
             sb.append(editables.get(i));
         }
+
 //        ((TextView)findViewById(R.id.textview)).setMovementMethod(new ScrollingMovementMethod());
         ClickableLinkMovementMethod clickableLinkMovementMethod = new ClickableLinkMovementMethod();
         clickableLinkMovementMethod.setCallback(new ClickMovementMethodCallback() {
@@ -120,9 +127,10 @@ public class MainActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.textview)).setText(sb);
 
-        //测试sb
+        //测试 将Editable转为按<p></p> <p></p> ...为规格的Xml
         SpanToXmlUtil.editableToXml(sb);
 
+        //将xml按<p>拆分成一句一句
         List<String> list = myXmlReader.getLineList(content);
 
         Log.d("test","list.size() = "+list.size());

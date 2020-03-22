@@ -9,6 +9,11 @@ public class XmlTags {
 
     private static String xmlEnd = "</resource>";
 
+    /**
+     * 譬如
+     * 左滑忽略：<pass:p key="ignore" val="1"></pass:p>
+     * 目录登记：<pass:p key="title" val="1"></pass:p>
+     */
     private static String lineBegin = "<"+passTag+"p key=\"%s\" val=\"%s\">",lineEnd ="</"+passTag+"p>";
 
     private static  String styleTag = "<"+passTag+"style key=\"%s\" val=\"%s\"/>";

@@ -312,7 +312,9 @@ public class PptxUtil {
             Field field = object.getClass().getDeclaredField(fieldName.toUpperCase());
             //设置对象的访问权限，保证对private的属性的访问
             field.setAccessible(true);
-            return String.format("%06x",(int)field.get(object));
+            String color = String.format("%06x",(int)field.get(object));
+            color = color.substring(color.length()-6);
+            return color;
         } catch (Exception e) {
             return "000000";//0x00000000 透明
         }
