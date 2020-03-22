@@ -21,6 +21,7 @@ import com.example.pass.util.officeUtils.MyXmlReader;
 import com.example.pass.util.officeUtils.PPTX.PptxSlideEntry;
 import com.example.pass.util.officeUtils.PPTX.PptxSlideEntryUtil;
 import com.example.pass.util.officeUtils.PPTX.PptxUtil;
+import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spanUtils.XmlToSpanUtil;
 import com.example.pass.util.spans.callbacks.ClickMovementMethodCallback;
 import com.example.pass.util.spans.movementMethods.ClickableLinkMovementMethod;
@@ -116,7 +117,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ((TextView) findViewById(R.id.textview)).setMovementMethod(clickableLinkMovementMethod);
+
         ((TextView) findViewById(R.id.textview)).setText(sb);
+
+        //测试sb
+        SpanToXmlUtil.editableToXml(sb);
 
         List<String> list = myXmlReader.getLineList(content);
 

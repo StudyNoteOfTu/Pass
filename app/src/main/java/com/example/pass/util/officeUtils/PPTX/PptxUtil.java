@@ -1,5 +1,6 @@
 package com.example.pass.util.officeUtils.PPTX;
 
+import android.graphics.Color;
 import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
@@ -18,10 +19,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
@@ -112,7 +115,7 @@ public class PptxUtil {
         int listLevel = 0;//列表的层序 0最大
         int listId = 0;//一个文档中可能有多个列表， 在ppt中没有用？
         String color = "000000";
-        String highlight = "000000";
+        String highlight = "FFFFFF";
 
         int event_type = xmlPullParser.getEventType();
         while(event_type != XmlPullParser.END_DOCUMENT){
@@ -122,6 +125,17 @@ public class PptxUtil {
                     if (tagBegin.equalsIgnoreCase("p")){
                         //检测到段落
                         outputStream.write(XmlTags.getLineBegin("","").getBytes());
+                        //刷新状态
+                        isColor = false;
+                        color = "000000";
+                        highlight = "FFFFFF";
+                        isBackground = false;
+                        isHighlight = false;
+                        isItalic = false;
+                        isUnderline = false;
+                        isBold = false;
+                        isList = false;
+
                     }
 
                     //设置文字颜色
@@ -132,6 +146,7 @@ public class PptxUtil {
                     if (isColor && tagBegin.equalsIgnoreCase("srgbClr")){
                         //设置文字颜色
                         color = xmlPullParser.getAttributeValue("","val");
+                        getFieldValueByFieldName(color,new Color());
                     }
 
                     //设置背景高亮颜色
@@ -286,5 +301,36 @@ public class PptxUtil {
     }
 
 
+
+    private  static String getFieldValueByFieldName(String fieldName, Object object) {
+        //注意这里修改为判断fieldName是否为数字开头，如果数字开头说明是srgbClr
+        if (isInteger(fieldName)){
+            return fieldName;
+        }
+        //如果是文字 比如YELLOW之类的
+        try {
+            Field field = object.getClass().getDeclaredField(fieldName.toUpperCase());
+            //设置对象的访问权限，保证对private的属性的访问
+            field.setAccessible(true);
+            return String.format("%06x",(int)field.get(object));
+        } catch (Exception e) {
+            return "000000";//0x00000000 透明
+        }
+    }
+
+    //判断是不是rgb数字
+    private static  boolean isInteger(String fieldName) {
+        Pattern pattern = Pattern.compile("[0-9a-fA-F]*");
+        return pattern.matcher(fieldName).matches();
+    }
+
+
+    private static String colorToString(String color) {
+        if (!color.startsWith("#")) {
+            return "#FF" + color;
+        } else {
+            return color;
+        }
+    }
 
 }

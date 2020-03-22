@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class XmlToSpanUtil {
 
@@ -82,12 +83,14 @@ public class XmlToSpanUtil {
                     case XmlPullParser.START_TAG:
                         String tagBegin = xmlPullParser.getName();
                         if (tagBegin.equalsIgnoreCase("pic")) {
-                            Bitmap bitmap = FileUtil.getLocalBitmap(xmlPullParser.nextText());
+                            String path = xmlPullParser.nextText();
+                            Bitmap bitmap = FileUtil.getLocalBitmap(path);
                             if (bitmap != null) {
 //                                ImageSpan imageSpan = new ImageSpan(context, bitmap);
                                 ImageSpan imageSpan = new ClickableImageSpan(context,bitmap);
                                 spannableStringBuilder = new SpannableStringBuilder();
-                                spannableStringBuilder.append("pic");
+                                //将pic的文字部分变为路径，这样就可以提取了
+                                spannableStringBuilder.append(path);
                                 spannableStringBuilder.setSpan(imageSpan, 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                                 editables.add(spannableStringBuilder);
                             }
@@ -137,6 +140,9 @@ public class XmlToSpanUtil {
 
                                 if (isBold) {
                                     if (spannableStringBuilder.length() != 0)
+
+                                        Log.d("TestBold","setBoldSpan");
+                                        Log.d("TestBold","content is"+spannableStringBuilder.toString());
                                         spannableStringBuilder.setSpan(new StyleSpan(Typeface.BOLD), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                                     isBold = false;
                                 }
@@ -158,8 +164,11 @@ public class XmlToSpanUtil {
                                 if (isColor) {
                                     if (spannableStringBuilder.length() != 0)
                                         if (!TextUtils.isEmpty(valueOfColor)) {
-                                            if (!valueOfColor.equalsIgnoreCase("000000"))
-                                            spannableStringBuilder.setSpan(new ForegroundColorSpan(Color.parseColor(colorToString(valueOfColor))), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                            if (!valueOfColor.equalsIgnoreCase("000000")) {
+                                                Log.d("TestForeground", "setForegroundColorSpan");
+                                                Log.d("TestForeground", "content is" + spannableStringBuilder.toString());
+                                                spannableStringBuilder.setSpan(new ForegroundColorSpan(Color.parseColor(colorToString(valueOfColor))), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                            }
                                         }
                                     isColor = false;
                                 }
@@ -201,6 +210,12 @@ public class XmlToSpanUtil {
     }
 
     private int getFieldValueByFieldName(String fieldName, Object object) {
+        //注意这里修改为判断fieldName是否为数字开头，如果数字开头说明是srgbClr
+        if (isInteger(fieldName)){
+            fieldName = "0xFF"+ fieldName.substring(fieldName.length()-6);
+            return (int) Integer.parseInt(fieldName);
+        }
+        //如果是文字 比如YELLOW之类的
         try {
             Field field = object.getClass().getDeclaredField(fieldName.toUpperCase());
             //设置对象的访问权限，保证对private的属性的访问
@@ -209,6 +224,12 @@ public class XmlToSpanUtil {
         } catch (Exception e) {
             return 0;//0x00000000 透明
         }
+    }
+
+    //判断是不是rgb数字
+    private boolean isInteger(String fieldName) {
+        Pattern pattern = Pattern.compile("[0-9a-fA-F]*");
+        return pattern.matcher(fieldName).matches();
     }
 
 
