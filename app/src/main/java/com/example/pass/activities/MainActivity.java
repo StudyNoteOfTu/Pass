@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
+import android.util.Xml;
 import android.widget.TextView;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
@@ -16,11 +17,14 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.pass.R;
 import com.example.pass.recyclerentry.selectTitle.LineAdapter;
 import com.example.pass.util.FormatTools;
+import com.example.pass.util.localFileUtils.LocalInfos;
+import com.example.pass.util.localFileUtils.LocalOfficeFileUtils;
 import com.example.pass.util.officeUtils.DocxUtil;
 import com.example.pass.util.officeUtils.MyXmlReader;
 import com.example.pass.util.officeUtils.PPTX.PptxSlideEntry;
 import com.example.pass.util.officeUtils.PPTX.PptxSlideEntryUtil;
 import com.example.pass.util.officeUtils.PPTX.PptxUtil;
+import com.example.pass.util.officeUtils.XmlTags;
 import com.example.pass.util.spanUtils.DataContainedSpannableStringBuilder;
 import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spanUtils.XmlToSpanUtil;
@@ -28,6 +32,8 @@ import com.example.pass.util.spans.callbacks.ClickMovementMethodCallback;
 import com.example.pass.util.spans.movementMethods.ClickableLinkMovementMethod;
 import com.example.pass.view.SwipeItemLayout;
 
+
+import org.apache.poi.util.LocaleUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -43,6 +49,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         testPPT();
+//
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+////                LocalOfficeFileUtils.doSearch(LocalInfos.QQFiles);
+////                int result = LocalOfficeFileUtils.doSearch(LocalOfficeFileUtils.filePath);
+//                LocalOfficeFileUtils.searchOfficeFiles(LocalOfficeFileUtils.filePath);
+//                //Log.d("LocalOfficeFileUtils","---------------getResult------------------------");
+//            }
+//        }).start();
+
 
     }
 
@@ -95,7 +112,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void testPPT() {
         String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
-        String ppt = sdcard_path + "/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv/新版马克思主义基本原理复习提纲20191204(2).pptx";
+//        String ppt = sdcard_path + "/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv/新版马克思主义基本原理复习提纲20191204(2).pptx";
+        String ppt = sdcard_path + "/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv/ToPPTX.pptx";
 
         PptxUtil.readPptx(ppt,"test","test");
 
@@ -104,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
 
         //解析xml并合成editable呈现在textview上
         XmlToSpanUtil xmlToSpanUtil = new XmlToSpanUtil();
+
+        //返回<p></p>的集合
         List<DataContainedSpannableStringBuilder> editables = xmlToSpanUtil.xmlToEditable(this, content);
 
         SpannableStringBuilder sb = new SpannableStringBuilder();
@@ -128,7 +148,16 @@ public class MainActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.textview)).setText(sb);
 
         //测试 将Editable转为按<p></p> <p></p> ...为规格的Xml
-        SpanToXmlUtil.editableToXml(sb);
+        List<String> xmlResultList = SpanToXmlUtil.editableToXml(sb);
+        StringBuilder finalXmlResult = new StringBuilder();
+        finalXmlResult.append(XmlTags.getXmlBegin());
+        for (int i = 0 ; i < xmlResultList.size() ; i++){
+            finalXmlResult.append(xmlResultList.get(i));
+            //加上一个换行只是为了更好打印结果观察
+            finalXmlResult.append("\n");
+        }
+        finalXmlResult.append(XmlTags.getXmlEnd());
+        Log.d("XmlResultListTest",finalXmlResult.toString());
 
         //将xml按<p>拆分成一句一句
         List<String> list = myXmlReader.getLineList(content);

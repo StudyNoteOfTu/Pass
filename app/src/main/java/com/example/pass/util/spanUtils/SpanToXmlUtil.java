@@ -34,6 +34,8 @@ public class SpanToXmlUtil {
     //转回的xml应该是节段形式的，即 <p>aaa</p><p>bbb</p>...
     //deal it line by line
     public static List<String> editableToXml(Editable editable) {
+
+
         //获取到的Editable的每一行
         List<SpannableStringBuilder> lines = new ArrayList<>();
         //需要处理的Editable转为SpannableStringBuilder
@@ -48,26 +50,31 @@ public class SpanToXmlUtil {
                 start = i + 1;
             }
         }
+
         //获得一行一行的(SpannableStringBuilder)Editable
         //接下来按行处理,按行处理的结果存入xmlStr集合
-        List<String> xmlStr = new ArrayList<>();
+        List<String> xmlResultList = new ArrayList<>();
         for (int i = 0 ; i < lines.size() ; i++) {
             SpannableStringBuilder line = lines.get(i);
 //            Log.d("TestIndex",i+"");
             String result = handleLineToXmlString(line);
+            xmlResultList.add(result);
         }
 
-
-        return null;
+        return xmlResultList;
     }
 
     /**
+     * 注意，每小节的<p></p>均无属性，不是title也不是ignore啥也不是
      * 将一行的SpannableStringBuilder处理转为以<p></p>为首尾的Xml语句
      *
      * @param line 一行的SpannableStringBuilder
      * @return 返回处理后的到的xml语句
      */
     private static String handleLineToXmlString(SpannableStringBuilder line) {
+
+        StringBuilder sb = new StringBuilder();
+
         //首先获取所有span位置
         Log.d(TAG, "---------------------------GettingSpan Begin--------------------------------");
         Log.d(TAG, line.toString());
@@ -287,7 +294,15 @@ public class SpanToXmlUtil {
 
         }
         Log.d(TAG, "---------------------------GettingSpan End--------------------------------");
-        return null;
+
+        sb.append(XmlTags.getLineBegin());
+
+        for (int i = 0 ; i < xmlOfEachText.size() ; i++){
+             sb.append(xmlOfEachText.get(i));
+        }
+
+        sb.append(XmlTags.getLineEnd());
+        return sb.toString();
     }
 
 

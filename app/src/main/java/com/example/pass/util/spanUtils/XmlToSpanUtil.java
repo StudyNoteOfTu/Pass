@@ -46,6 +46,7 @@ public class XmlToSpanUtil {
     private static final String TAG = "XmlToSpanUtil";
 
     //将String类型的Xml解析为Span修饰的Editable
+    //返回<p></p>的集合
     public List<DataContainedSpannableStringBuilder> xmlToEditable(Context context, String xml) {
 
         String p_key = "";

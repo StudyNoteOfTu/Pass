@@ -12,6 +12,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,6 +22,7 @@ import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,11 +101,24 @@ public class PptxUtil {
 
 
         ZipEntry slide = pptxSlideEntry.getSlide();
+        
         //开始写入xml文件，形同docx
-
         InputStream inputStream = zipFile.getInputStream(slide);
+
+        //输入流测试
+        byte[] testBytes = new byte[inputStream.available()];
+        int totalNum = inputStream.read(testBytes);
+        String byteXmlResult=  new String(testBytes);
+        String removeStr = "Evaluation Warning : The document was created with Spire.Presentation for Java";
+        String removeStr2 = "Evaluation Warning : The document was created with  Spire.Presentation for Java";
+        byteXmlResult = byteXmlResult.replaceAll(removeStr,"");
+        byteXmlResult = byteXmlResult.replaceAll(removeStr2,"");
+
+        //得到去掉spire水印的xmlInputStream
+        InputStream resultByteArrayInputStream = new ByteArrayInputStream(byteXmlResult.getBytes());
+
         XmlPullParser xmlPullParser = Xml.newPullParser();
-        xmlPullParser.setInput(inputStream,"utf-8");
+        xmlPullParser.setInput(resultByteArrayInputStream,"utf-8");
 
         boolean isColor = false;//文字颜色
         boolean isBackground = false;//文字背景颜色
@@ -244,6 +259,9 @@ public class PptxUtil {
             event_type = xmlPullParser.next();
         }
 
+
+        inputStream.close();
+        resultByteArrayInputStream.close();
 
     }
 

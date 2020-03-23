@@ -48,6 +48,7 @@ public class LineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         List<LineItem> items = new ArrayList<>();
         for (String str:lineData){
             lineItem = new LineItem();
+            //将str中的信息提取出来，存入lineItem
             lineItem.setDataWithXml(str);
             items.add(lineItem);
         }
@@ -106,6 +107,7 @@ public class LineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         LineItem lineItem = items.get(position);
 
         //初始化
+
         if (!lineHolder.swipeItemLayout.isHasInit()){
             lineHolder.swipeItemLayout.initOpenState(true);
             changeStateToOpen(lineHolder,position);
