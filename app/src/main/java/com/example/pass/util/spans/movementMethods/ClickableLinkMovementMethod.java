@@ -1,7 +1,6 @@
 package com.example.pass.util.spans.movementMethods;
 
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
@@ -10,13 +9,20 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.example.pass.util.spans.ClickableImageSpan;
-import com.example.pass.util.spans.callbacks.ClickMovementMethodCallback;
+import com.example.pass.util.spans.callbacks.ClickCallBack;
+import com.example.pass.util.spans.callbacks.ClickShadeMovementMethodCallback;
+import com.example.pass.util.spans.callbacks.ClickImageMovementMethodCallback;
+import com.example.pass.util.spans.customSpans.MyShadeSpan;
 
-
+/**
+ * 写的很乱，抽取一下相同代码
+ */
 public class ClickableLinkMovementMethod extends LinkMovementMethod {
 
     private static final String TAG= "ClickableLinkMovementMethod";
     private ClickableImageSpan mClickableImageSpan;
+
+    private MyShadeSpan mMyShadeSpan;
 
 
     private int TOUCH_MAX=50;
@@ -25,9 +31,9 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
 
     private long lastPressTime = 0;
 
-    private ClickMovementMethodCallback callback;
+    private ClickCallBack callback;
 
-    public void setCallback(ClickMovementMethodCallback callback){
+    public void setCallback(ClickCallBack callback){
         this.callback = callback;
     }
 
@@ -42,16 +48,22 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
                 if (Math.abs(System.currentTimeMillis() - lastPressTime )> TOUCH_MAX){
                     if (mClickableImageSpan!=null){
                         Drawable drawable = mClickableImageSpan.clicked();
-                        if (callback!=null){
-                            callback.onClicked(drawable);
+                        if (callback!=null && callback instanceof ClickImageMovementMethodCallback){
+                            ((ClickImageMovementMethodCallback)callback).onClicked(drawable);
                         }
                     }
+                    if (mMyShadeSpan != null){
+                        if (callback != null && callback instanceof ClickShadeMovementMethodCallback){
+                            ((ClickShadeMovementMethodCallback) callback).onClicked(mMyShadeSpan);
+                        }
+                    }
+
                 }
                 lastPressTime = 0;
                 break;
             }
             case MotionEvent.ACTION_MOVE:{
-                ClickableImageSpan touchSpan = getPressedSpan(widget,buffer,event);
+                ClickableImageSpan touchSpan = getPressedImageSpan(widget,buffer,event);
                 if (mClickableImageSpan != null && touchSpan != mClickableImageSpan){
                     mClickableImageSpan = null;
                     break;
@@ -61,6 +73,17 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
                     mClickableImageSpan = null;
                     break;
                 }
+
+                MyShadeSpan shadeSpan = getPressedShadeSpan(widget, buffer, event);
+                if (mMyShadeSpan !=null  && shadeSpan != mMyShadeSpan){
+                    mMyShadeSpan = null;
+                    break;
+                }
+                if (Math.abs((int)event.getX() - mLastMotionX)>TOUCH_MAX
+                        || Math.abs((int)event.getY() - mLastMotionY) > TOUCH_MAX){
+                    mMyShadeSpan = null;
+                    break;
+                }
                 break;
             }
 
@@ -68,15 +91,16 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
                 mLastMotionX = (int)event.getX();
                 mLastMotionY = (int)event.getY();
                 lastPressTime = System.currentTimeMillis();
-                mClickableImageSpan = getPressedSpan(widget, buffer, event);
+                mClickableImageSpan = getPressedImageSpan(widget, buffer, event);
+                mMyShadeSpan = getPressedShadeSpan(widget, buffer, event);
                 break;
             }
 
 //            case MotionEvent.ACTION_DOWN:
-//                mClickableImageSpan = getPressedSpan(widget,buffer,event);
+//                mClickableImageSpan = getPressedImageSpan(widget,buffer,event);
 //                break;
 //            case MotionEvent.ACTION_MOVE:
-//                ClickableImageSpan touchSpan = getPressedSpan(widget,buffer,event);
+//                ClickableImageSpan touchSpan = getPressedImageSpan(widget,buffer,event);
 //                if (mClickableImageSpan != null && touchSpan != mClickableImageSpan){
 //                    mClickableImageSpan = null;
 //                    break;
@@ -97,12 +121,13 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
 
 
 
-    private ClickableImageSpan getPressedSpan(TextView textView, Spannable spannable, MotionEvent event) {
+    private ClickableImageSpan getPressedImageSpan(TextView textView, Spannable spannable, MotionEvent event) {
         int x = (int) event.getX() - textView.getTotalPaddingLeft() + textView.getScrollX();
         int y = (int) event.getY() - textView.getTotalPaddingTop() + textView.getScrollY();
 
         Layout layout = textView.getLayout();
         int position = layout.getOffsetForHorizontal(layout.getLineForVertical(y), x);
+
 
         ClickableImageSpan[] blockImageSpans = spannable.getSpans(position, position, ClickableImageSpan.class);
         ClickableImageSpan touchedSpan = null;
@@ -114,8 +139,29 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
         return touchedSpan;
     }
 
+
+
+
+    private MyShadeSpan getPressedShadeSpan(TextView textView, Spannable spannable, MotionEvent event) {
+        int x = (int) event.getX() - textView.getTotalPaddingLeft() + textView.getScrollX();
+        int y = (int) event.getY() - textView.getTotalPaddingTop() + textView.getScrollY();
+
+        Layout layout = textView.getLayout();
+        int position = layout.getOffsetForHorizontal(layout.getLineForVertical(y), x);
+
+        MyShadeSpan[] clickableTextSpans = spannable.getSpans(0,spannable.length(),MyShadeSpan.class);
+        MyShadeSpan touchedSpan = null;
+        for (int i = 0 ; i < clickableTextSpans.length;i++){
+            if (positionWithinTag(position,spannable,clickableTextSpans[i])){
+                Log.d("SpanClickTest","点击命中第"+i+"个");
+                touchedSpan = clickableTextSpans[i];
+            }
+        }
+
+        return touchedSpan;
+    }
+
     private boolean positionWithinTag(int position, Spannable spannable, Object tag) {
         return position >= spannable.getSpanStart(tag) && position <= spannable.getSpanEnd(tag);
     }
-
 }

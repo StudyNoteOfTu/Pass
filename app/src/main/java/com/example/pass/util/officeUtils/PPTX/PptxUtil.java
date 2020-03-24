@@ -101,7 +101,7 @@ public class PptxUtil {
 
 
         ZipEntry slide = pptxSlideEntry.getSlide();
-        
+
         //开始写入xml文件，形同docx
         InputStream inputStream = zipFile.getInputStream(slide);
 

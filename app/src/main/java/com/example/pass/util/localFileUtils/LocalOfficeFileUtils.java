@@ -3,9 +3,6 @@ package com.example.pass.util.localFileUtils;
 import android.os.Environment;
 import android.util.Log;
 
-import com.spire.presentation.FileFormat;
-import com.spire.presentation.Presentation;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,10 +15,11 @@ public class LocalOfficeFileUtils {
     public static String filePath = Environment.getExternalStorageDirectory().toString() + File.separator;
 
 
-    public static void searchOfficeFiles(String filePath){
+    public static List<File> searchOfficeFiles(String filePath){
         List<File> fileList = new ArrayList<>();
         int result = doSearch(fileList,filePath);
         Log.d(TAG,fileList.toString());
+        return  fileList;
     }
 
     public static int doSearch(List<File> fileList, String path) {
@@ -48,30 +46,4 @@ public class LocalOfficeFileUtils {
         return 1;
     }
 
-    //耗时操作！
-    private static void PPT2PPTX(String filePath) {
-        try {
-            Presentation ppt = new Presentation();
-            ppt.loadFromFile(filePath);
-            ppt.saveToFile(filePath+"x", FileFormat.PPTX_2013);
-            ppt.dispose();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public static void PPT2PPTX(final String filePath, final LocalOfficeFileUtilsCallBack callBack){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                PPT2PPTX(filePath);
-                callBack.onFinished();
-            }
-        }).start();
-    }
-
-    public  interface LocalOfficeFileUtilsCallBack {
-        void onFinished();
-    }
 }

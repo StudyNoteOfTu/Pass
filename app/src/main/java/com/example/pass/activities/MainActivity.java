@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
-import android.util.Xml;
 import android.widget.TextView;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
@@ -21,21 +20,17 @@ import com.example.pass.util.localFileUtils.LocalInfos;
 import com.example.pass.util.localFileUtils.LocalOfficeFileUtils;
 import com.example.pass.util.officeUtils.DocxUtil;
 import com.example.pass.util.officeUtils.MyXmlReader;
-import com.example.pass.util.officeUtils.PPTX.PptxSlideEntry;
-import com.example.pass.util.officeUtils.PPTX.PptxSlideEntryUtil;
 import com.example.pass.util.officeUtils.PPTX.PptxUtil;
 import com.example.pass.util.officeUtils.XmlTags;
 import com.example.pass.util.spanUtils.DataContainedSpannableStringBuilder;
 import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spanUtils.XmlToSpanUtil;
-import com.example.pass.util.spans.callbacks.ClickMovementMethodCallback;
+import com.example.pass.util.spans.callbacks.ClickImageMovementMethodCallback;
 import com.example.pass.util.spans.movementMethods.ClickableLinkMovementMethod;
 import com.example.pass.view.SwipeItemLayout;
 
 
-import org.apache.poi.util.LocaleUtil;
-
-import java.io.IOException;
+import java.io.File;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,15 +45,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         testPPT();
 //
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-////                LocalOfficeFileUtils.doSearch(LocalInfos.QQFiles);
-////                int result = LocalOfficeFileUtils.doSearch(LocalOfficeFileUtils.filePath);
-//                LocalOfficeFileUtils.searchOfficeFiles(LocalOfficeFileUtils.filePath);
-//                //Log.d("LocalOfficeFileUtils","---------------getResult------------------------");
-//            }
-//        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+//                LocalOfficeFileUtils.doSearch(LocalInfos.QQFiles);
+//                int result = LocalOfficeFileUtils.doSearch(LocalOfficeFileUtils.filePath);
+                List<File> totalFileList = LocalOfficeFileUtils.searchOfficeFiles(LocalOfficeFileUtils.filePath);
+                List<File> QQFileList = LocalOfficeFileUtils.searchOfficeFiles(LocalInfos.QQFiles);
+                List<File> WechatFileList = LocalOfficeFileUtils.searchOfficeFiles(LocalInfos.WeChatFiles);
+                //Log.d("LocalOfficeFileUtils","---------------getResult------------------------");
+            }
+        }).start();
 
 
     }
@@ -67,9 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private void testDoc() {
         String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-
 //        String ppt = sdcard_path+"/tencent/QQfile_recv/新版马克思主义基本原理复习提纲20191204.pptx";
-
 
         String doc_path = sdcard_path + "/tencent/QQfile_recv/2019新闻二学位硬件基础复习(1).docx";
 
@@ -87,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
 //        ((TextView)findViewById(R.id.textview)).setMovementMethod(new ScrollingMovementMethod());
         ClickableLinkMovementMethod clickableLinkMovementMethod = new ClickableLinkMovementMethod();
-        clickableLinkMovementMethod.setCallback(new ClickMovementMethodCallback() {
+        clickableLinkMovementMethod.setCallback(new ClickImageMovementMethodCallback() {
             @Override
             public void onClicked(Drawable drawable) {
                 ((SubsamplingScaleImageView) findViewById(R.id.bigview)).setImage(ImageSource.bitmap(FormatTools.getInstance().drawable2Bitmap(drawable)));
@@ -136,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        ((TextView)findViewById(R.id.textview)).setMovementMethod(new ScrollingMovementMethod());
         ClickableLinkMovementMethod clickableLinkMovementMethod = new ClickableLinkMovementMethod();
-        clickableLinkMovementMethod.setCallback(new ClickMovementMethodCallback() {
+        clickableLinkMovementMethod.setCallback(new ClickImageMovementMethodCallback() {
             @Override
             public void onClicked(Drawable drawable) {
                 ((SubsamplingScaleImageView) findViewById(R.id.bigview)).setImage(ImageSource.bitmap(FormatTools.getInstance().drawable2Bitmap(drawable)));

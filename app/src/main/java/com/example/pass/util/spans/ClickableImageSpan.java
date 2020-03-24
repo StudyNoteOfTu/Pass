@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 
 
-import com.example.pass.util.spans.callbacks.ClickMovementMethodCallback;
 import com.example.pass.util.spans.callbacks.OnImageClickListener;
 import com.example.pass.util.spans.impls.LongClickableSpan;
 

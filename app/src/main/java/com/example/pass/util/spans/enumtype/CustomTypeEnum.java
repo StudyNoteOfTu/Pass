@@ -3,12 +3,14 @@ package com.example.pass.util.spans.enumtype;
 
 import androidx.annotation.IntDef;
 
+import com.example.pass.util.spans.customSpans.CustomSpan;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.SOURCE)
 @IntDef({CustomTypeEnum.NORMAL,CustomTypeEnum.BOLD,CustomTypeEnum.ITALIC,CustomTypeEnum.STRIKE_THROUGH,CustomTypeEnum.UNDERLINE,
-        CustomTypeEnum.IMAGE,CustomTypeEnum.FOREGROUND_COLOR,CustomTypeEnum.HIGHLIGHT_COLOR})
+        CustomTypeEnum.IMAGE,CustomTypeEnum.FOREGROUND_COLOR,CustomTypeEnum.HIGHLIGHT_COLOR, CustomTypeEnum.SHADE_MODE})
 public @interface CustomTypeEnum {
     /**
      * 普通无效果
@@ -50,6 +52,11 @@ public @interface CustomTypeEnum {
      */
     int HIGHLIGHT_COLOR = 7;
 
+
+    /**
+     * 遮罩效果
+     */
+    int SHADE_MODE = 8;
 
 
 }
