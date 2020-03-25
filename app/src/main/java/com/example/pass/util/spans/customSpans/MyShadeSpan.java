@@ -6,8 +6,9 @@ import android.text.style.UnderlineSpan;
 import androidx.annotation.NonNull;
 
 import com.example.pass.util.spans.enumtype.CustomTypeEnum;
+import com.example.pass.util.spans.impls.TouchableSpan;
 
-public class MyShadeSpan extends UnderlineSpan implements CustomSpan {
+public class MyShadeSpan extends UnderlineSpan implements CustomSpan, TouchableSpan {
 
     private boolean isShow = false;
 

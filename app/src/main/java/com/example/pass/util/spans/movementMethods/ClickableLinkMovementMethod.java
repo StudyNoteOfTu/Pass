@@ -12,17 +12,18 @@ import com.example.pass.util.spans.ClickableImageSpan;
 import com.example.pass.util.spans.callbacks.ClickCallBack;
 import com.example.pass.util.spans.callbacks.ClickShadeMovementMethodCallback;
 import com.example.pass.util.spans.callbacks.ClickImageMovementMethodCallback;
+import com.example.pass.util.spans.customSpans.MyImageSpan;
 import com.example.pass.util.spans.customSpans.MyShadeSpan;
+import com.example.pass.util.spans.impls.TouchableSpan;
 
 /**
- * 写的很乱，抽取一下相同代码
+ * 触摸事件
  */
 public class ClickableLinkMovementMethod extends LinkMovementMethod {
 
     private static final String TAG= "ClickableLinkMovementMethod";
-    private ClickableImageSpan mClickableImageSpan;
 
-    private MyShadeSpan mMyShadeSpan;
+    private TouchableSpan mTouchableSpan;
 
 
     private int TOUCH_MAX=50;
@@ -46,44 +47,68 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
             case MotionEvent.ACTION_UP:{
 //                handler.removeCallbacks(r);
                 if (Math.abs(System.currentTimeMillis() - lastPressTime )> TOUCH_MAX){
-                    if (mClickableImageSpan!=null){
-                        Drawable drawable = mClickableImageSpan.clicked();
-                        if (callback!=null && callback instanceof ClickImageMovementMethodCallback){
-                            ((ClickImageMovementMethodCallback)callback).onClicked(drawable);
+                    if (mTouchableSpan != null){
+                        //如果触摸的事MyImageSpan
+                        if (mTouchableSpan instanceof ClickableImageSpan){
+                            Drawable drawable = ((ClickableImageSpan) mTouchableSpan).clicked();
+                            if (callback!=null && callback instanceof ClickImageMovementMethodCallback){
+                                ((ClickImageMovementMethodCallback)callback).onClicked(drawable);
+                            }
+                        }
+                        //如果触摸的是MyShadeSpan
+                        if (mTouchableSpan instanceof MyShadeSpan){
+                            if (callback != null && callback instanceof ClickShadeMovementMethodCallback){
+                                ((ClickShadeMovementMethodCallback) callback).onClicked((MyShadeSpan)mTouchableSpan);
+                            }
                         }
                     }
-                    if (mMyShadeSpan != null){
-                        if (callback != null && callback instanceof ClickShadeMovementMethodCallback){
-                            ((ClickShadeMovementMethodCallback) callback).onClicked(mMyShadeSpan);
-                        }
-                    }
-
+//                    if (mClickableImageSpan!=null){
+//                        Drawable drawable = mClickableImageSpan.clicked();
+//                        if (callback!=null && callback instanceof ClickImageMovementMethodCallback){
+//                            ((ClickImageMovementMethodCallback)callback).onClicked(drawable);
+//                        }
+//                    }
+//                    if (mMyShadeSpan != null){
+//                        if (callback != null && callback instanceof ClickShadeMovementMethodCallback){
+//                            ((ClickShadeMovementMethodCallback) callback).onClicked(mMyShadeSpan);
+//                        }
+//                    }
                 }
                 lastPressTime = 0;
                 break;
             }
             case MotionEvent.ACTION_MOVE:{
-                ClickableImageSpan touchSpan = getPressedImageSpan(widget,buffer,event);
-                if (mClickableImageSpan != null && touchSpan != mClickableImageSpan){
-                    mClickableImageSpan = null;
+                TouchableSpan touchableSpan = getPressedSpan(widget, buffer, event);
+                if (mTouchableSpan != null && touchableSpan != mTouchableSpan){
+                    mTouchableSpan = null;
                     break;
                 }
-                if (Math.abs((int)event.getX() - mLastMotionX)>TOUCH_MAX
-                        || Math.abs((int)event.getY() - mLastMotionY) > TOUCH_MAX){
-                    mClickableImageSpan = null;
+                if (Math.abs((int) event.getX() - mLastMotionX) > TOUCH_MAX
+                        || Math.abs((int) event.getY() - mLastMotionY) > TOUCH_MAX) {
+                    mTouchableSpan = null;
                     break;
                 }
-
-                MyShadeSpan shadeSpan = getPressedShadeSpan(widget, buffer, event);
-                if (mMyShadeSpan !=null  && shadeSpan != mMyShadeSpan){
-                    mMyShadeSpan = null;
-                    break;
-                }
-                if (Math.abs((int)event.getX() - mLastMotionX)>TOUCH_MAX
-                        || Math.abs((int)event.getY() - mLastMotionY) > TOUCH_MAX){
-                    mMyShadeSpan = null;
-                    break;
-                }
+//                ClickableImageSpan touchSpan = getPressedImageSpan(widget,buffer,event);
+//                if (mClickableImageSpan != null && touchSpan != mClickableImageSpan){
+//                    mClickableImageSpan = null;
+//                    break;
+//                }
+//                if (Math.abs((int)event.getX() - mLastMotionX)>TOUCH_MAX
+//                        || Math.abs((int)event.getY() - mLastMotionY) > TOUCH_MAX){
+//                    mClickableImageSpan = null;
+//                    break;
+//                }
+//
+//                MyShadeSpan shadeSpan = getPressedShadeSpan(widget, buffer, event);
+//                if (mMyShadeSpan !=null  && shadeSpan != mMyShadeSpan){
+//                    mMyShadeSpan = null;
+//                    break;
+//                }
+//                if (Math.abs((int)event.getX() - mLastMotionX)>TOUCH_MAX
+//                        || Math.abs((int)event.getY() - mLastMotionY) > TOUCH_MAX){
+//                    mMyShadeSpan = null;
+//                    break;
+//                }
                 break;
             }
 
@@ -91,8 +116,7 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
                 mLastMotionX = (int)event.getX();
                 mLastMotionY = (int)event.getY();
                 lastPressTime = System.currentTimeMillis();
-                mClickableImageSpan = getPressedImageSpan(widget, buffer, event);
-                mMyShadeSpan = getPressedShadeSpan(widget, buffer, event);
+                mTouchableSpan = getPressedSpan(widget, buffer, event);
                 break;
             }
 
@@ -100,7 +124,7 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
 //                mClickableImageSpan = getPressedImageSpan(widget,buffer,event);
 //                break;
 //            case MotionEvent.ACTION_MOVE:
-//                ClickableImageSpan touchSpan = getPressedImageSpan(widget,buffer,event);
+//                MyImageSpan touchSpan = getPressedImageSpan(widget,buffer,event);
 //                if (mClickableImageSpan != null && touchSpan != mClickableImageSpan){
 //                    mClickableImageSpan = null;
 //                    break;
@@ -120,8 +144,17 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
     }
 
 
+    private TouchableSpan getPressedSpan(TextView textView,Spannable spannable,MotionEvent event){
+        TouchableSpan pressedSpan = getPressedImageSpan(textView, spannable, event);
+        if (pressedSpan != null) return pressedSpan;
+        pressedSpan = getPressedShadeSpan(textView, spannable, event);
+        if (pressedSpan != null) return pressedSpan;
 
-    private ClickableImageSpan getPressedImageSpan(TextView textView, Spannable spannable, MotionEvent event) {
+        return null;
+    }
+
+
+    private MyImageSpan getPressedImageSpan(TextView textView, Spannable spannable, MotionEvent event) {
         int x = (int) event.getX() - textView.getTotalPaddingLeft() + textView.getScrollX();
         int y = (int) event.getY() - textView.getTotalPaddingTop() + textView.getScrollY();
 
@@ -129,8 +162,8 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
         int position = layout.getOffsetForHorizontal(layout.getLineForVertical(y), x);
 
 
-        ClickableImageSpan[] blockImageSpans = spannable.getSpans(position, position, ClickableImageSpan.class);
-        ClickableImageSpan touchedSpan = null;
+        MyImageSpan[] blockImageSpans = spannable.getSpans(position, position, MyImageSpan.class);
+        MyImageSpan touchedSpan = null;
         if (blockImageSpans.length > 0 && positionWithinTag(position, spannable, blockImageSpans[0])
                 && blockImageSpans[0].clicked(x, y)) {
             touchedSpan = blockImageSpans[0];

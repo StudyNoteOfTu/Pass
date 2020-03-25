@@ -16,7 +16,7 @@ import com.example.pass.util.spans.impls.LongClickableSpan;
 
 public class ClickableImageSpan extends CenterImageSpan implements LongClickableSpan {
 
-    private static final String TAG = "ClickableImageSpan";
+    private static final String TAG = "MyImageSpan";
 
     private float x;
     private float y;

@@ -2,19 +2,10 @@ package com.example.pass.util.spanUtils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.text.Editable;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.BackgroundColorSpan;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.ImageSpan;
-import android.text.style.StrikethroughSpan;
-import android.text.style.StyleSpan;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.util.Xml;
 
@@ -23,12 +14,10 @@ import com.example.pass.util.officeUtils.XmlTags;
 import com.example.pass.util.spans.ClickableImageSpan;
 import com.example.pass.util.spans.customSpans.MyForegroundColorSpan;
 import com.example.pass.util.spans.customSpans.MyHighLightColoSpan;
-import com.example.pass.util.spans.customSpans.MyImageSpan;
 import com.example.pass.util.spans.customSpans.MyNormalSpan;
 import com.example.pass.util.spans.customSpans.MyStrikethroughSpan;
 import com.example.pass.util.spans.customSpans.MyStyleSpan;
 import com.example.pass.util.spans.customSpans.MyUnderlineSpan;
-import com.example.pass.view.DataContainedImageView;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -104,7 +93,7 @@ public class XmlToSpanUtil {
                             Bitmap bitmap = FileUtil.getLocalBitmap(path);
                             if (bitmap != null) {
 //                                ImageSpan imageSpan = new ImageSpan(context, bitmap);
-                                MyImageSpan imageSpan = new MyImageSpan(context,bitmap);
+                                ClickableImageSpan imageSpan = new ClickableImageSpan(context,bitmap);
                                 spannableStringBuilder = new DataContainedSpannableStringBuilder();
                                 //将pic的文字部分变为路径，这样就可以提取了
                                 spannableStringBuilder.append(path);

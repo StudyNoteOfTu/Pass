@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,10 +16,11 @@ import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.pass.R;
 import com.example.pass.recyclerentry.selectTitle.LineAdapter;
-import com.example.pass.util.FormatTools;
+import com.example.pass.util.ImageFormatTools;
 import com.example.pass.util.localFileUtils.LocalInfos;
 import com.example.pass.util.localFileUtils.LocalOfficeFileUtils;
 import com.example.pass.util.officeUtils.DocxUtil;
+import com.example.pass.util.officeUtils.FileUtil;
 import com.example.pass.util.officeUtils.MyXmlReader;
 import com.example.pass.util.officeUtils.PPTX.PptxUtil;
 import com.example.pass.util.officeUtils.XmlTags;
@@ -42,36 +44,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        String path = intent.getStringExtra("path");
         setContentView(R.layout.activity_main);
-        testPPT();
-//
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-//                LocalOfficeFileUtils.doSearch(LocalInfos.QQFiles);
-//                int result = LocalOfficeFileUtils.doSearch(LocalOfficeFileUtils.filePath);
-                List<File> totalFileList = LocalOfficeFileUtils.searchOfficeFiles(LocalOfficeFileUtils.filePath);
-                List<File> QQFileList = LocalOfficeFileUtils.searchOfficeFiles(LocalInfos.QQFiles);
-                List<File> WechatFileList = LocalOfficeFileUtils.searchOfficeFiles(LocalInfos.WeChatFiles);
-                //Log.d("LocalOfficeFileUtils","---------------getResult------------------------");
-            }
-        }).start();
+
+        if (path.endsWith(".docx")){
+            testDoc(path);
+        }else if (path.endsWith(".pptx")){
+            testPPT(path);
+        }
+
 
 
     }
 
 
-    private void testDoc() {
+    private void testDoc(String path) {
         String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
 
 //        String ppt = sdcard_path+"/tencent/QQfile_recv/新版马克思主义基本原理复习提纲20191204.pptx";
 
-        String doc_path = sdcard_path + "/tencent/QQfile_recv/2019新闻二学位硬件基础复习(1).docx";
+//        String doc_path = sdcard_path + "/tencent/QQfile_recv/2019新闻二学位硬件基础复习(1).docx";
 
-        DocxUtil docxUtil = new DocxUtil(doc_path, "SpanEditTextDemoDocxUtil", "test");
+        String doc_path = path;
+
+        DocxUtil docxUtil = new DocxUtil(doc_path, "Pass", FileUtil.getFileName(path));
+        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pass/"+FileUtil.getFileName(path)+".xml";
 
         MyXmlReader myXmlReader = new MyXmlReader();
-        String content = myXmlReader.fileToString(Environment.getExternalStorageDirectory().getAbsolutePath() + "/SpanEditTextDemoDocxUtil/test.xml");
+        String content = myXmlReader.fileToString(filePath);
 
         //解析xml并合成editable呈现在textview上
         XmlToSpanUtil xmlToSpanUtil = new XmlToSpanUtil();
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         clickableLinkMovementMethod.setCallback(new ClickImageMovementMethodCallback() {
             @Override
             public void onClicked(Drawable drawable) {
-                ((SubsamplingScaleImageView) findViewById(R.id.bigview)).setImage(ImageSource.bitmap(FormatTools.getInstance().drawable2Bitmap(drawable)));
+                ((SubsamplingScaleImageView) findViewById(R.id.bigview)).setImage(ImageSource.bitmap(ImageFormatTools.getInstance().drawable2Bitmap(drawable)));
             }
         });
 
@@ -105,15 +106,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void testPPT() {
+    private void testPPT(String path) {
         String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
 //        String ppt = sdcard_path + "/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv/新版马克思主义基本原理复习提纲20191204(2).pptx";
-        String ppt = sdcard_path + "/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv/ToPPTX.pptx";
+//        String ppt = sdcard_path + "/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv/ToPPTX.pptx";
+        String ppt = path;
 
-        PptxUtil.readPptx(ppt,"test","test");
+        PptxUtil.readPptx(ppt,"Pass",FileUtil.getFileName(path));
+        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pass/"+FileUtil.getFileName(path)+".xml";
 
         MyXmlReader myXmlReader = new MyXmlReader();
-        String content = myXmlReader.fileToString(Environment.getExternalStorageDirectory().getAbsolutePath() + "/test/test.xml");
+        String content = myXmlReader.fileToString(filePath);
 
         //解析xml并合成editable呈现在textview上
         XmlToSpanUtil xmlToSpanUtil = new XmlToSpanUtil();
@@ -134,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         clickableLinkMovementMethod.setCallback(new ClickImageMovementMethodCallback() {
             @Override
             public void onClicked(Drawable drawable) {
-                ((SubsamplingScaleImageView) findViewById(R.id.bigview)).setImage(ImageSource.bitmap(FormatTools.getInstance().drawable2Bitmap(drawable)));
+                ((SubsamplingScaleImageView) findViewById(R.id.bigview)).setImage(ImageSource.bitmap(ImageFormatTools.getInstance().drawable2Bitmap(drawable)));
             }
         });
 

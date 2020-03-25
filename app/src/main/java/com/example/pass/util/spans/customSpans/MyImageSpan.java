@@ -7,8 +7,9 @@ import android.net.Uri;
 
 import com.example.pass.util.spans.ClickableImageSpan;
 import com.example.pass.util.spans.enumtype.CustomTypeEnum;
+import com.example.pass.util.spans.impls.TouchableSpan;
 
-public class MyImageSpan extends ClickableImageSpan implements CustomSpan {
+public class MyImageSpan extends ClickableImageSpan implements CustomSpan , TouchableSpan {
 
     public MyImageSpan(Context context, int resourceId) {
         super(context, resourceId);

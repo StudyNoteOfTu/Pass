@@ -17,12 +17,12 @@ import java.io.InputStream;
  * @author Administrator
  *
  */
-public class FormatTools {
-    private static FormatTools tools = new FormatTools();
+public class ImageFormatTools {
+    private static ImageFormatTools tools = new ImageFormatTools();
 
-    public static FormatTools getInstance() {
+    public static ImageFormatTools getInstance() {
         if (tools == null) {
-            tools = new FormatTools();
+            tools = new ImageFormatTools();
             return tools;
         }
         return tools;
