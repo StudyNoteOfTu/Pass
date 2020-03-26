@@ -14,6 +14,7 @@ import com.example.pass.util.officeUtils.XmlTags;
 import com.example.pass.util.spans.ClickableImageSpan;
 import com.example.pass.util.spans.customSpans.MyForegroundColorSpan;
 import com.example.pass.util.spans.customSpans.MyHighLightColoSpan;
+import com.example.pass.util.spans.customSpans.MyImageSpan;
 import com.example.pass.util.spans.customSpans.MyNormalSpan;
 import com.example.pass.util.spans.customSpans.MyStrikethroughSpan;
 import com.example.pass.util.spans.customSpans.MyStyleSpan;
@@ -93,7 +94,7 @@ public class XmlToSpanUtil {
                             Bitmap bitmap = FileUtil.getLocalBitmap(path);
                             if (bitmap != null) {
 //                                ImageSpan imageSpan = new ImageSpan(context, bitmap);
-                                ClickableImageSpan imageSpan = new ClickableImageSpan(context,bitmap);
+                                MyImageSpan imageSpan = new MyImageSpan(context,bitmap);
                                 spannableStringBuilder = new DataContainedSpannableStringBuilder();
                                 //将pic的文字部分变为路径，这样就可以提取了
                                 spannableStringBuilder.append(path);

@@ -33,7 +33,7 @@ public class ChooseFileActivity extends BaseActivity<IChooseFileView, ChooseFile
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPresenter.fetchAllFiles();
+        mPresenter.fetchQQFiles();
     }
 
     @Override

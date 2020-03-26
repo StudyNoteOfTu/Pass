@@ -78,11 +78,19 @@ public class DocxUtil {
                     case XmlPullParser.START_TAG:
                         String tagBegin = xmlParser.getName();
                         if (tagBegin.equalsIgnoreCase("pic")) {
+                            //断头
+                            outputStream.write(XmlTags.getLineEnd().getBytes());
+                            //起头
+                            outputStream.write(XmlTags.getLineBegin("","").getBytes());
                             ZipEntry pic_entry = getWordPicEntry(docxFile, pic_ndex);
                             if (pic_entry != null) {
                                 byte[] pictureBytes = FileUtil.getPictureBytes(docxFile, pic_entry);
                                 writeDocumentPicture(docPath, outputStream, pictureBytes);
                             }
+                            //必须要断尾
+                            outputStream.write(XmlTags.getLineEnd().getBytes());
+                            //补上下一段起头（就算自带结尾也可以，就是一个段空的p
+                            outputStream.write(XmlTags.getLineBegin("","").getBytes());
                             pic_ndex++;
                         }
                         if (tagBegin.equalsIgnoreCase("p")) {//检测到段落

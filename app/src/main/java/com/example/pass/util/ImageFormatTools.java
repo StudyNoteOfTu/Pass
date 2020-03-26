@@ -4,9 +4,11 @@ package com.example.pass.util;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,8 +16,8 @@ import java.io.InputStream;
 
 /**
  * Bitmap与DrawAble与byte[]与InputStream之间的转换工具类
- * @author Administrator
  *
+ * @author Administrator
  */
 public class ImageFormatTools {
     private static ImageFormatTools tools = new ImageFormatTools();
@@ -131,4 +133,48 @@ public class ImageFormatTools {
         Drawable d = (Drawable) bd;
         return d;
     }
+
+    public static Bitmap scaleBitmap(Bitmap origin, int newWidth, int newHeight) {
+        if (origin == null) return null;
+        int height = origin.getHeight();
+        int width = origin.getWidth();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap newBitmap = Bitmap.createBitmap(origin, 0, 0, width, height, matrix, false);
+        if (!origin.isRecycled()) {
+            origin.recycle();
+        }
+        return newBitmap;
+    }
+
+    public static Bitmap scaleBitmapByWidth(Bitmap origin, int newWidth) {
+        if (origin == null) return null;
+        int height = origin.getHeight();
+        int width = origin.getWidth();
+        Log.d("CenterImageSpan", "origin width " + origin.getWidth() + " height = " + origin.getHeight());
+        //判断宽度是否超出目标宽度
+        //如果宽度没有超出目标宽度，直接不用处理把它本身返回回去
+        //只缩不放（放会出bug，高度固定，而后才绘制图片，会覆盖到下面的文本）
+        if (width <= newWidth) {
+            Log.d("CenterImageSpan", "return origin");
+
+            return origin;
+        }
+        //如果宽度超出范围
+
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = scaleWidth;
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap newBitmap = Bitmap.createBitmap(origin, 0, 0, width, height, matrix, false);
+//        if (!origin.isRecycled()) {
+//            origin.recycle();
+//        }
+        Log.d("CenterImageSpan", "newBitmap width " + newBitmap.getWidth() + " height = " + newBitmap.getHeight());
+        return newBitmap;
+    }
+
+
 }

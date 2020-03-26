@@ -150,7 +150,6 @@ public class PptxUtil {
                         isUnderline = false;
                         isBold = false;
                         isList = false;
-
                     }
 
                     //设置文字颜色
