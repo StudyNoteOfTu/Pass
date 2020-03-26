@@ -1,15 +1,20 @@
 package com.example.pass.recyclerentry.selectTitle;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import androidx.core.widget.PopupWindowCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pass.R;
@@ -17,7 +22,9 @@ import com.example.pass.util.officeUtils.FileUtil;
 import com.example.pass.recyclerentry.selectTitle.bean.LineHolder;
 import com.example.pass.recyclerentry.selectTitle.bean.LineItem;
 import com.example.pass.view.DataContainedImageView;
+import com.example.pass.view.DataContainedLinearLayout;
 import com.example.pass.view.OnSwipeItemOpenListener;
+import com.example.pass.view.popWindows.TitlePopWindow;
 
 import org.apache.poi.sl.usermodel.Line;
 
@@ -90,7 +97,23 @@ public class LineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     @Override
     public boolean onLongClick(View v) {
+        int[] location = new int[2];
+        v.getLocationOnScreen(location);
+
+        Log.d(TAG,"v.x = "+location[0]+" ,v.y = "+location[1]+" ,v.width = "+v.getMeasuredWidth()+" ,v.height = "+v.getMeasuredHeight());
+        if (v instanceof DataContainedLinearLayout){
+            View childView = ((DataContainedLinearLayout)v).getChildAt(1);
+            if (childView!=null){
+                int[] childLocation = new int[2];
+                childView.getLocationOnScreen(childLocation);
+                Log.d(TAG,"Get Child[3] v.x = "+childLocation[0]+" ,v.y = "+childLocation[1]);
+                showPopupWindow((DataContainedLinearLayout)v,childView);
+            }
+
+
+        }
         Toast.makeText(context, "长按", Toast.LENGTH_SHORT).show();
+
         return true;
     }
 
@@ -109,16 +132,20 @@ public class LineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         //初始化
 
         if (!lineHolder.swipeItemLayout.isHasInit()){
-            lineHolder.swipeItemLayout.initOpenState(true);
-            changeStateToOpen(lineHolder,position);
+            //设置初始是否张开
+            lineHolder.swipeItemLayout.initOpenState(false);
+//            changeStateToOpen(lineHolder,position);
             lineHolder.swipeItemLayout.setHasInit(true);
         }
 
 
         lineHolder.imageSelect.setOnClickListener(this);
-        lineHolder.imageSelect.setOnLongClickListener(this);
+//        lineHolder.imageSelect.setOnLongClickListener(this);
+        lineHolder.linearLayout.setOnLongClickListener(this);
+
         lineHolder.imageSelect.setIndexInAdapterList(position);
         lineHolder.linearLayout.setIndexInAdapterList(position);
+
         lineHolder.linearLayout.setOnSwipeItemOpenListener(new OnSwipeItemOpenListener() {
             @Override
             public void onOpenStateChanged(boolean isOpen) {
@@ -180,5 +207,42 @@ public class LineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         return position;
     }
 
+
+    public void showPopupWindow(DataContainedLinearLayout linearLayout,View childView){
+        TitlePopWindow window = new TitlePopWindow(context);
+        View contentView = window.getContentView();
+        ///需要先测量，PopupWindow还未弹出时，宽高为0
+        contentView.measure(makeDropDownMeasureSpec(window.getWidth()),
+                makeDropDownMeasureSpec(window.getHeight()));
+        int offsetX = 0;
+        int offsetY = -(window.getContentView().getMeasuredHeight()+childView.getHeight())/2;
+        PopupWindowCompat.showAsDropDown(window,childView,offsetX,offsetY,Gravity.END);
+        //有问题
+//        window.showBackgroundAnimator();
+        window.setOnOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.tv_h1:
+                        Toast.makeText(context, "h1", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+    }
+
+
+
+
+    @SuppressWarnings("ResourceType")
+    private static int makeDropDownMeasureSpec(int measureSpec) {
+        int mode;
+        if (measureSpec == ViewGroup.LayoutParams.WRAP_CONTENT) {
+            mode = View.MeasureSpec.UNSPECIFIED;
+        } else {
+            mode = View.MeasureSpec.EXACTLY;
+        }
+        return View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.getSize(measureSpec), mode);
+    }
 
 }

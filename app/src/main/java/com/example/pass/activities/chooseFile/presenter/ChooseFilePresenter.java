@@ -19,19 +19,21 @@ public class ChooseFilePresenter<T extends IChooseFileView> extends BasePresente
     }
 
 
-    public void fetchAllFiles(){
-        fetchFiles(IChooseFileModel.LoadType.ALL);
+    public void fetchAllFiles(IChooseFileModel.FileType fileType){
+        fetchFiles(IChooseFileModel.LoadType.ALL,fileType);
     }
 
-    public void fetchQQFiles(){
-        fetchFiles(IChooseFileModel.LoadType.QQ);
+    public void fetchQQFiles(IChooseFileModel.FileType fileType){
+        fetchFiles(IChooseFileModel.LoadType.QQ,fileType);
     }
 
-    public void fetchWXFiles(){
-        fetchFiles(IChooseFileModel.LoadType.WX);
+    public void fetchWXFiles(IChooseFileModel.FileType fileType){
+        fetchFiles(IChooseFileModel.LoadType.WX,fileType);
     }
 
-    private void fetchFiles(IChooseFileModel.LoadType loadType){
+
+
+    public void fetchFiles(IChooseFileModel.LoadType loadType){
         if (isViewAttached()){
             if (chooseFileModel != null){
                 chooseFileModel.loadFiles(loadType,new IChooseFileModel.OnFilesLoadListener() {
@@ -52,6 +54,29 @@ public class ChooseFilePresenter<T extends IChooseFileView> extends BasePresente
             }
         }
     }
+
+    public void fetchFiles(IChooseFileModel.LoadType loadType, IChooseFileModel.FileType fileType){
+        if (isViewAttached()){
+            if (chooseFileModel != null){
+                chooseFileModel.loadFiles(loadType,fileType,new IChooseFileModel.OnFilesLoadListener() {
+                    @Override
+                    public void onStart() {
+                        //提示开始加载
+                        mViewRef.get().onLoadingFiles();
+                    }
+
+                    @Override
+                    public void onComplete(List<File> allFiles) {
+                        //做数据处理
+                        //排序
+                        Collections.sort(allFiles,new FileComparator());
+                        mViewRef.get().onShowFiles(allFiles);
+                    }
+                });
+            }
+        }
+    }
+
 
 
     private class FileComparator implements Comparator<File> {

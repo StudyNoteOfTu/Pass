@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.example.pass.activities.chooseFile.model.impls.IChooseFileModel;
+import com.example.pass.util.officeUtils.FileUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,30 +22,60 @@ public class ChooseFileModelImpl implements IChooseFileModel {
     /**
      * 微信文件存储路径
      */
-    public static String mWeChatFilesPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/tencent/MicroMsg/Download";
+    public static String mWeChatFilesPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tencent/MicroMsg/Download";
 
 
     /**
      * QQ文件存储路径
      */
-    public static String mQQFilesPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv";
+    public static String mQQFilesPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv";
 
+    /**
+     * QQ浏览器存储路径
+     */
+    public static String mQQBrowserPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/QQBroswer";
+
+    /**
+     * wps云
+     */
+    public static String mWPSCloadPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/cn.wps.moffice_eng/.Cloud";
+
+    /**
+     * wps缓存
+     */
+    public static String mWPSCachePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/cn.wps.moffice_eng/.cache/KingsoftOffice/file/download";
+
+
+    /**
+     * UC浏览器
+     */
+    public static String mUCPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/UCDownloads";
+
+    /**
+     * 搜狗浏览器
+     */
+    public static String mSougouPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/SougouExplorer/download";
+
+    /**
+     * 360浏览器
+     */
+    public static String m360Path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/360Browser/download";
 
     private List<File> allFiles;
     private List<File> qqFiles;
     private List<File> wxFiles;
 
     @Override
-    public void loadFiles(LoadType type, OnFilesLoadListener l) {
-        switch (type){
+    public void loadFiles(LoadType loadType, FileType fileType, OnFilesLoadListener l) {
+        switch (loadType) {
             case ALL:
-                loadAllFiles(l);
+                loadAllFiles(fileType, l);
                 break;
             case QQ:
-                loadQQFiles(l);
+                loadQQFiles(fileType, l);
                 break;
             case WX:
-                loadWXFiles(l);
+                loadWXFiles(fileType, l);
                 break;
             default:
                 break;
@@ -52,79 +83,134 @@ public class ChooseFileModelImpl implements IChooseFileModel {
     }
 
     @Override
-    public void loadAllFiles(OnFilesLoadListener l) {
+    public void loadFiles(LoadType type, OnFilesLoadListener l) {
+        switch (type) {
+            case ALL:
+                loadAllFiles(FileType.ALL, l);
+                break;
+            case QQ:
+                loadQQFiles(FileType.ALL, l);
+                break;
+            case WX:
+                loadWXFiles(FileType.ALL, l);
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    @Override
+    public void loadAllFiles(FileType fileType, OnFilesLoadListener l) {
         if (l == null) return;
         //开始搜索
         l.onStart();
 
-        if (allFiles == null){
-            loadFile(mRootPath, l, new OnCompleteListener() {
+        if (allFiles == null) {
+            List<String> paths = new ArrayList<>();
+            //添加微信路径
+            paths.add(mWeChatFilesPath);
+            //添加QQ路径
+            paths.add(mQQFilesPath);
+            //添加QQ浏览器路径
+            paths.add(mQQBrowserPath);
+            //添加wps两个路径
+            paths.add(mWPSCloadPath);
+            paths.add(mWPSCachePath);
+            //360浏览器路径
+            paths.add(m360Path);
+            //搜狗浏览器路径
+            paths.add(mSougouPath);
+            //UC浏览器路径
+            paths.add(mUCPath);
+
+            loadFile(fileType,paths, l, new OnCompleteListener() {
                 @Override
                 public void onComplete(List<File> fileList) {
                     allFiles = fileList;
                 }
             });
-        }else{
-            l.onComplete(allFiles);
+        } else {
+            List<File> typeFileList = getTypeFileList(fileType.name(),allFiles);
+            l.onComplete(typeFileList);
         }
     }
 
     @Override
-    public void loadQQFiles(OnFilesLoadListener l) {
+    public void loadQQFiles(FileType fileType, OnFilesLoadListener l) {
         if (l == null) return;
         l.onStart();
 
-        if (qqFiles == null){
-            loadFile(mQQFilesPath, l, new OnCompleteListener() {
+        if (qqFiles == null) {
+            loadFile(fileType,mQQFilesPath, l, new OnCompleteListener() {
                 @Override
                 public void onComplete(List<File> fileList) {
                     qqFiles = fileList;
                 }
             });
-        }else{
-            l.onComplete(qqFiles);
+        } else {
+            List<File> typeFileList = getTypeFileList(fileType.name(),qqFiles);
+            l.onComplete(typeFileList);
         }
 
     }
 
     @Override
-    public void loadWXFiles(OnFilesLoadListener l) {
+    public void loadWXFiles(FileType fileType, OnFilesLoadListener l) {
         if (l == null) return;
         l.onStart();
 
-        if (wxFiles == null){
-            loadFile(mWeChatFilesPath, l, new OnCompleteListener() {
+        if (wxFiles == null) {
+            loadFile(fileType,mWeChatFilesPath, l, new OnCompleteListener() {
                 @Override
                 public void onComplete(List<File> fileList) {
                     wxFiles = fileList;
                 }
             });
-        }else{
-            l.onComplete(wxFiles);
+        } else {
+            List<File> typeFileList = getTypeFileList(fileType.name(),wxFiles);
+            l.onComplete(typeFileList);
         }
 
     }
 
-    private interface OnCompleteListener{
+    private interface OnCompleteListener {
         void onComplete(List<File> fileList);
     }
 
-    private void loadFile(String path,OnFilesLoadListener l,OnCompleteListener innerListener){
+    private void loadFile(FileType fileType,String path, OnFilesLoadListener l, OnCompleteListener innerListener) {
         List<File> fileList = new ArrayList<>();
         new Thread(() -> {
             fileList.addAll(searchOfficeFiles(path));
-            l.onComplete(fileList);
             innerListener.onComplete(fileList);
+            //筛选type后的
+            List<File> typeFileList = getTypeFileList(fileType.name(),fileList);
+            l.onComplete(typeFileList);
+
         }).start();
 
     }
 
-
-    private List<File> searchOfficeFiles(String filePath){
+    private void loadFile(FileType fileType,List<String> paths, OnFilesLoadListener l, OnCompleteListener innerListener) {
         List<File> fileList = new ArrayList<>();
-        int result = doSearch(fileList,filePath);
-        Log.d(TAG,fileList.toString());
-        return  fileList;
+        new Thread(() -> {
+            for (String path : paths) {
+                fileList.addAll(searchOfficeFiles(path));
+            }
+            innerListener.onComplete(fileList);
+            //筛选type后的
+            List<File> typeFileList = getTypeFileList(fileType.name(),fileList);
+            l.onComplete(typeFileList);
+
+        }).start();
+    }
+
+
+    private List<File> searchOfficeFiles(String filePath) {
+        List<File> fileList = new ArrayList<>();
+        int result = doSearch(fileList, filePath);
+        Log.d(TAG, fileList.toString());
+        return fileList;
     }
 
     private int doSearch(List<File> fileList, String path) {
@@ -134,9 +220,9 @@ public class ChooseFileModelImpl implements IChooseFileModel {
             if (file.isDirectory()) {
                 File[] fileArray = file.listFiles();
                 for (File file1 : fileArray) {
-                    if (file1.isDirectory()){
-                        doSearch(fileList,file1.getAbsolutePath());
-                    }else {
+                    if (file1.isDirectory()) {
+                        doSearch(fileList, file1.getAbsolutePath());
+                    } else {
                         if (file1.getName().endsWith(".pptx") || file1.getName().endsWith(".docx")) {
                             Log.d(TAG, "文件名称" + file1.getName());
                             Log.d(TAG, "文件的绝对路径" + file1.getAbsolutePath());
@@ -149,5 +235,23 @@ public class ChooseFileModelImpl implements IChooseFileModel {
             }
         }
         return 1;
+    }
+
+    private List<File> getTypeFileList(String end, List<File> fileList) {
+        List<File> typeFileList = new ArrayList<>();
+        //如果不做筛选
+        if (end.equalsIgnoreCase("all")){
+            typeFileList.addAll(fileList);
+            return typeFileList;
+        }
+        //如果做筛选
+        for (int i = 0; i < fileList.size(); i++) {
+            File file = fileList.get(i);
+            if (file.getAbsolutePath().endsWith(end.toUpperCase()) ||
+                    file.getAbsolutePath().endsWith(end.toLowerCase())) {
+                typeFileList.add(file);
+            }
+        }
+        return typeFileList;
     }
 }
