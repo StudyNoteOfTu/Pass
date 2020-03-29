@@ -2,7 +2,6 @@ package com.example.pass.activities.chooseFile.utils;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pass.R;
 import com.example.pass.activities.MainActivity;
+import com.example.pass.activities.analyseOffice.view.AnalyseOfficeActivity;
 import com.example.pass.util.TimeFormatTools;
 
 import java.io.File;
@@ -51,10 +51,10 @@ public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == 0){
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_choosefile_top,parent,false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_choose_file_top,parent,false);
             return new TopHolder(view);
         }else{
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_choosefile_file,parent,false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_choose_file_file,parent,false);
             return new FileHolder(view);
         }
     }
@@ -99,7 +99,7 @@ public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.btn_slide_choose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, MainActivity.class);
+                    Intent intent = new Intent(context, AnalyseOfficeActivity.class);
                     intent.putExtra("path", file.getAbsolutePath());
                     context.startActivity(intent);
                 }

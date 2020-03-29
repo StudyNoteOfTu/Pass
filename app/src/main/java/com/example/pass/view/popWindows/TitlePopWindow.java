@@ -34,7 +34,7 @@ public class TitlePopWindow extends PopupWindow {
         setOutsideTouchable(true);
         setFocusable(true);
         setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        View contentView = LayoutInflater.from(context).inflate(R.layout.pop_titleselect,null,false);
+        View contentView = LayoutInflater.from(context).inflate(R.layout.pop_title_select,null,false);
         setContentView(contentView);
         initViews(contentView);
     }

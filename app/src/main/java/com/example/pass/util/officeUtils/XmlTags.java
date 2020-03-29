@@ -5,7 +5,7 @@ public class XmlTags {
 
     private final static String passTag = "pass:";
 
-    private static String xmlBegin = "<?xml version=\"1.0\" encoding=\"utf-8\"?><resource xmlns:pass=\"http://www.fengyitu.com\">";
+    private static String xmlBegin = "<?xml version=\"1.0\" encoding=\"utf-8\"?><resource xmlns:pass=\"http://www.ttloveyyforever.com\">";
 
     private static String xmlEnd = "</resource>";
 
@@ -57,7 +57,25 @@ public class XmlTags {
     //字体大小
     private static  String value_fontsize = "fontsize";
 
-    public static String getLineBegin(String key,String value) {
+    //遮罩
+    private static String value_shade = "shade";
+
+    //p 风格  标题
+    private static String key_title = "title";
+
+    //p 风格 忽略
+    private static String key_ignore = "ignore";
+
+    //p 风格 无风格
+    private static String key_none = "";
+
+
+
+    public static String getValue_shade() {
+        return value_shade;
+    }
+
+    public static String getLineBegin(String key, String value) {
         return String.format(lineBegin,key,value);
     }
 
@@ -161,6 +179,22 @@ public class XmlTags {
 
     public static String getValue_highlight() {
         return value_highlight;
+    }
+
+    public static String getKey_title() {
+        return key_title;
+    }
+
+    public static String getKey_ignore() {
+        return key_ignore;
+    }
+
+    public static String getNone() {
+        return key_none;
+    }
+
+    public static String getTitle_level(int level){
+        return String.valueOf(level);
     }
 }
 

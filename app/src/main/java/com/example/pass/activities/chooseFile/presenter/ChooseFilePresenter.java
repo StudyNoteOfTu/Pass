@@ -13,9 +13,9 @@ import java.util.List;
 
 public class ChooseFilePresenter<T extends IChooseFileView> extends BasePresenter<T> {
 
-    private ChooseFileModelImpl chooseFileModel;
+    private ChooseFileModelImpl mChooseFileModel;
     public ChooseFilePresenter(){
-        chooseFileModel = new ChooseFileModelImpl();
+        mChooseFileModel = new ChooseFileModelImpl();
     }
 
 
@@ -35,8 +35,8 @@ public class ChooseFilePresenter<T extends IChooseFileView> extends BasePresente
 
     public void fetchFiles(IChooseFileModel.LoadType loadType){
         if (isViewAttached()){
-            if (chooseFileModel != null){
-                chooseFileModel.loadFiles(loadType,new IChooseFileModel.OnFilesLoadListener() {
+            if (mChooseFileModel != null){
+                mChooseFileModel.loadFiles(loadType,new IChooseFileModel.OnFilesLoadListener() {
                     @Override
                     public void onStart() {
                         //提示开始加载
@@ -57,8 +57,8 @@ public class ChooseFilePresenter<T extends IChooseFileView> extends BasePresente
 
     public void fetchFiles(IChooseFileModel.LoadType loadType, IChooseFileModel.FileType fileType){
         if (isViewAttached()){
-            if (chooseFileModel != null){
-                chooseFileModel.loadFiles(loadType,fileType,new IChooseFileModel.OnFilesLoadListener() {
+            if (mChooseFileModel != null){
+                mChooseFileModel.loadFiles(loadType,fileType,new IChooseFileModel.OnFilesLoadListener() {
                     @Override
                     public void onStart() {
                         //提示开始加载

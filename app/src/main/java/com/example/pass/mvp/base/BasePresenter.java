@@ -33,4 +33,8 @@ public class BasePresenter<T> {
     }
 
 
+    public T getView(){
+        return (T)mViewRef.get();
+    }
+
 }

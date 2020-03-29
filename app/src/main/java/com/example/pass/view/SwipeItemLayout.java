@@ -593,7 +593,7 @@ public class SwipeItemLayout extends ViewGroup{
                         pointOther = true;
 
 
-                    //点击的是capture item
+                    //点击的是capture LineItem
                     if (!pointOther) {
                         Mode touchMode = mCaptureItem.getTouchMode();
 
@@ -688,8 +688,8 @@ public class SwipeItemLayout extends ViewGroup{
 
                         if (touchMode == Mode.TAP) {
                             //如果capture item是open的，下拉有两种处理方式：
-                            //  1、下拉后，直接close item
-                            //  2、只要是open的，就拦截所有它的消息，这样如果点击open的，就只能滑动该capture item
+                            //  1、下拉后，直接close LineItem
+                            //  2、只要是open的，就拦截所有它的消息，这样如果点击open的，就只能滑动该capture LineItem
                             //网易邮箱，在open的情况下，下拉直接close
                             //QQ，在open的情况下，下拉也是close。但是，做的不够好，没有达到该效果。
                             if (xDiff > mTouchSlop && xDiff > yDiff) {

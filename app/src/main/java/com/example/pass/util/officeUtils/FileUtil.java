@@ -46,6 +46,21 @@ public class FileUtil {
     }
 
     /**
+     * 获取带随机数的文件名，不带后缀
+     * @param pathandname 文件路径
+     * @return
+     */
+    public static String createSingleFileName(String pathandname) {
+        int start = pathandname.lastIndexOf("/");
+        int end = pathandname.lastIndexOf(".");
+        if (start != -1 && end != -1) {
+            return pathandname.substring(start + 1, end)+"_"+System.currentTimeMillis();
+        } else {
+            return "";
+        }
+    }
+
+    /**
      * 获取文件名，带后缀
      * @param pathandname 文件路径
      * @return

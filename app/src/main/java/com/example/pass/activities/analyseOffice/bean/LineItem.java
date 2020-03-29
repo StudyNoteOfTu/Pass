@@ -1,4 +1,5 @@
-package com.example.pass.recyclerentry.selectTitle.bean;
+package com.example.pass.activities.analyseOffice.bean;
+
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,7 +12,7 @@ public class LineItem {
 
     private boolean isSelect = false;
 
-    private int titleLevel = 0;//0为没有 1 2 3 逐次上升
+    private int titleLevel = 1;//1为最低 2 3 4 逐次上升
 
     private boolean isIgnored = false;
 
@@ -137,6 +138,7 @@ public class LineItem {
     }
 
     public void setIgnored(boolean ignored) {
+        if (ignored) refresh();
         isIgnored = ignored;
     }
 
@@ -146,5 +148,10 @@ public class LineItem {
 
     public void setPicPath(String picPath) {
         this.picPath = picPath;
+    }
+
+    public void refresh() {
+        isSelect = false;
+        titleLevel = 1;
     }
 }

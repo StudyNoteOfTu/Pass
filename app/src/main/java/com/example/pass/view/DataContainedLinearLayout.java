@@ -16,11 +16,15 @@ public class DataContainedLinearLayout extends LinearLayout {
 
     private OnSwipeItemOpenListener l;
 
+    private boolean isShowingPicture = false;
+
     public void setOnSwipeItemOpenListener(OnSwipeItemOpenListener l){
         this.l = l;
     }
 
-    private boolean isShowingPicture = false;
+    public boolean isShowingPicture() {
+        return isShowingPicture;
+    }
 
     public void setShowingPicture(boolean showingPicture) {
         isShowingPicture = showingPicture;
@@ -37,7 +41,6 @@ public class DataContainedLinearLayout extends LinearLayout {
 
     private int indexInAdapterList = -1;
 
-    private boolean isNeeded = true;
 
     public DataContainedLinearLayout(Context context) {
         super(context);

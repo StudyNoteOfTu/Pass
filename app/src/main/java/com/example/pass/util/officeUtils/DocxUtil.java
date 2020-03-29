@@ -19,21 +19,22 @@ import java.util.zip.ZipFile;
  * 用于提取Docx文档内容，生成自定义xml文件
  */
 public class DocxUtil {
-    private int presentPicture;
+    private static int presentPicture;
 
-    public DocxUtil(String docPath, String output_dir, String output_name) {
-        presentPicture = 0;
-        readDocx(docPath, output_dir, output_name);
-    }
+//    public DocxUtil(String docPath, String output_dir, String output_name) {
+//        presentPicture = 0;
+//        readDocx(docPath, output_dir, output_name);
+//    }
 
     //解析docx文件，提取内容写入自己的xml文件中
-    private void readDocx(String docPath, String output_dir, String output_name) {
+    public static void readDocx(String docPath, String output_dir, String output_name) {
+        presentPicture = 0;
         try {
             //创建一个outputXmlFile
             String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
             File dirFile = new File(sdcard_path + "/" + output_dir);
             if (!dirFile.exists()) {
-                dirFile.mkdir();
+                dirFile.mkdirs();
             }
             File xmlFile = new File(sdcard_path + "/" + output_dir + "/" + output_name + ".xml");
             if (xmlFile.exists()) {
@@ -85,7 +86,7 @@ public class DocxUtil {
                             ZipEntry pic_entry = getWordPicEntry(docxFile, pic_ndex);
                             if (pic_entry != null) {
                                 byte[] pictureBytes = FileUtil.getPictureBytes(docxFile, pic_entry);
-                                writeDocumentPicture(docPath, outputStream, pictureBytes);
+                                writeDocumentPicture(output_name, outputStream, pictureBytes);
                             }
                             //必须要断尾
                             outputStream.write(XmlTags.getLineEnd().getBytes());
@@ -183,14 +184,14 @@ public class DocxUtil {
 
     }
 
-    public void writeDocumentPicture(String docPath, FileOutputStream output, byte[] pictureBytes) {
-        String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pass";
+    public static void writeDocumentPicture(String name, FileOutputStream output, byte[] pictureBytes) {
+        String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pass/Pics/docx_pics";
         File dirFile = new File(dir_path);
         if (!dirFile.exists()) {
-            dirFile.mkdir();
+            dirFile.mkdirs();
         }
 
-        String picturePath = FileUtil.createFile("Pass/" + FileUtil.getFileName(docPath), presentPicture + ".jpg");
+        String picturePath = FileUtil.createFile("Pass/Pics/docx_pics/" + name+"/", presentPicture + ".jpg");
         FileUtil.writePicture(picturePath, pictureBytes);
         presentPicture++;
         String imageString = XmlTags.getPicBegin() + picturePath + XmlTags.getPicEnd();
