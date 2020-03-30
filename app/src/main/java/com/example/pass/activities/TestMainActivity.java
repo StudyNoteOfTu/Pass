@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pass.R;
-import com.example.pass.activities.chooseFile.view.ChooseFileActivity;
+import com.example.pass.activities.chooseFileActivity.view.ChooseFileActivity;
 
 public class TestMainActivity extends AppCompatActivity {
     @Override

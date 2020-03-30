@@ -5,6 +5,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
 
+import com.example.pass.configs.PathConfig;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -185,13 +187,13 @@ public class DocxUtil {
     }
 
     public static void writeDocumentPicture(String name, FileOutputStream output, byte[] pictureBytes) {
-        String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pass/Pics/docx_pics";
+        String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator+ PathConfig.DOX_PICS_PATH;
         File dirFile = new File(dir_path);
         if (!dirFile.exists()) {
             dirFile.mkdirs();
         }
 
-        String picturePath = FileUtil.createFile("Pass/Pics/docx_pics/" + name+"/", presentPicture + ".jpg");
+        String picturePath = FileUtil.createFile(PathConfig.DOX_PICS_PATH+File.separator + name+File.separator, presentPicture + ".jpg");
         FileUtil.writePicture(picturePath, pictureBytes);
         presentPicture++;
         String imageString = XmlTags.getPicBegin() + picturePath + XmlTags.getPicEnd();

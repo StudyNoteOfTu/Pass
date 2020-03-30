@@ -4,8 +4,7 @@ import android.os.Environment;
 
 import androidx.annotation.NonNull;
 
-import com.example.pass.activities.analyseOffice.model.impls.IOfficeModel;
-import com.example.pass.callbacks.ProgressCallback;
+import com.example.pass.callbacks.LoadObjectCallback;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class MyXmlWriter {
 
-    public static boolean compileLinesToXml(List<String> xmlLines, String dir, String name, @NonNull ProgressCallback listener){
+    public static boolean compileLinesToXml(List<String> xmlLines, String dir, String name, @NonNull LoadObjectCallback<String> listener){
         try {
              listener.onStart();
             String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();

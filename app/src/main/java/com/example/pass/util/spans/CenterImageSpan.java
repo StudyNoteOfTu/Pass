@@ -67,13 +67,13 @@ public class CenterImageSpan extends ImageSpan {
     public void draw(Canvas canvas, CharSequence text, int start, int end, float x, int top, int y,
                      int bottom, Paint paint) {
         if (mBitmap != null){
+            Log.d("CenterImageSpan","x="+x+",y="+y+",top="+top+",bottom="+bottom);
             Log.d("CenterImageSpan","mBitmap is not null");
             Log.d("CenterImageSpan","mBitmap width "+mBitmap.getWidth()+" height = "+mBitmap.getHeight() );
 
             canvas.save();
             Bitmap scaledBitmap = ImageFormatTools.scaleBitmapByWidth(mBitmap,ScreenConfig.getmImageTargetWidth());
             Log.d("CenterImageSpan","scaledBitmap width "+scaledBitmap.getWidth()+" height = "+scaledBitmap.getHeight() );
-
             Paint.FontMetricsInt fmPaint = paint.getFontMetricsInt();
             int fontHeight = fmPaint.descent - fmPaint.ascent;
             int centerY = y + fmPaint.descent - fontHeight / 2;

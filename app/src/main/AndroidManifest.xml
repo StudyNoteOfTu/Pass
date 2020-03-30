@@ -17,7 +17,7 @@
         <activity android:name=".activities.MainActivity">
 
         </activity>
-        <activity android:name=".activities.chooseFile.view.ChooseFileActivity"
+        <activity android:name=".activities.chooseFileActivity.view.ChooseFileActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
 
@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.analyseOffice.view.AnalyseOfficeActivity"
+        <activity android:name=".activities.analyseOfficeActivity.view.AnalyseOfficeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
     </application>

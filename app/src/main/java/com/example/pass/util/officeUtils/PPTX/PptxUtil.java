@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
 
+import com.example.pass.configs.PathConfig;
 import com.example.pass.util.officeUtils.FileUtil;
 import com.example.pass.util.officeUtils.XmlTags;
 
@@ -295,13 +296,13 @@ public class PptxUtil {
 
 
     private static void writePptxPicture(String name, FileOutputStream output, byte[] pictureBytes,String picName) {
-        String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pass/Pics/ppt_pics";
+        String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator+ PathConfig.PPT_PICS_PATH;
         File dirFile = new File(dir_path);
         if (!dirFile.exists()) {
             dirFile.mkdirs();
         }
 
-        String picturePath = FileUtil.createFile("Pass/Pics/ppt_pics/" + name+"/", picName);
+        String picturePath = FileUtil.createFile(PathConfig.PPT_PICS_PATH+File.separator + name+ File.separator, picName);
         Log.d("test","copy picture , target path is "+picturePath);
         FileUtil.writePicture(picturePath, pictureBytes);
         String imageString = XmlTags.getPicBegin() + picturePath + XmlTags.getPicEnd();
