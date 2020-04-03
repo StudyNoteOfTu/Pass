@@ -1,5 +1,6 @@
 package com.example.pass.activities.mainActivity.fragments.scatteredFragment.model;
 
+import com.example.pass.activities.mainActivity.fragments.scatteredFragment.bean.ScatterItem;
 import com.example.pass.activities.mainActivity.fragments.scatteredFragment.model.impls.IScatterModel;
 
 import java.io.File;
@@ -37,6 +38,17 @@ public class ScatterModelImpl implements IScatterModel {
         if (position < 0 || position > fileList.size()-1)return;
         fileList.remove(position);
     }
+
+    /**
+     * 将List<File> 转为ScatterItem
+     */
+    public List<ScatterItem> files2ScatterItem(List<File> scatterFiles){
+        List<ScatterItem> scatterItems = new ArrayList<>();
+        //
+
+        return scatterItems;
+    }
+
 
     /**
      * 添加到记背本

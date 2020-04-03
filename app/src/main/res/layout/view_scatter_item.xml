@@ -1,34 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<com.example.pass.view.SwipeItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <com.example.pass.view.DataContainedLinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_data_contained">
 
-        <LinearLayout
-            android:layout_alignParentLeft="true"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tv_date"
+
+            <LinearLayout
+                android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_hasTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_hasTitle"
+                android:layout_alignParentRight="true"
+                android:id="@+id/tv_from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-        </LinearLayout>
+        </RelativeLayout>
 
         <TextView
-            android:layout_alignParentRight="true"
-            android:id="@+id/tv_from"
+            android:id="@+id/tv_content"
+            android:ellipsize="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.example.pass.view.DataContainedLinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_slide"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    </RelativeLayout>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
+    </LinearLayout>
 
-</LinearLayout>
+</com.example.pass.view.SwipeItemLayout>
