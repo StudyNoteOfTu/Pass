@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.example.pass.util.spans.customSpans.MyImageSpan;
+import com.example.pass.util.spans.customSpans.MyShadeSpan;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
@@ -35,6 +36,11 @@ public class ShadeManager  {
         return instance;
     }
 
+
+    //获取触摸位置的ShadeSpan
+//    public MyShadeSpan getPressedShadeSpan(Spannable spannable,int eventX, int eventY){
+//
+//    }
 
     //获取触摸位置的ImageSpan
     public MyImageSpan getPressedImageSpan(Spannable spannable, MotionEvent event){

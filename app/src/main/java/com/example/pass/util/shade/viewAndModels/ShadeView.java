@@ -203,6 +203,11 @@ public class ShadeView extends View {
                             dealFingerPathLine(touchedSpan);
                         }
 
+                        if (touchedSpan == null && imageSpan == null){
+                            //如果down和up都不在图片上
+                            //可能是文字涂抹，交给TextView处理？
+                        }
+
                         fingerPathLine.setCalculating(false);
                     }
 
