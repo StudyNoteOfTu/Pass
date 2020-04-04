@@ -36,4 +36,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0-alpha04'
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
     implementation 'com.github.Jlanglang:TreeRecyclerView:1.3.1.1'
+
+    //可以解决行间距异常的EditText
+    api 'com.hanks:lineheightedittext-library:1.0'
+
 }

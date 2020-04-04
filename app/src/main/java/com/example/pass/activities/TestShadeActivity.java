@@ -15,22 +15,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.pass.R;
-import com.example.pass.recyclerentry.selectTitle.LineAdapter;
-import com.example.pass.util.ImageFormatTools;
+
 import com.example.pass.util.officeUtils.DocxUtil;
 import com.example.pass.util.officeUtils.FileUtil;
 import com.example.pass.util.officeUtils.MyXmlReader;
 import com.example.pass.util.officeUtils.PPTX.PptxUtil;
-import com.example.pass.util.officeUtils.XmlTags;
 import com.example.pass.util.shade.ShadeManager;
 import com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout;
 import com.example.pass.util.shade.viewAndModels.ShadeView;
 import com.example.pass.util.spanUtils.DataContainedSpannableStringBuilder;
-import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spanUtils.XmlToSpanUtil;
-import com.example.pass.util.spans.callbacks.ClickImageMovementMethodCallback;
-import com.example.pass.util.spans.movementMethods.ClickableLinkMovementMethod;
-import com.example.pass.view.SwipeItemLayout;
+
 
 import java.util.List;
 
