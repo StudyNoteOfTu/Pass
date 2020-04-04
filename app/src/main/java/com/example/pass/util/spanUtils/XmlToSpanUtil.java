@@ -94,7 +94,7 @@ public class XmlToSpanUtil {
                             Bitmap bitmap = FileUtil.getLocalBitmap(path);
                             if (bitmap != null) {
 //                                ImageSpan imageSpan = new ImageSpan(context, bitmap);
-                                MyImageSpan imageSpan = new MyImageSpan(context,bitmap);
+                                MyImageSpan imageSpan = new MyImageSpan(context,bitmap,path);
                                 spannableStringBuilder = new DataContainedSpannableStringBuilder();
                                 //将pic的文字部分变为路径，这样就可以提取了
                                 spannableStringBuilder.append(path);

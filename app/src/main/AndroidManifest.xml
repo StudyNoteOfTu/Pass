@@ -31,6 +31,7 @@
         <activity android:name=".activities.analyseOfficeActivity.view.AnalyseOfficeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activities.TestShadeActivity" />
     </application>
 
 </manifest>

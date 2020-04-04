@@ -41,6 +41,8 @@ public class PptxUtil {
      * @param output_name 输出文件名 不加后缀
      */
     public static void readPptx(String filePath, String output_dir,String output_name) {
+
+
         //逐个解析逐个写入整体之中
         try {
             //创建目标xml文件
@@ -73,7 +75,7 @@ public class PptxUtil {
             outputStream.write(XmlTags.getXmlBegin().getBytes());
             //逐个写入数据
             for (PptxSlideEntry pptxSlideEntry:pptxSlideEntries){
-                writePptxEntryIntoXml(output_name,images,zipFile,outputStream,pptxSlideEntry);
+                writePptxEntryIntoXml(output_dir,output_name,images,zipFile,outputStream,pptxSlideEntry);
             }
             //全都写完以后
             outputStream.write(XmlTags.getXmlEnd().getBytes());
@@ -89,7 +91,7 @@ public class PptxUtil {
      * @param outputStream
      * @param pptxSlideEntry
      */
-    private static void writePptxEntryIntoXml(String out_name,Map<String,byte[]> images,ZipFile zipFile,FileOutputStream outputStream, PptxSlideEntry pptxSlideEntry) throws Exception{
+    private static void writePptxEntryIntoXml(String out_dir,String out_name,Map<String,byte[]> images,ZipFile zipFile,FileOutputStream outputStream, PptxSlideEntry pptxSlideEntry) throws Exception{
         if (outputStream ==null){
             return;
         }
@@ -238,7 +240,7 @@ public class PptxUtil {
                         Log.d("test","picName is "+picName);
                         byte[] pictureBytes = images.get(picName);
                         Log.d("test","byte size is "+pictureBytes.length);
-                        writePptxPicture(out_name,outputStream,pictureBytes,picName);
+                        writePptxPicture(out_dir,out_name,outputStream,pictureBytes,picName);
                     }
 
                     break;
@@ -295,14 +297,15 @@ public class PptxUtil {
     }
 
 
-    private static void writePptxPicture(String name, FileOutputStream output, byte[] pictureBytes,String picName) {
-        String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator+ PathConfig.PPT_PICS_PATH;
+    private static void writePptxPicture(String dir,String name, FileOutputStream output, byte[] pictureBytes,String picName) {
+//        String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator+ PathConfig.PPT_PICS_PATH;
+        String dir_path = dir+File.separator+"Pics";
         File dirFile = new File(dir_path);
         if (!dirFile.exists()) {
             dirFile.mkdirs();
         }
 
-        String picturePath = FileUtil.createFile(PathConfig.PPT_PICS_PATH+File.separator + name+ File.separator, picName);
+        String picturePath = FileUtil.createFile(dir_path, picName);
         Log.d("test","copy picture , target path is "+picturePath);
         FileUtil.writePicture(picturePath, pictureBytes);
         String imageString = XmlTags.getPicBegin() + picturePath + XmlTags.getPicEnd();

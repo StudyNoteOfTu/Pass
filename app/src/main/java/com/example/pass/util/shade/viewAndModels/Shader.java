@@ -1,4 +1,5 @@
-package com.example.pass.test.shade;
+package com.example.pass.util.shade.viewAndModels;
+
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -6,6 +7,9 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
+
+import com.example.pass.util.shade.impls.Touchable;
+import com.example.pass.util.shade.util.LongClickTimer;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_MOVE;
@@ -17,11 +21,19 @@ public class Shader implements Touchable {
     //与图片进行数据绑定
     private String imgUrl;
 
+    private String timeTag;
+
     //在图片中的位置偏移量
     private int leftPadding;
 
     //在图片中的位置偏移量
     private int topPadding;
+
+    //图片的底下位置(屏幕显示的位置）
+    private int mImageBottom;
+
+    //图片顶上位置
+    private int mImageTop;
 
     //顶层优先显示优先触摸的Shader
     public static Shader currentTouchShader;
@@ -38,7 +50,7 @@ public class Shader implements Touchable {
 
 
     public static final int MIN_WIDTH = 100;
-    public static final int MIN_HIGHT = 50;
+    public static final int MIN_HEIGHT = 50;
 
     private Paint mRectPaint;
 
@@ -148,13 +160,22 @@ public class Shader implements Touchable {
 
                                 //不允许锁到负向
 
-                                if (mWidth <= MIN_WIDTH){
-                                    mWidth -= x- lastX;
+                                if (mWidth < MIN_WIDTH){
+//                                    mWidth -= x- lastX;
+                                    //改为重置状态
+                                    mWidth = MIN_WIDTH;
                                 }
 
-                                if (mHeight <= MIN_HIGHT){
-                                    mHeight -= y- lastY;
+                                //高度太小或者太高超出底下边框
+                                if (mHeight <= MIN_HEIGHT){
+//                                    mHeight -= y- lastY;
+                                    //改为重置状态
+                                    mHeight = MIN_HEIGHT;
+                                }else if(mLocationY+mHeight > mImageBottom){
+                                    mHeight = mImageBottom - mLocationY;
                                 }
+
+
 
                                 lastX = x;
                                 lastY = y;
@@ -178,11 +199,22 @@ public class Shader implements Touchable {
                                 leftPadding += x - lastX;
                                 topPadding += y - lastY;
                                 //刷新上次触摸位置
+
                                 if (leftPadding <0 ){
-                                    leftPadding -= x- lastX;
+//                                    leftPadding -= x- lastX;
+                                    //改为重置状态
+                                    leftPadding = 0;
                                 }
+
                                 if (topPadding <0){
-                                    topPadding -= y - lastY;
+//                                    Log.d("ShaderTestHeight","mLocationY+mHeight = "+(mLocationY+mHeight)+" mImageBottom = "+mImageBottom);
+//                                    //撤销状态
+//                                    topPadding -= y - lastY;
+                                    //不应撤销状态，而改为重置状态
+                                    topPadding = 0;
+                                }else if(mLocationY+mHeight > mImageBottom){
+                                    //画图看
+                                    topPadding = mImageBottom - mImageTop - mHeight;
                                 }
 
                                 lastX = x;
@@ -236,7 +268,7 @@ public class Shader implements Touchable {
             currentTouchShader = null;
         }
 //        mShadeView.delShader(this);
-        mShadeView.delShader(imgUrl);
+        mShadeView.delShader(imgUrl,timeTag);
     }
 
     private boolean isOverDistance(int lastX, int lastY, int thisX, int thisY) {
@@ -292,7 +324,9 @@ public class Shader implements Touchable {
     }
 
 
-    public void draw(int picLeft, int picTop, int scrollX, int scrollY,Canvas canvas){
+    public void draw(int picLeft, int picTop, int bottom, int scrollX, int scrollY, Canvas canvas){
+        mImageBottom = bottom - scrollY;
+        mImageTop = picTop - scrollY;
         mLocationX = picLeft + scrollX +leftPadding;
         mLocationY = picTop- scrollY + topPadding;
         Log.d("FastTest1","mLocationX = "+mLocationX +" ,mLocationY = "+mLocationY);
@@ -420,5 +454,13 @@ public class Shader implements Touchable {
 
     public void setTopPadding(int topPadding) {
         this.topPadding = topPadding;
+    }
+
+    public String getTimeTag() {
+        return timeTag;
+    }
+
+    public void setTimeTag(String timeTag) {
+        this.timeTag = timeTag;
     }
 }

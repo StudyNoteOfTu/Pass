@@ -1,13 +1,11 @@
-package com.example.pass.test.shade;
+package com.example.pass.util.shade.viewAndModels;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-import androidx.annotation.Nullable;
-
-public class ShadeLinearLayout extends LinearLayout {
+public class ShadeRelativeLayout extends RelativeLayout {
 
     ShadeView shadeView;
 
@@ -19,21 +17,22 @@ public class ShadeLinearLayout extends LinearLayout {
         this.shadeView = shadeView;
     }
 
-    public ShadeLinearLayout(Context context) {
+    public ShadeRelativeLayout(Context context) {
         super(context);
     }
 
-    public ShadeLinearLayout(Context context, @Nullable AttributeSet attrs) {
+    public ShadeRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public ShadeLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ShadeRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public ShadeLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ShadeRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
+
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {

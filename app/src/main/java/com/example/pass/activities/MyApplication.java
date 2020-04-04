@@ -25,7 +25,7 @@ public class MyApplication extends Application {
         WindowManager windowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(metrics);
         ScreenConfig.setmScreenWidth(metrics.widthPixels);
-        ScreenConfig.setmImageTargetWidth((int)(metrics.widthPixels * 0.8));
+        ScreenConfig.setmImageTargetWidth((int)(metrics.widthPixels * 0.9));
         ScreenConfig.setmScreenHeight(metrics.heightPixels);
     }
 }

@@ -88,7 +88,7 @@ public class DocxUtil {
                             ZipEntry pic_entry = getWordPicEntry(docxFile, pic_ndex);
                             if (pic_entry != null) {
                                 byte[] pictureBytes = FileUtil.getPictureBytes(docxFile, pic_entry);
-                                writeDocumentPicture(output_name, outputStream, pictureBytes);
+                                writeDocumentPicture(output_dir,output_name, outputStream, pictureBytes);
                             }
                             //必须要断尾
                             outputStream.write(XmlTags.getLineEnd().getBytes());
@@ -186,14 +186,14 @@ public class DocxUtil {
 
     }
 
-    public static void writeDocumentPicture(String name, FileOutputStream output, byte[] pictureBytes) {
-        String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator+ PathConfig.DOX_PICS_PATH;
+    public static void writeDocumentPicture(String output_dir,String name, FileOutputStream output, byte[] pictureBytes) {
+        String dir_path = output_dir+File.separator+"Pics";
         File dirFile = new File(dir_path);
         if (!dirFile.exists()) {
             dirFile.mkdirs();
         }
 
-        String picturePath = FileUtil.createFile(PathConfig.DOX_PICS_PATH+File.separator + name+File.separator, presentPicture + ".jpg");
+        String picturePath = FileUtil.createFile(dir_path, "image"+presentPicture + ".jpg");
         FileUtil.writePicture(picturePath, pictureBytes);
         presentPicture++;
         String imageString = XmlTags.getPicBegin() + picturePath + XmlTags.getPicEnd();

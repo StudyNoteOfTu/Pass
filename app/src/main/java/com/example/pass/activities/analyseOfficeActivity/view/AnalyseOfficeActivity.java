@@ -22,6 +22,7 @@ import com.example.pass.base.BaseActivity;
 import com.example.pass.util.officeUtils.FileUtil;
 import com.example.pass.view.SwipeItemLayout;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +74,7 @@ public class AnalyseOfficeActivity extends BaseActivity<ITitleSelectView, Analys
         //处理这个path
         if (path != null) {
             singleName = FileUtil.createSingleFileName(path);
-            mPresenter.readFileAndGetLineList(path, PathConfig.TEMP_OFFICE_PATH,singleName );
+            mPresenter.readFileAndGetLineList(path, PathConfig.LOCAL_PATH+File.separator+singleName,singleName );
         }else{
             //不允许继续下去
         }
@@ -109,7 +110,7 @@ public class AnalyseOfficeActivity extends BaseActivity<ITitleSelectView, Analys
     @Override
     public void onFinishAndCompileListToXml() {
         if (path == null) return;
-        mPresenter.compileLinesToXml(PathConfig.FINAL_OFFICE_PATH, singleName, new IOfficeModel.OnLoadProgressListener<String>() {
+        mPresenter.compileLinesToXml(PathConfig.LOCAL_PATH+File.separator+singleName, singleName+"_final", new IOfficeModel.OnLoadProgressListener<String>() {
             @Override
             public void onStart() {
                 runOnUiThread(new Runnable() {

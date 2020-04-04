@@ -1,6 +1,14 @@
 package com.example.pass.configs;
 
+import java.io.File;
+
 public class PathConfig {
+
+    //根路径
+    public static final String ROOT_PATH = "Pass";
+
+    //本地路径
+    public static final String LOCAL_PATH = ROOT_PATH+ File.separator+"local_files";
 
     /**
      * 图片存放路径

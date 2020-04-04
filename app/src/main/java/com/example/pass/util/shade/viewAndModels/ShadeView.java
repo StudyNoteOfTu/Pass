@@ -1,6 +1,5 @@
-package com.example.pass.test.shade;
+package com.example.pass.util.shade.viewAndModels;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -14,35 +13,55 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.example.pass.util.shade.ShadeManager;
+import com.example.pass.util.spans.customSpans.MyImageSpan;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+public class ShadeView extends View {
 
-public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
+    //树的形式存储shader
+    Map<String, Map<String, Shader>> shaderMap = new HashMap<>();
 
-    //所有shader
-    List<Shader> allShaders = new ArrayList<>();
+    //shader盖住的textView的所有MyImageSpan
+    List<MyImageSpan> myImageSpanList = new ArrayList<>();
 
-    //需要显示的shader
-    List<Shader> shaders = new ArrayList<>();
-
-
-    Map<String,Shader> shaderMap= new HashMap<>();
-
-    //获取所有的CenterImageSpan
-    List<CenterImageSpan> centerImageSpans = new ArrayList<>();
-
+    //覆盖的textView
     private TextView mTextView;
 
+    //手指滑动的路线
     private FingerLine fingerPathLine;
 
+    //手指滑动路线的画笔
     private Paint fingerLinePaint;
 
+    //上层调度者
     private ShadeManager mShadeManager;
 
+    //TextView的Spannable（需要传入，无法直接从textView获取）
     private Spannable mSpannable;
+
+
+    private int downX;
+    private int downY;
+
+    private int lastX;
+    private int lastY;
+
+    boolean isDealingShader = false;
+
+    //当前触摸的ImageSpan
+    MyImageSpan touchedSpan;
+
+    List<MyImageSpan> myImageSpansShown = new ArrayList<>();
+
+    //span在屏幕上显示的top
+    int y_top;
+    //span在屏幕上显示的bottom
+    int y_bottom;
 
     public ShadeView(Context context) {
         super(context);
@@ -56,29 +75,23 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
         super(context, attrs, defStyleAttr);
     }
 
-    @SuppressLint("NewApi")
     public ShadeView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public Spannable getmSpannable() {
-        return mSpannable;
-    }
-
-    public void setmSpannable(Spannable mSpannable) {
-        this.mSpannable = mSpannable;
-    }
-
+    /**
+     * 绑定的几个model
+     *
+     * @param textView     绑定覆盖的TextView
+     * @param shadeManager 指定上层调度者
+     * @param spannable    TextView的Spannable
+     */
     public void init(TextView textView, ShadeManager shadeManager, Spannable spannable) {
+        //初始化信息
         mSpannable = spannable;
         mShadeManager = shadeManager;
         mTextView = textView;
-        textView.setOnScrollChangeListener(new OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                onScrollChanged(scrollX,scrollY);
-            }
-        });
+        //手指画笔
         fingerPathLine = new FingerLine();
         fingerLinePaint = new Paint();
         fingerLinePaint.setColor(Color.RED);
@@ -86,48 +99,29 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
         fingerLinePaint.setStyle(Paint.Style.FILL);
 
         //获取所有centerImageSpan
-        centerImageSpans.addAll(mShadeManager.getAllCenterImageSpan(spannable));
+        myImageSpanList.addAll(mShadeManager.getAllCenterImageSpan(spannable));
     }
 
-    private void onScrollChanged(int scrollX, int scrollY) {
-        //管理shader
-
+    private void addShaderToMap(String url, String timeTag, Shader shader) {
+        if (shader != null) {
+            Map<String, Shader> map = shaderMap.get(url);
+            if (map != null) {
+                map.put(timeTag, shader);
+            } else {
+                Map<String, Shader> inner = new HashMap<>();
+                inner.put(timeTag, shader);
+                shaderMap.put(url, inner);
+            }
+        }
     }
 
-//    private void addShader(int locationX, int locationY, int width, int height) {
-//        Shader shader = new Shader(this,locationX, locationY, width, height);
-//        shaders.add(shader);
-//    }
-//
-//    private void addShader(Shader shader){
-//        if (shader != null)shaders.add(shader);
-//    }
-
-
-    //    public void delShader(Shader shaderToDelete){
-//        shaders.remove(shaderToDelete);
-//    }
-
-    private void addShaderToMap(String url,Shader shader){
-        if (shader != null) shaderMap.put(url,shader);
+    //
+    public void delShader(String url, String timeTag) {
+        Map<String, Shader> inner = shaderMap.get(url);
+        if (inner != null) {
+            inner.remove(timeTag);
+        }
     }
-
-//
-    public void delShader(String url){
-        shaderMap.remove(url);
-    }
-
-
-    int downX;
-    int downY;
-
-    int lastX;
-    int lastY;
-
-    boolean isDealingShader = false;
-
-
-    CenterImageSpan touchedSpan;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -142,25 +136,18 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
         //判断一开始触摸的是在谁里面
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             //判断点的在不在优先Shader中,如果不在就把它取消掉
-            if (Shader.currentTouchShader != null && !Shader.currentTouchShader.isPointInner(x,y)){
+            if (Shader.currentTouchShader != null && !Shader.currentTouchShader.isPointInner(x, y)) {
                 Shader.currentTouchShader = null;
             }
-            //判断在不在shaders中
-//            for (Shader shader : shaders) {
-//                if (shader.isPointInner(x, y)) {
-//                    isDealingShader = true;
-//                } else {
-//                    //如果不在，就设置Editable = false
-//                    shader.setEditable(false);
-//                }
-//            }
 
-            for (Shader shader : shaderMap.values()){
-                if (shader.isPointInner(x, y)) {
-                    isDealingShader = true;
-                } else {
-                    //如果不在，就设置Editable = false
-                    shader.setEditable(false);
+            for (Map<String, Shader> inner : shaderMap.values()) {
+                for (Shader shader : inner.values()) {
+                    if (shader.isPointInner(x, y)) {
+                        isDealingShader = true;
+                    } else {
+                        //如果不在，就设置Editable = false
+                        shader.setEditable(false);
+                    }
                 }
             }
         }
@@ -174,7 +161,7 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
                     lastX = (int) event.getX();
                     lastY = (int) event.getY();
 
-                    touchedSpan = mShadeManager.getPressedImageSpan(mSpannable,event);
+                    touchedSpan = mShadeManager.getPressedImageSpan(mSpannable, event);
 
                     Log.d("ShadeView", "down");
                     downX = (int) event.getX();
@@ -194,9 +181,9 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
                     //判断fingerPath是否在重要方向区域内
                     //如果不是，则控制TextView
 
-                    if (!fingerPathLine.isInDangerousDirection()){
+                    if (!fingerPathLine.isInDangerousDirection()) {
                         int delY = (int) event.getY() - lastY;
-                        mTextView.scrollBy(0,-delY);
+                        mTextView.scrollBy(0, -delY);
                     }
 
                     lastX = (int) event.getX();
@@ -208,11 +195,11 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
 
                     if (fingerPathLine.isCalculating()) {
                         fingerPathLine.setWorking(false);
-                        CenterImageSpan imageSpan = mShadeManager.getPressedImageSpan(mSpannable,event);
-                        if (touchedSpan == null ||imageSpan == null|| imageSpan != touchedSpan){
+                        MyImageSpan imageSpan = mShadeManager.getPressedImageSpan(mSpannable, event);
+                        if (touchedSpan == null || imageSpan == null || imageSpan != touchedSpan) {
                             //如果不在同个图片上，或者down的时候不在图片上，或者up时候不在图片内
                             //则不可绘制shader
-                        }else {
+                        } else {
                             dealFingerPathLine(touchedSpan);
                         }
 
@@ -228,23 +215,19 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
             //如果在方块里面
             //交给最后添加的shader
             //优先交给顶层优先Shader
-            if (Shader.currentTouchShader != null){
+            if (Shader.currentTouchShader != null) {
                 Shader.currentTouchShader.onTouch(event);
                 isDealingShader = true;
-            }else {
-//                for (int i = shaders.size() - 1; i >= 0; i--) {
-//                    if (shaders.get(i).onTouch(event)) {
-//                        //如果处理了，拦截
-//                        isDealingShader = true;
-//                        break;
-//                    }
-//                }
-                for (Shader shader: shaderMap.values()){
-                    if (shader.onTouch(event)){
-                        //如果处理了，拦截
-                        isDealingShader = true;
-                        break;
+            } else {
+                for (Map<String, Shader> inner : shaderMap.values()) {
+                    for (Shader shader : inner.values()) {
+                        if (shader.onTouch(event)) {
+                            //如果处理了，拦截
+                            isDealingShader = true;
+                            break;
+                        }
                     }
+
                 }
             }
 
@@ -256,19 +239,21 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
         return false;
     }
 
-    private void dealFingerPathLine(CenterImageSpan touchedSpan) {
+    private void dealFingerPathLine(MyImageSpan touchedSpan) {
         if (fingerPathLine != null) {
             //判断方位，添加Shader
             int delX = fingerPathLine.getNowX() - fingerPathLine.getDownX();
             int delY = fingerPathLine.getNowY() - fingerPathLine.getDownY();
-            if (delY > Shader.MIN_HIGHT && delX > Shader.MIN_WIDTH && delY <= 2 * delX) {
+            if (delY > Shader.MIN_HEIGHT && delX > Shader.MIN_WIDTH && delY <= 2 * delX) {
 //                addShader(fingerPathLine.getDownX(), fingerPathLine.getDownY(), delX, delY);
-                Shader shader = new Shader(this,fingerPathLine.getDownX(),fingerPathLine.getDownY(),delX,delY);
+                Shader shader = new Shader(this, fingerPathLine.getDownX(), fingerPathLine.getDownY(), delX, delY);
+                String millisTag = getMillisTAG();
                 //设置对应的图片
                 shader.setImgUrl(touchedSpan.getImgUrl());
+                shader.setTimeTag(millisTag);
                 //设置相对位置
                 //当前图片在TextView显示的位置
-                int top = (int)touchedSpan.y - mTextView.getScrollY();
+                int top = (int) touchedSpan.y - mTextView.getScrollY();
                 int left = (int) touchedSpan.x + mTextView.getScrollX();
 
                 shader.setLeftPadding(fingerPathLine.getDownX() - left);
@@ -276,8 +261,7 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
 
                 //addShader(shader);
 
-                addShaderToMap(touchedSpan.getImgUrl(),shader);
-
+                addShaderToMap(touchedSpan.getImgUrl(), millisTag, shader);
 
 
             }
@@ -285,68 +269,65 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
         }
     }
 
-    List<CenterImageSpan> centerImageSpansShown = new ArrayList<>();
-
-    int y_top;
-    int y_bottom;
     @Override
     protected void onDraw(Canvas canvas) {
-
         //判断哪些CenterImageSpan在屏幕上
-        centerImageSpansShown.clear();
-        for (CenterImageSpan centerImageSpan : centerImageSpans) {
-            y_top = (int)(centerImageSpan.y - mTextView.getScrollY());
-            y_bottom = (int)(centerImageSpan.bottom - mTextView.getScrollY());
-            if (y_bottom<0 || y_top > mTextView.getMeasuredHeight()){
+        myImageSpansShown.clear();
+        for (MyImageSpan centerImageSpan : myImageSpanList) {
+            y_top = (int) (centerImageSpan.y - mTextView.getScrollY());
+            y_bottom = (int) (centerImageSpan.bottom - mTextView.getScrollY());
+            if (y_bottom < 0 || y_top > mTextView.getMeasuredHeight()) {
                 //底部已经在上面或者顶部在下面
-            }else{
+            } else {
                 //在绘制
-                centerImageSpansShown.add(centerImageSpan);
+                myImageSpansShown.add(centerImageSpan);
             }
         }
 
+        Shader topShader = null;
+        MyImageSpan topShadersImageSpan = null;
+
         //根据url获取需要绘制的shader
-        for (CenterImageSpan centerImageSpan : centerImageSpansShown) {
-            Shader shader = shaderMap.get(centerImageSpan.getImgUrl());
-            if (shader != null) shader.draw((int)centerImageSpan.x,(int)centerImageSpan.y,mTextView.getScrollX(),mTextView.getScrollY(),canvas);
+        for (MyImageSpan myImageSpan : myImageSpansShown) {
+            Map<String, Shader> inner = shaderMap.get(myImageSpan.getImgUrl());
+            if (inner != null) {
+                for (Shader shader : inner.values()) {
+                    if (shader != null) {
+                        if (shader == Shader.currentTouchShader){
+                            topShader = shader;
+                            topShadersImageSpan = myImageSpan;
+                        }
+                        shader.draw((int) myImageSpan.x, (int) myImageSpan.y, myImageSpan.bottom, mTextView.getScrollX(), mTextView.getScrollY(), canvas);
+                    }
+                }
+            }
         }
 
-//        for (Shader shader : shaders) {
-//            if (shader != Shader.currentTouchShader) {
-//                shader.draw(canvas);
-//            }
-//        }
-
-//        //如果是当前Touch的顶层绘制
-//        if (Shader.currentTouchShader != null) {
-//            Shader.currentTouchShader.draw(canvas);
-//        }
+        //如果是当前Touch的顶层绘制，由于topShader是从需要绘制的里面抽取出来的，所以肯定需要绘制
+        if (topShader != null) {
+            topShader.draw((int) topShadersImageSpan.x, (int) topShadersImageSpan.y, topShadersImageSpan.bottom, mTextView.getScrollX(), mTextView.getScrollY(), canvas);
+        }
 
         //finger线是最顶层绘制的
         if (fingerPathLine != null && fingerPathLine.isWorking() && fingerLinePaint != null) {
-            Log.d("ShadeView", "draw line");
             canvas.drawLine(fingerPathLine.getDownX(), fingerPathLine.getDownY(),
                     fingerPathLine.getNowX(), fingerPathLine.getNowY(), fingerLinePaint);
         }
 
         super.onDraw(canvas);
+        //不停地更新绘制
         invalidate();
     }
 
-
-    public TextView getmTextView() {
-        return mTextView;
+    /**
+     * 获取时间转换为的TAG
+     *
+     * @return 六位TAG
+     */
+    private String getMillisTAG() {
+        String tag = String.valueOf(System.currentTimeMillis());
+        return tag.substring(tag.length() - 6);
     }
 
-    public void setmTextView(TextView mTextView) {
-        this.mTextView = mTextView;
-    }
 
-    @Override
-    public void onLocate(String url, int x, int y,int originX, int originY) {
-        Log.d("ShadeViewTAG","onLocate url = "+url+" ,x= "+x+" ,y =  "+y);
-        //在所有的shader中重写添加需要显示的shader
-
-
-    }
 }

@@ -157,12 +157,14 @@ public class ImageFormatTools {
         //判断宽度是否超出目标宽度
         //如果宽度没有超出目标宽度，直接不用处理把它本身返回回去
         //只缩不放（放会出bug，高度固定，而后才绘制图片，会覆盖到下面的文本）
-        if (width <= newWidth) {
-            Log.d("CenterImageSpan", "return origin");
-
-            return origin;
-        }
+//        if (width <= newWidth) {
+//            Log.d("CenterImageSpan", "return origin");
+//
+//
+//            return origin;
+//        }
         //如果宽度超出范围
+
 
         float scaleWidth = ((float) newWidth) / width;
         float scaleHeight = scaleWidth;

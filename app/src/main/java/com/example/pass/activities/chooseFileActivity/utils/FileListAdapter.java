@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pass.R;
 import com.example.pass.activities.MainActivity;
+import com.example.pass.activities.TestShadeActivity;
 import com.example.pass.activities.analyseOfficeActivity.view.AnalyseOfficeActivity;
 import com.example.pass.util.TimeFormatTools;
 
@@ -99,8 +100,9 @@ public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.btn_slide_choose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(context, AnalyseOfficeActivity.class);
-                    Intent intent = new Intent(context, MainActivity.class);
+                    Intent intent = new Intent(context, AnalyseOfficeActivity.class);
+//                    Intent intent = new Intent(context, MainActivity.class);
+//                    Intent intent = new Intent(context,TestShadeActivity.class);
                     intent.putExtra("path", file.getAbsolutePath());
                     context.startActivity(intent);
                 }
