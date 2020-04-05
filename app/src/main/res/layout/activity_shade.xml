@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/shadeRelativeLayout">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:textSize="20sp"
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:text="编辑完成"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
 
-    <com.example.pass.util.shade.viewAndModels.ShadeView
-        android:id="@+id/shadeView"
-        android:background="#00000000"
+    <com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:id="@+id/shadeRelativeLayout">
+
+        <TextView
+            android:id="@+id/textView"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.example.pass.util.shade.viewAndModels.ShadeView
+            android:id="@+id/shadeView"
+            android:background="#00000000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 
-</com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout>
+    </com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout>
+</LinearLayout>

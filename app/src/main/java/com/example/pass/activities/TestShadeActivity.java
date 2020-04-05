@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -20,13 +22,18 @@ import com.example.pass.util.officeUtils.DocxUtil;
 import com.example.pass.util.officeUtils.FileUtil;
 import com.example.pass.util.officeUtils.MyXmlReader;
 import com.example.pass.util.officeUtils.PPTX.PptxUtil;
+import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderBean;
+import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderXmlTool;
 import com.example.pass.util.shade.ShadeManager;
 import com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout;
 import com.example.pass.util.shade.viewAndModels.ShadeView;
+import com.example.pass.util.shade.viewAndModels.Shader;
 import com.example.pass.util.spanUtils.DataContainedSpannableStringBuilder;
 import com.example.pass.util.spanUtils.XmlToSpanUtil;
 
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestShadeActivity extends AppCompatActivity {
@@ -34,6 +41,8 @@ public class TestShadeActivity extends AppCompatActivity {
     TextView textView;
     ShadeView shadeView;
     ShadeRelativeLayout shadeRelativeLayout;
+
+    Button btn_finish;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +64,7 @@ public class TestShadeActivity extends AppCompatActivity {
     }
 
     private void initViews(SpannableStringBuilder spannableStringBuilder) {
+        btn_finish = findViewById(R.id.btn_finish);
         shadeRelativeLayout = findViewById(R.id.shadeRelativeLayout);
         shadeView = findViewById(R.id.shadeView);
         textView = findViewById(R.id.textView);
@@ -63,8 +73,42 @@ public class TestShadeActivity extends AppCompatActivity {
             textView.setText(spannableStringBuilder);
             shadeRelativeLayout.setShadeView(shadeView);
             ShadeManager shadeManager = ShadeManager.getInstance();
-            shadeView.init(textView,shadeManager,spannableStringBuilder);
+            List<ShaderBean> shaderBeans= ShaderXmlTool.analyseXml(Environment.getExternalStorageDirectory().getAbsolutePath()
+                    + File.separator+"Pass/Test/test.shader");
+            List<Shader> shaders = new ArrayList<>();
+            Shader shader;
+            for (ShaderBean shaderBean : shaderBeans) {
+                shader = new Shader(shadeView,0,0-shaderBean.getHeight()-100,shaderBean.getWidth(),shaderBean.getHeight());
+                shader.setLeftPadding(shaderBean.getLeftPadding());
+                shader.setTopPadding(shaderBean.getTopPadding());
+                shader.setImgUrl(shaderBean.getImage_path());
+                shader.setTimeTag(shaderBean.getTime_tag());
+                shaders.add(shader);
+            }
+
+            shadeView.init(shaders,textView,shadeManager,spannableStringBuilder);
             shadeManager.setHolder(textView);
+            shadeManager.setOnLocateCallBack(shadeView);
+
+            btn_finish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    List<ShaderBean> shaderBeans = new ArrayList<>();
+//                    List<Shader> shaders = shadeView.getAllShaders();
+//                    ShaderBean bean;
+//                    for (Shader shader : shaders) {
+//                        bean = new ShaderBean(shader.getImgUrl(),shader.getTimeTag(),
+//                                shader.getLeftPadding(),shader.getTopPadding(),
+//                                shader.getWidth(),shader.getHeight());
+//                        shaderBeans.add(bean);
+//                    }
+//
+//                    ShaderXmlTool.createXml(shaderBeans,"Pass/Test","test");
+                    String result = ShaderXmlTool.analyseXml(Environment.getExternalStorageDirectory().getAbsolutePath()
+                    + File.separator+"Pass/Test/test.shader").toString();
+                    Log.d("XmlTest",result);
+                }
+            });
         }
 
 

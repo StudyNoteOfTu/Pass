@@ -36,13 +36,13 @@ public class ShadeRelativeLayout extends RelativeLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-
+        getParent().requestDisallowInterceptTouchEvent(true);
         return true;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
+        getParent().requestDisallowInterceptTouchEvent(true);
 
         if (shadeView != null) {
             shadeView.onTouchEvent(event);

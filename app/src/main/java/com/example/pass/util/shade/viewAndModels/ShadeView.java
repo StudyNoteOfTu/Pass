@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.Layout;
 import android.text.Spannable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -21,10 +22,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ShadeView extends View {
+public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
 
     //树的形式存储shader
     Map<String, Map<String, Shader>> shaderMap = new HashMap<>();
+
+    Map<String,String> appearPic = new HashMap<>();
 
     //shader盖住的textView的所有MyImageSpan
     List<MyImageSpan> myImageSpanList = new ArrayList<>();
@@ -100,6 +103,40 @@ public class ShadeView extends View {
 
         //获取所有centerImageSpan
         myImageSpanList.addAll(mShadeManager.getAllCenterImageSpan(spannable));
+    }
+
+    public void init(List<Shader> shaders, TextView textView, ShadeManager shadeManager, Spannable spannable) {
+        //初始化信息
+        mSpannable = spannable;
+        mShadeManager = shadeManager;
+        mTextView = textView;
+        //手指画笔
+        fingerPathLine = new FingerLine();
+        fingerLinePaint = new Paint();
+        fingerLinePaint.setColor(Color.RED);
+        fingerLinePaint.setStrokeWidth(10f);
+        fingerLinePaint.setStyle(Paint.Style.FILL);
+
+        //获取所有centerImageSpan
+        myImageSpanList.addAll(mShadeManager.getAllCenterImageSpan(spannable));
+
+        //将shaders添加到map当中去
+        String image_path;
+        String time_tag;
+        Map<String, Shader> inner;
+        for (Shader shader : shaders) {
+            image_path = shader.getImgUrl();
+            time_tag = shader.getTimeTag();
+            //获取路径
+            inner = shaderMap.get(image_path);
+            if (inner == null) {
+                inner = new HashMap<>();
+                inner.put(time_tag, shader);
+                shaderMap.put(image_path, inner);
+            } else {
+                inner.put(time_tag, shader);
+            }
+        }
     }
 
     private void addShaderToMap(String url, String timeTag, Shader shader) {
@@ -183,7 +220,24 @@ public class ShadeView extends View {
 
                     if (!fingerPathLine.isInDangerousDirection()) {
                         int delY = (int) event.getY() - lastY;
-                        mTextView.scrollBy(0, -delY);
+
+                        Layout layout = mTextView.getLayout();
+                        int line = mTextView.getLineCount() - 1;
+                        int bottom = 0;
+                        if (layout != null) bottom = layout.getLineTop(line + 1);
+
+                        //判断滑动范围
+                        if ((mTextView.getScrollY() - delY) <= 0) {
+                            //如果滑动到顶部
+                            mTextView.scrollTo(0, 0);
+
+                        } else if (layout != null && (bottom - mTextView.getHeight()) <= (mTextView.getScrollY() - delY)) {
+                            //如果滑动到底部,思路借鉴ScrollingMovementMethod.class
+                            mTextView.scrollTo(0, bottom - mTextView.getHeight());
+
+                        } else {
+                            mTextView.scrollBy(0, -delY);
+                        }
                     }
 
                     lastX = (int) event.getX();
@@ -203,7 +257,7 @@ public class ShadeView extends View {
                             dealFingerPathLine(touchedSpan);
                         }
 
-                        if (touchedSpan == null && imageSpan == null){
+                        if (touchedSpan == null && imageSpan == null) {
                             //如果down和up都不在图片上
                             //可能是文字涂抹，交给TextView处理？
                         }
@@ -281,13 +335,16 @@ public class ShadeView extends View {
         for (MyImageSpan centerImageSpan : myImageSpanList) {
             y_top = (int) (centerImageSpan.y - mTextView.getScrollY());
             y_bottom = (int) (centerImageSpan.bottom - mTextView.getScrollY());
-            if (y_bottom < 0 || y_top > mTextView.getMeasuredHeight()) {
+            if (y_bottom < 0 || y_top > mTextView.getMeasuredHeight() || appearPic.get(centerImageSpan.getImgUrl())==null) {
                 //底部已经在上面或者顶部在下面
             } else {
                 //在绘制
                 myImageSpansShown.add(centerImageSpan);
             }
         }
+
+
+
 
         Shader topShader = null;
         MyImageSpan topShadersImageSpan = null;
@@ -298,7 +355,7 @@ public class ShadeView extends View {
             if (inner != null) {
                 for (Shader shader : inner.values()) {
                     if (shader != null) {
-                        if (shader == Shader.currentTouchShader){
+                        if (shader == Shader.currentTouchShader) {
                             topShader = shader;
                             topShadersImageSpan = myImageSpan;
                         }
@@ -334,5 +391,18 @@ public class ShadeView extends View {
         return tag.substring(tag.length() - 6);
     }
 
+    public List<Shader> getAllShaders() {
+        List<Shader> shaders = new ArrayList<>();
+        for (Map<String, Shader> values : shaderMap.values()) {
+            shaders.addAll(values.values());
+        }
+        return shaders;
+    }
 
+
+    @Override
+    public void onLocate(String url) {
+        Log.d("ImageShownTest","add url = "+url);
+        appearPic.put(url,"a");
+    }
 }

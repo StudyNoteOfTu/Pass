@@ -62,6 +62,8 @@ public class MyImageSpan extends ClickableImageSpan implements CustomSpan , Touc
     @Override
     public void draw(Canvas canvas, CharSequence text, int start, int end, float x, int top, int y,
                      int bottom, Paint paint) {
+
+        ShadeManager.getInstance().imageAppear(imgUrl);
         this.x = x;
         this.y = top;
         this.bottom = bottom;

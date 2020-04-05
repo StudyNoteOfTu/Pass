@@ -17,6 +17,14 @@ public class ShadeManager  {
 
     private WeakReference<TextView> holder;
 
+    public interface OnLocateCallBack{
+        /**
+         *
+         * @param url  图片路径标识
+         */
+        void onLocate(String url);
+    }
+    private OnLocateCallBack onLocateCallBack;
 
     public TextView getHolder() {
         if (holder == null) return null;
@@ -68,5 +76,19 @@ public class ShadeManager  {
 
     private boolean positionWithinTag(int position, Spannable spannable, Object tag) {
         return position >= spannable.getSpanStart(tag) && position <= spannable.getSpanEnd(tag);
+    }
+
+    public OnLocateCallBack getOnLocateCallBack() {
+        return onLocateCallBack;
+    }
+
+    public void setOnLocateCallBack(OnLocateCallBack onLocateCallBack) {
+        this.onLocateCallBack = onLocateCallBack;
+    }
+
+    public void imageAppear(String url){
+        if (onLocateCallBack != null){
+            onLocateCallBack.onLocate(url);
+        }
     }
 }
