@@ -16,6 +16,9 @@ public class MyShadeSpan extends UnderlineSpan implements CustomSpan, TouchableS
         setShow(isShow);
     }
 
+    public MyShadeSpan(){
+    }
+
     public boolean isShow() {
         return isShow;
     }

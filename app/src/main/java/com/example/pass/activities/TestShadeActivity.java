@@ -86,9 +86,17 @@ public class TestShadeActivity extends AppCompatActivity {
                 shaders.add(shader);
             }
 
-            shadeView.init(shaders,textView,shadeManager,spannableStringBuilder);
-            shadeManager.setHolder(textView);
-            shadeManager.setOnLocateCallBack(shadeView);
+
+            textView.post(new Runnable() {
+                @Override
+                public void run() {
+                    //holder设置必须在init之前
+                    shadeManager.setHolder(textView);
+                    shadeManager.setOnLocateCallBack(shadeView);
+                    shadeView.init(shaders,textView,shadeManager,spannableStringBuilder);
+                }
+            });
+
 
             btn_finish.setOnClickListener(new View.OnClickListener() {
                 @Override

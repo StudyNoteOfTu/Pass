@@ -16,6 +16,8 @@ public class FingerLine {
         int delY = getNowY() - getDownY();
         if (delY > 0 && delX > 0 && delY <= 2 * delX) {
             return true;
+        }else if(delY <0 && delX >0 && Math.abs(delY) <= delX){
+            return true;
         }
         return false;
     }

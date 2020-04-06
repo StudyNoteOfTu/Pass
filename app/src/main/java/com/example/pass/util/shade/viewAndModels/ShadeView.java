@@ -32,6 +32,9 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
     //shader盖住的textView的所有MyImageSpan
     List<MyImageSpan> myImageSpanList = new ArrayList<>();
 
+    //文字shader方片
+    List<TextShader> myTextShaderList = new ArrayList<>();
+
     //覆盖的textView
     private TextView mTextView;
 
@@ -103,6 +106,7 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
 
         //获取所有centerImageSpan
         myImageSpanList.addAll(mShadeManager.getAllCenterImageSpan(spannable));
+        myTextShaderList.addAll(shadeManager.getAllShadeSpan(spannable));
     }
 
     public void init(List<Shader> shaders, TextView textView, ShadeManager shadeManager, Spannable spannable) {
@@ -110,6 +114,9 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
         mSpannable = spannable;
         mShadeManager = shadeManager;
         mTextView = textView;
+        if (mShadeManager.getHolder() == null){
+            mShadeManager.setHolder(textView);
+        }
         //手指画笔
         fingerPathLine = new FingerLine();
         fingerLinePaint = new Paint();
@@ -119,6 +126,7 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
 
         //获取所有centerImageSpan
         myImageSpanList.addAll(mShadeManager.getAllCenterImageSpan(spannable));
+        myTextShaderList.addAll(mShadeManager.getAllShadeSpan(spannable));
 
         //将shaders添加到map当中去
         String image_path;
@@ -253,6 +261,10 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
                         if (touchedSpan == null || imageSpan == null || imageSpan != touchedSpan) {
                             //如果不在同个图片上，或者down的时候不在图片上，或者up时候不在图片内
                             //则不可绘制shader
+                            if (touchedSpan == null && imageSpan == null){
+                                //判断是否在文字上且在同一行
+                                dealFingerPathLine();
+                            }
                         } else {
                             dealFingerPathLine(touchedSpan);
                         }
@@ -296,6 +308,28 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
             isDealingShader = false;
         }
         return false;
+    }
+
+    //判断是否在同一行文字上,只需要判断是否同一行即可
+    private void dealFingerPathLine() {
+        if (fingerPathLine != null){
+            //让manager去判断
+            int downX = fingerPathLine.getDownX();
+            int nowX = fingerPathLine.getNowX();
+            int downY= fingerPathLine.getDownY();
+            int nowY = fingerPathLine.getNowY();
+            int delX = fingerPathLine.getNowX() - fingerPathLine.getDownX();
+            //判断方向
+            if (delX > 20) {
+                int pressedLine = mShadeManager.getPressTextInLine(downY, nowY);
+                //如果是
+                if (pressedLine != -1) {
+                    //TODO:如果在同一行，则进行span设置，并且更新span，以及更新文字shader图片
+                    mSpannable = mShadeManager.insertTextShadeSpan(mSpannable, pressedLine, downX, nowX);
+                    myTextShaderList.addAll(mShadeManager.getAllShadeSpan(mSpannable));
+                }
+            }
+        }
     }
 
     private void dealFingerPathLine(MyImageSpan touchedSpan) {
