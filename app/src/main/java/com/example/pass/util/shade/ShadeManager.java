@@ -3,11 +3,13 @@ package com.example.pass.util.shade;
 import android.graphics.Rect;
 import android.text.Layout;
 import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.example.pass.util.shade.viewAndModels.TextShader;
+import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spans.customSpans.MyImageSpan;
 import com.example.pass.util.spans.customSpans.MyShadeSpan;
 import com.example.pass.util.spans.utils.SpanTool;
@@ -132,7 +134,12 @@ public class ShadeManager  {
         Layout layout = getHolder().getLayout();
         int startPosition = layout.getOffsetForHorizontal(line,startX);
         int endPosition = layout.getOffsetForHorizontal(line,endX);
-        Spannable resultSpannable = SpanTool.handleInsert(spannable,startPosition,endPosition,new MyShadeSpan());
+
+        MyShadeSpan shadeSpan = new MyShadeSpan();
+        Log.d("TextShadeTAG2","before size = "+spannable.getSpans(0,spannable.length(),MyShadeSpan.class).length);
+        Spannable resultSpannable = SpanTool.handleInsert(spannable,startPosition,endPosition,shadeSpan);
+        Log.d("TextShadeTAG2","size = "+resultSpannable.getSpans(0,spannable.length(),MyShadeSpan.class).length);
+
         //设置最新span，并通知更新
         getHolder().setText(resultSpannable);
         return resultSpannable;
@@ -155,4 +162,6 @@ public class ShadeManager  {
             onLocateCallBack.onLocate(url);
         }
     }
+
+
 }

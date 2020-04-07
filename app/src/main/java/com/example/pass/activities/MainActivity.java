@@ -17,10 +17,8 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.pass.R;
 import com.example.pass.recyclerentry.selectTitle.LineAdapter;
 import com.example.pass.util.ImageFormatTools;
-import com.example.pass.util.localFileUtils.LocalInfos;
-import com.example.pass.util.localFileUtils.LocalOfficeFileUtils;
 import com.example.pass.util.officeUtils.DocxUtil;
-import com.example.pass.util.officeUtils.FileUtil;
+import com.example.pass.util.FileUtil;
 import com.example.pass.util.officeUtils.MyXmlReader;
 import com.example.pass.util.officeUtils.PPTX.PptxUtil;
 import com.example.pass.util.officeUtils.XmlTags;
@@ -32,7 +30,6 @@ import com.example.pass.util.spans.movementMethods.ClickableLinkMovementMethod;
 import com.example.pass.view.SwipeItemLayout;
 
 
-import java.io.File;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -155,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             finalXmlResult.append("\n");
         }
         finalXmlResult.append(XmlTags.getXmlEnd());
+
         Log.d("XmlResultListTest",finalXmlResult.toString());
 
         //将xml按<p>拆分成一句一句

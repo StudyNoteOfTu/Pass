@@ -2,10 +2,9 @@ package com.example.pass.util.officeUtils.PPTX;
 
 import android.util.Log;
 
-import com.example.pass.util.officeUtils.FileUtil;
+import com.example.pass.util.FileUtil;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;

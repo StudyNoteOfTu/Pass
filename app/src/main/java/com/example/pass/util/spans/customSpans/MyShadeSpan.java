@@ -29,15 +29,15 @@ public class MyShadeSpan extends UnderlineSpan implements CustomSpan, TouchableS
 
     @Override
     public void updateDrawState(@NonNull TextPaint ds) {
-        if (!isShow){
-            //背景黑色，字体透明
-            ds.setColor(0x00000000);
-            ds.bgColor = 0xff000000;
-        }else{
-            //字体黑色，背景透明
-            ds.setColor(0xff000000);
-            ds.bgColor = 0x00000000;
-        }
+//        if (!isShow){
+//            //背景黑色，字体透明
+//            ds.setColor(0x00000000);
+//            ds.bgColor = 0xff000000;
+//        }else{
+//            //字体黑色，背景透明
+//            ds.setColor(0xff000000);
+//            ds.bgColor = 0x00000000;
+//        }
         super.updateDrawState(ds);
     }
 

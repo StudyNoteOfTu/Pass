@@ -161,7 +161,7 @@ public class XmlTags {
         return passTag;
     }
 
-    public static String getLineBegin() {
+    private static String getLineBegin() {
         return lineBegin;
     }
 

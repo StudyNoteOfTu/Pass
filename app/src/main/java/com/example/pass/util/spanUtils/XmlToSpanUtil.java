@@ -9,13 +9,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Xml;
 
-import com.example.pass.util.officeUtils.FileUtil;
+import com.example.pass.util.FileUtil;
 import com.example.pass.util.officeUtils.XmlTags;
-import com.example.pass.util.spans.ClickableImageSpan;
 import com.example.pass.util.spans.customSpans.MyForegroundColorSpan;
 import com.example.pass.util.spans.customSpans.MyHighLightColoSpan;
 import com.example.pass.util.spans.customSpans.MyImageSpan;
 import com.example.pass.util.spans.customSpans.MyNormalSpan;
+import com.example.pass.util.spans.customSpans.MyShadeSpan;
 import com.example.pass.util.spans.customSpans.MyStrikethroughSpan;
 import com.example.pass.util.spans.customSpans.MyStyleSpan;
 import com.example.pass.util.spans.customSpans.MyUnderlineSpan;
@@ -69,6 +69,7 @@ public class XmlToSpanUtil {
             boolean isTitle = false;
             boolean isLinethrough = false;
             boolean isHighlight = false;
+            boolean isShade = false;
             String valueOfList = "";
             String valueOfListId = "";
             String valueOfTitle = "";
@@ -129,6 +130,8 @@ public class XmlToSpanUtil {
                             } else if (key.equalsIgnoreCase(XmlTags.getValue_highlight())) {//字体背景高亮样式
                                 isHighlight = true;
                                 valueOfHightlight = value;
+                            } else if (key.equalsIgnoreCase(XmlTags.getValue_shade())){
+                                isShade =true;
                             }
                         }
 
@@ -184,6 +187,13 @@ public class XmlToSpanUtil {
                                         if (!TextUtils.isEmpty(valueOfHightlight))
                                             spannableStringBuilder.setSpan(new MyHighLightColoSpan(getFieldValueByFieldName(valueOfHightlight, new Color())), 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                                     isHighlight = false;
+                                }
+
+                                if (isShade){
+                                    if (spannableStringBuilder.length() != 0){
+                                        spannableStringBuilder.setSpan(new MyShadeSpan(),0,spannableStringBuilder.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                    }
+                                    isShade = false;
                                 }
 
                                 spannableStringBuilder = setSBAttributes(spannableStringBuilder,p_key,p_value,false);

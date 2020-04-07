@@ -18,7 +18,7 @@ import com.example.pass.R;
 import com.example.pass.activities.analyseOfficeActivity.bean.LineHolder;
 import com.example.pass.activities.analyseOfficeActivity.bean.LineItem;
 import com.example.pass.activities.analyseOfficeActivity.view.impls.Updatable;
-import com.example.pass.util.officeUtils.FileUtil;
+import com.example.pass.util.FileUtil;
 import com.example.pass.util.officeUtils.XmlTags;
 import com.example.pass.view.DataContainedImageView;
 import com.example.pass.view.DataContainedLinearLayout;

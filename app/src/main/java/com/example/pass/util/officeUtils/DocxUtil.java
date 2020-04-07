@@ -5,7 +5,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
 
-import com.example.pass.configs.PathConfig;
+import com.example.pass.util.FileUtil;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

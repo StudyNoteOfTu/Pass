@@ -5,30 +5,22 @@ import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
 
-import com.example.pass.configs.PathConfig;
-import com.example.pass.util.officeUtils.FileUtil;
+import com.example.pass.util.FileUtil;
 import com.example.pass.util.officeUtils.XmlTags;
 
 import org.xmlpull.v1.XmlPullParser;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 
 public class PptxUtil {
 

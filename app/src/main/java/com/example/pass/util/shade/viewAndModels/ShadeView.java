@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.Layout;
 import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.example.pass.util.shade.ShadeManager;
+import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spans.customSpans.MyImageSpan;
 
 import java.util.ArrayList;
@@ -321,7 +323,7 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
             int delX = fingerPathLine.getNowX() - fingerPathLine.getDownX();
             //判断方向
             if (delX > 20) {
-                int pressedLine = mShadeManager.getPressTextInLine(downY, nowY);
+                int pressedLine = mShadeManager.getPressTextInLine(downY+mTextView.getScrollY(), nowY+mTextView.getScrollY());
                 //如果是
                 if (pressedLine != -1) {
                     //TODO:如果在同一行，则进行span设置，并且更新span，以及更新文字shader图片
@@ -439,4 +441,10 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
         Log.d("ImageShownTest","add url = "+url);
         appearPic.put(url,"a");
     }
+
+    public String getXmlString(){
+        return SpanToXmlUtil.transformAllSpanToXmlFile(new SpannableStringBuilder(mSpannable));
+    }
+
+
 }

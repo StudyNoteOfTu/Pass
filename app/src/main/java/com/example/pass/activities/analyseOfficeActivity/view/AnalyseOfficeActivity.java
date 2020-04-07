@@ -19,7 +19,7 @@ import com.example.pass.activities.analyseOfficeActivity.view.impls.ITitleSelect
 import com.example.pass.activities.analyseOfficeActivity.view.impls.Updatable;
 import com.example.pass.configs.PathConfig;
 import com.example.pass.base.BaseActivity;
-import com.example.pass.util.officeUtils.FileUtil;
+import com.example.pass.util.FileUtil;
 import com.example.pass.view.SwipeItemLayout;
 
 import java.io.File;

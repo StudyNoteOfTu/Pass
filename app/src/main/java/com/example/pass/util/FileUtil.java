@@ -1,4 +1,4 @@
-package com.example.pass.util.officeUtils;
+package com.example.pass.util;
 
 
 import android.graphics.Bitmap;
@@ -164,6 +164,11 @@ public class FileUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String getParentPath(String path){
+        int lastSeperator = path.lastIndexOf("/");
+        return path.substring(0,lastSeperator);
     }
 }
 

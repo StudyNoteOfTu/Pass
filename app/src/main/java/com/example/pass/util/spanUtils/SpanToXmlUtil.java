@@ -2,6 +2,7 @@ package com.example.pass.util.spanUtils;
 
 import android.text.Editable;
 import android.text.ParcelableSpan;
+import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
@@ -35,7 +36,6 @@ public class SpanToXmlUtil {
     //deal it line by line
     public static List<String> editableToXml(Editable editable) {
 
-
         //获取到的Editable的每一行
         List<SpannableStringBuilder> lines = new ArrayList<>();
         //需要处理的Editable转为SpannableStringBuilder
@@ -54,10 +54,11 @@ public class SpanToXmlUtil {
         //获得一行一行的(SpannableStringBuilder)Editable
         //接下来按行处理,按行处理的结果存入xmlStr集合
         List<String> xmlResultList = new ArrayList<>();
-        for (int i = 0 ; i < lines.size() ; i++) {
+        for (int i = 0; i < lines.size(); i++) {
             SpannableStringBuilder line = lines.get(i);
 //            Log.d("TestIndex",i+"");
             String result = handleLineToXmlString(line);
+//            if (result.contains("shade"))Log.d("WhatTAG",result);
             xmlResultList.add(result);
         }
 
@@ -65,6 +66,9 @@ public class SpanToXmlUtil {
     }
 
     /**
+     * //注意，混乱的情况还是出现了，需要重新写这个方法！！！
+     * ！！！！！
+     * ！！！！！
      * 注意，每小节的<p></p>均无属性，不是title也不是ignore啥也不是
      * 将一行的SpannableStringBuilder处理转为以<p></p>为首尾的Xml语句
      *
@@ -93,6 +97,7 @@ public class SpanToXmlUtil {
         boolean isUnderline = false;
         boolean isStrikeThrough = false;
         boolean isPic = false;
+        boolean isShade = false;
         String picPath = "";
         boolean isColor = false;
         String color = "000000";
@@ -150,6 +155,9 @@ public class SpanToXmlUtil {
                     if (isHighlight) {
                         xmlResult.append(XmlTags.getStyleTag(XmlTags.getValue_highlight(), highlight));
                     }
+                    if (isShade) {
+                        xmlResult.append(XmlTags.getStyleTag(XmlTags.getValue_shade()));
+                    }
                     //设置文字
                     xmlResult.append(XmlTags.getTextBegin());
                     xmlResult.append(line.subSequence(spanStart, spanEnd).toString());
@@ -170,6 +178,7 @@ public class SpanToXmlUtil {
                 isUnderline = false;
                 isStrikeThrough = false;
                 isPic = false;
+                isShade = false;
                 picPath = "";
                 isColor = false;
                 color = "000000";
@@ -220,12 +229,15 @@ public class SpanToXmlUtil {
                     highlight = highlight.substring(highlight.length() - 6);
                     Log.d(TAG, "getHighlightColor " + highlight);
                     break;
+                case CustomTypeEnum.SHADE_MODE:
+                    isShade = true;
+                    break;
                 default:
                     break;
             }
 
             //判断当前span是否为最后一个span
-            if (i == spans.length-1) {//如果是新的位置，或者当前span为最后一个span
+            if (i == spans.length - 1) {//如果是新的位置，或者当前span为最后一个span
                 Log.d("xmlResultTAG", "-----------lastLine------------");
                 //新起一行
                 //处理上一行的数据
@@ -259,6 +271,9 @@ public class SpanToXmlUtil {
                     if (isHighlight) {
                         xmlResult.append(XmlTags.getStyleTag(XmlTags.getValue_highlight(), highlight));
                     }
+                    if (isShade){
+                        xmlResult.append(XmlTags.getStyleTag(XmlTags.getValue_shade()));
+                    }
                     //设置文字
                     xmlResult.append(XmlTags.getTextBegin());
                     xmlResult.append(line.subSequence(spanStart, spanEnd).toString());
@@ -281,6 +296,7 @@ public class SpanToXmlUtil {
                 isPic = false;
                 picPath = "";
                 isColor = false;
+                isShade = false;
                 color = "000000";
                 isHighlight = false;
                 highlight = "ffffff";
@@ -295,14 +311,28 @@ public class SpanToXmlUtil {
         }
         Log.d(TAG, "---------------------------GettingSpan End--------------------------------");
 
-        sb.append(XmlTags.getLineBegin());
+        sb.append(XmlTags.getLineBegin("",""));
 
-        for (int i = 0 ; i < xmlOfEachText.size() ; i++){
-             sb.append(xmlOfEachText.get(i));
+        for (int i = 0; i < xmlOfEachText.size(); i++) {
+            sb.append(xmlOfEachText.get(i));
         }
 
         sb.append(XmlTags.getLineEnd());
         return sb.toString();
+    }
+
+    public static String transformAllSpanToXmlFile(SpannableStringBuilder spannableStringBuilder){
+        List<String> list = editableToXml(spannableStringBuilder);
+
+
+        StringBuilder finalXmlResult = new StringBuilder();
+        finalXmlResult.append(XmlTags.getXmlBegin());
+
+        for (int i = 0 ; i < list.size() ; i++){
+            finalXmlResult.append(list.get(i));
+        }
+        finalXmlResult.append(XmlTags.getXmlEnd());
+        return finalXmlResult.toString();
     }
 
 

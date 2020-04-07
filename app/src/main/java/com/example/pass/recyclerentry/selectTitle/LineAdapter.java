@@ -1,6 +1,5 @@
 package com.example.pass.recyclerentry.selectTitle;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,23 +9,19 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import androidx.core.widget.PopupWindowCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pass.R;
-import com.example.pass.util.officeUtils.FileUtil;
+import com.example.pass.util.FileUtil;
 import com.example.pass.recyclerentry.selectTitle.bean.LineHolder;
 import com.example.pass.recyclerentry.selectTitle.bean.LineItem;
 import com.example.pass.view.DataContainedImageView;
 import com.example.pass.view.DataContainedLinearLayout;
 import com.example.pass.view.OnSwipeItemOpenListener;
 import com.example.pass.view.popWindows.TitlePopWindow;
-
-import org.apache.poi.sl.usermodel.Line;
 
 import java.util.ArrayList;
 import java.util.List;
