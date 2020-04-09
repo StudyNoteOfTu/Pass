@@ -77,6 +77,25 @@ public class ShadeManager  {
         return touchedSpan;
     }
 
+    public MyImageSpan getPressedImageSpan(Spannable spannable, int downX,int downY){
+
+        int x = (int) downX - getHolder().getTotalPaddingLeft() + getHolder().getScrollX();
+        int y = (int) downY- getHolder().getTotalPaddingTop() + getHolder().getScrollY();
+
+        Layout layout = getHolder().getLayout();
+        int position = layout.getOffsetForHorizontal(layout.getLineForVertical(y), x);
+
+
+        MyImageSpan[] blockImageSpans = spannable.getSpans(position, position, MyImageSpan.class);
+        MyImageSpan touchedSpan = null;
+        if (blockImageSpans.length > 0 && positionWithinTag(position, spannable, blockImageSpans[0])
+                && blockImageSpans[0].clicked(x, y)) {
+            touchedSpan = blockImageSpans[0];
+        }
+
+        return touchedSpan;
+    }
+
     public List<MyImageSpan> getAllCenterImageSpan(Spannable spannable){
         return Arrays.asList(spannable.getSpans(0, spannable.length(), MyImageSpan.class));
     }

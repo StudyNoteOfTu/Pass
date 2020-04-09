@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.example.pass.util.shade.ShadeManager;
+import com.example.pass.util.shade.util.ShadePaintManager;
 import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spans.customSpans.MyImageSpan;
 
@@ -45,6 +46,9 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
 
     //手指滑动路线的画笔
     private Paint fingerLinePaint;
+
+    //绘制遮罩矩形的画笔
+    private Paint mDrawRectPaint;
 
     //上层调度者
     private ShadeManager mShadeManager;
@@ -125,6 +129,11 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
         fingerLinePaint.setColor(Color.RED);
         fingerLinePaint.setStrokeWidth(10f);
         fingerLinePaint.setStyle(Paint.Style.FILL);
+
+        //矩形画笔
+        mDrawRectPaint = ShadePaintManager.getPaint();
+        mDrawRectPaint.setColor(0x7effff00);
+        mDrawRectPaint.setStyle(Paint.Style.FILL);
 
         //获取所有centerImageSpan
         myImageSpanList.addAll(mShadeManager.getAllCenterImageSpan(spannable));
@@ -263,9 +272,18 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
                         if (touchedSpan == null || imageSpan == null || imageSpan != touchedSpan) {
                             //如果不在同个图片上，或者down的时候不在图片上，或者up时候不在图片内
                             //则不可绘制shader
-                            if (touchedSpan == null && imageSpan == null){
+                            if (touchedSpan == null && imageSpan == null ){
                                 //判断是否在文字上且在同一行
-                                dealFingerPathLine();
+
+                                int downX = fingerPathLine.getDownX();
+                                int nowX = fingerPathLine.getNowX();
+                                int downY= fingerPathLine.getDownY();
+                                int nowY = fingerPathLine.getNowY();
+                                if (mShadeManager.getPressedImageSpan(mSpannable,downX,downY)==null
+                                        && mShadeManager.getPressedImageSpan(mSpannable,nowX,nowY)==null
+                                        && mShadeManager.getPressedImageSpan(mSpannable,(downX+nowX)/2,(downY+nowY)/2)==null){
+                                    dealFingerPathLine();
+                                }
                             }
                         } else {
                             dealFingerPathLine(touchedSpan);
@@ -322,12 +340,13 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
             int nowY = fingerPathLine.getNowY();
             int delX = fingerPathLine.getNowX() - fingerPathLine.getDownX();
             //判断方向
-            if (delX > 20) {
+            if (delX > 0) {
                 int pressedLine = mShadeManager.getPressTextInLine(downY+mTextView.getScrollY(), nowY+mTextView.getScrollY());
                 //如果是
                 if (pressedLine != -1) {
                     //TODO:如果在同一行，则进行span设置，并且更新span，以及更新文字shader图片
                     mSpannable = mShadeManager.insertTextShadeSpan(mSpannable, pressedLine, downX, nowX);
+                    myTextShaderList.clear();
                     myTextShaderList.addAll(mShadeManager.getAllShadeSpan(mSpannable));
                 }
             }
@@ -366,6 +385,11 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        //绘制文字遮罩
+        for (TextShader shader : myTextShaderList) {
+            shader.draw(canvas,mDrawRectPaint ,mTextView.getScrollX(),mTextView.getScrollY());
+        }
+        //绘制图片遮罩
         //判断哪些CenterImageSpan在屏幕上
         myImageSpansShown.clear();
         for (MyImageSpan centerImageSpan : myImageSpanList) {
@@ -395,7 +419,7 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
                             topShader = shader;
                             topShadersImageSpan = myImageSpan;
                         }
-                        shader.draw((int) myImageSpan.x, (int) myImageSpan.y, myImageSpan.bottom, mTextView.getScrollX(), mTextView.getScrollY(), canvas);
+                        shader.draw(mDrawRectPaint,(int) myImageSpan.x, (int) myImageSpan.y, myImageSpan.bottom, mTextView.getScrollX(), mTextView.getScrollY(), canvas);
                     }
                 }
             }
@@ -403,7 +427,7 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
 
         //如果是当前Touch的顶层绘制，由于topShader是从需要绘制的里面抽取出来的，所以肯定需要绘制
         if (topShader != null) {
-            topShader.draw((int) topShadersImageSpan.x, (int) topShadersImageSpan.y, topShadersImageSpan.bottom, mTextView.getScrollX(), mTextView.getScrollY(), canvas);
+            topShader.draw(mDrawRectPaint,(int) topShadersImageSpan.x, (int) topShadersImageSpan.y, topShadersImageSpan.bottom, mTextView.getScrollX(), mTextView.getScrollY(), canvas);
         }
 
         //finger线是最顶层绘制的

@@ -324,7 +324,7 @@ public class Shader implements Touchable {
     }
 
 
-    public void draw(int picLeft, int picTop, int bottom, int scrollX, int scrollY, Canvas canvas){
+    public void draw(Paint paint,int picLeft, int picTop, int bottom, int scrollX, int scrollY, Canvas canvas){
         mImageBottom = bottom - scrollY;
         mImageTop = picTop - scrollY;
         mLocationX = picLeft + scrollX +leftPadding;
@@ -333,14 +333,14 @@ public class Shader implements Touchable {
         if (isEditable){
             //是否可编辑
             //方片和编辑圆 都画
-            drawRectAndCircle(picLeft- scrollX,picTop - scrollY,canvas);
+            drawRectAndCircle(picLeft- scrollX,picTop - scrollY,canvas,paint);
         }else{
             //只画方片
-            drawRect(picLeft- scrollX,picTop - scrollY,canvas);
+            drawRect(picLeft- scrollX,picTop - scrollY,canvas,paint);
         }
     }
 
-    private void drawRectAndCircle(int positionX, int positionY, Canvas canvas){
+    private void drawRectAndCircle(int positionX, int positionY, Canvas canvas,Paint paint){
 
 //        canvas.drawRect(mLocationX,mLocationY,mLocationX+mWidth,mLocationY+mHeight, mRectPaint);
 //
@@ -350,7 +350,7 @@ public class Shader implements Touchable {
 //        canvas.drawCircle(mLocationX+mWidth,mLocationY+mHeight, OUTER_RADIUS,mCirclePaint);
 //        canvas.drawCircle(mLocationX+mWidth,mLocationY+mHeight, INNER_RADIUS,mCircleInnerPaint);
 
-        canvas.drawRect(positionX+leftPadding,positionY+topPadding,positionX+leftPadding+mWidth,positionY+topPadding+mHeight,mRectPaint);
+        canvas.drawRect(positionX+leftPadding,positionY+topPadding,positionX+leftPadding+mWidth,positionY+topPadding+mHeight,paint);
 
         canvas.drawCircle(positionX+leftPadding+mWidth,positionY+topPadding,OUTER_RADIUS,mCirclePaint);
         canvas.drawCircle(positionX+leftPadding+mWidth,positionY+topPadding,INNER_RADIUS,mCircleInnerPaint);
@@ -360,9 +360,9 @@ public class Shader implements Touchable {
 
     }
 
-    private void drawRect(int positionX, int positionY,Canvas canvas){
+    private void drawRect(int positionX, int positionY,Canvas canvas,Paint paint){
 //        canvas.drawRect(mLocationX,mLocationY,mLocationX+mWidth,mLocationY+mHeight, mRectPaint);
-        canvas.drawRect(positionX+leftPadding,positionY+topPadding,positionX+leftPadding+mWidth,positionY+topPadding+mHeight,mRectPaint);
+        canvas.drawRect(positionX+leftPadding,positionY+topPadding,positionX+leftPadding+mWidth,positionY+topPadding+mHeight,paint);
 
     }
 
