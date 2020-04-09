@@ -57,8 +57,13 @@ public class MyXmlWriter {
     public static boolean compileLinesToXml(String xmlFileString, String dir, String name, @NonNull LoadObjectCallback<String> listener){
         try {
             listener.onStart();
-            String sdcard_path = Environment.getExternalStorageDirectory().getAbsolutePath();
-            String path = sdcard_path + File.separator + dir + File.separator + name;
+            String root_path = Environment.getExternalStorageDirectory().getAbsolutePath();
+            if (dir.startsWith(root_path)){
+                root_path = dir;
+            }else{
+                root_path = root_path + File.separator+dir;
+            }
+            String path = root_path +File.separator + name;
             path = FileUtil.createFile(path);
             File xmlFile = new File(path + ".xml");
             if (xmlFile.exists()) {

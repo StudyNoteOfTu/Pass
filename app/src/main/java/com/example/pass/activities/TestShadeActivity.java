@@ -49,6 +49,7 @@ public class TestShadeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shade);
         Intent intent = getIntent();
         path = intent.getStringExtra("path");
+        Log.d("PathTest","path = "+path);
 
         SpannableStringBuilder sb = null;
 
@@ -56,6 +57,8 @@ public class TestShadeActivity extends AppCompatActivity {
             sb =  testDoc(path);
         }else if (path.endsWith(".pptx")){
             sb = testPPT(path);
+        }else if (path.endsWith(".xml")){
+            sb = testXml(path);
         }
 
         initViews(sb);
@@ -72,8 +75,9 @@ public class TestShadeActivity extends AppCompatActivity {
             textView.setText(spannableStringBuilder);
             shadeRelativeLayout.setShadeView(shadeView);
             ShadeManager shadeManager = ShadeManager.getInstance();
-            List<ShaderBean> shaderBeans= ShaderXmlTool.analyseXml(Environment.getExternalStorageDirectory().getAbsolutePath()
-                    + File.separator+"Pass/Test/test.shader");
+            List<ShaderBean> shaderBeans= ShaderXmlTool.analyseXml(FileUtil.getParentPath(path)+"/shade.shader");
+            Log.d("20200409",FileUtil.getParentPath(path)+"/shade.shader ----- size = "+shaderBeans.size());
+
             List<Shader> shaders = new ArrayList<>();
             Shader shader;
             for (ShaderBean shaderBean : shaderBeans) {
@@ -110,12 +114,12 @@ public class TestShadeActivity extends AppCompatActivity {
                         shaderBeans.add(bean);
                     }
 
-                    ShaderXmlTool.createXml(shaderBeans,"Pass/Test","test");
+                    ShaderXmlTool.createXml(shaderBeans,FileUtil.getParentPath(path),"shade");
 
                     String xml = shadeView.getXmlString();
                     //存入文件
                     //覆盖
-                    MyXmlWriter.compileLinesToXml(xml,"Pass/Test/Shade", "shadetest", new IOfficeModel.OnLoadProgressListener<String>() {
+                    MyXmlWriter.compileLinesToXml(xml,FileUtil.getParentPath(path), FileUtil.getFileName(path), new IOfficeModel.OnLoadProgressListener<String>() {
                         @Override
                         public void onStart() {
 
@@ -142,6 +146,8 @@ public class TestShadeActivity extends AppCompatActivity {
 //                    Log.d("XmlTest",result);
                 }
             });
+        }else{
+            Log.d("20200409","span is null");
         }
     }
 
@@ -177,6 +183,7 @@ public class TestShadeActivity extends AppCompatActivity {
         PptxUtil.readPptx(ppt,"PassTest",FileUtil.getFileName(path));
         String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/PassTest/"+FileUtil.getFileName(path)+".xml";
 
+
         MyXmlReader myXmlReader = new MyXmlReader();
         String content = myXmlReader.fileToString(filePath);
 
@@ -192,8 +199,26 @@ public class TestShadeActivity extends AppCompatActivity {
             sb.append(editables.get(i));
         }
 
-
         return sb;
 
+    }
+
+    private SpannableStringBuilder testXml(String path){
+        MyXmlReader myXmlReader = new MyXmlReader();
+        String content = myXmlReader.fileToString(path);
+
+        //解析xml并合成editable呈现在textview上
+        XmlToSpanUtil xmlToSpanUtil = new XmlToSpanUtil();
+
+        //返回<p></p>的集合
+        List<DataContainedSpannableStringBuilder> editables = xmlToSpanUtil.xmlToEditable(this, content);
+
+        SpannableStringBuilder sb = new SpannableStringBuilder();
+        for (int i = 0; i < editables.size(); i++) {
+            DataContainedSpannableStringBuilder dcSb = editables.get(i);
+            sb.append(editables.get(i));
+        }
+
+        return sb;
     }
 }

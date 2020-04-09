@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pass.R;
+import com.example.pass.activities.TestShadeActivity;
 import com.example.pass.activities.analyseOfficeActivity.adapter.LineAdapter;
 import com.example.pass.activities.analyseOfficeActivity.model.impls.IOfficeModel;
 import com.example.pass.activities.analyseOfficeActivity.presenter.AnalyseOfficePresenter;
@@ -124,6 +125,9 @@ public class AnalyseOfficeActivity extends BaseActivity<ITitleSelectView, Analys
             @Override
             public void onFinish(String result) {
                 Log.d(TAG,"onFinishAndCompileListToXml, 合并完成");
+                //跳转过去
+                //直接进入final
+                doIntent(result);
             }
 
             @Override
@@ -132,6 +136,15 @@ public class AnalyseOfficeActivity extends BaseActivity<ITitleSelectView, Analys
 
             }
         });
+    }
+
+    private void doIntent(String result) {
+        //开始跳转，判断是否有设置小标题，如果有，如果没有
+
+        //这里不做判断，直接跳入
+        Intent intent = new Intent(this, TestShadeActivity.class);
+        intent.putExtra("path",result);
+        startActivity(intent);
     }
 
     @Override

@@ -96,11 +96,16 @@ public class ShaderXmlTool {
     //生成xml文件的方法
     public static void createXml(List<ShaderBean> shaderBeans,String dir,String name){
         String root_path = Environment.getExternalStorageDirectory().getAbsolutePath();
+        if (dir.startsWith(root_path)){
+            root_path = dir;
+        }else{
+            root_path = root_path+ File.separator+dir;
+        }
         //得到xml序列化器对象
         XmlSerializer xmlSerializer = Xml.newSerializer();
         //给序列化器设置输出流
         //首先创建文件
-        String path = FileUtil.createFile(root_path+ File.separator+dir+File.separator+name+".shader");
+        String path = FileUtil.createFile(root_path+File.separator+name+".shader");
         File file = new File(path);
         try {
             FileOutputStream fos = new FileOutputStream(file);

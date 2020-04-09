@@ -136,6 +136,8 @@ public class OfficeModelImpl implements IOfficeModel {
 
     /**
      * 自动填补完善用户编辑好的列表
+     * //注意这里有bug， 什么标题都没设置的时候是不应该有填充的
+     *
      * @param xmlLineList 用户编辑好的列表
      * @return 自动填补后的列表
      */

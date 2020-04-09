@@ -100,9 +100,9 @@ public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.btn_slide_choose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(context, AnalyseOfficeActivity.class);
+                    Intent intent = new Intent(context, AnalyseOfficeActivity.class);
 //                    Intent intent = new Intent(context, MainActivity.class);
-                    Intent intent = new Intent(context,TestShadeActivity.class);
+//                    Intent intent = new Intent(context,TestShadeActivity.class);
                     intent.putExtra("path", file.getAbsolutePath());
                     context.startActivity(intent);
                 }
