@@ -111,7 +111,7 @@ public class AnalyseOfficeActivity extends BaseActivity<ITitleSelectView, Analys
     @Override
     public void onFinishAndCompileListToXml() {
         if (path == null) return;
-        mPresenter.compileLinesToXml(PathConfig.LOCAL_PATH+File.separator+singleName, singleName+"_final", new IOfficeModel.OnLoadProgressListener<String>() {
+        mPresenter.compileLinesToXml(PathConfig.LOCAL_PATH+File.separator+singleName+File.separator+"final", "final", new IOfficeModel.OnLoadProgressListener<String>() {
             @Override
             public void onStart() {
                 runOnUiThread(new Runnable() {

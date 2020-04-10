@@ -1,14 +1,22 @@
 package com.example.pass.configs;
 
+import android.os.Environment;
+
 import java.io.File;
 
 public class PathConfig {
+
+    //EnvironmentPath
+    public static final String EnvironmentPath = Environment.getExternalStorageDirectory().getAbsolutePath();
 
     //根路径
     public static final String ROOT_PATH = "Pass";
 
     //本地路径
     public static final String LOCAL_PATH = ROOT_PATH+ File.separator+"local_files";
+
+    //本地路径标识
+    public static final String LOCAL_PATH_TAG = "local_files";
 
     /**
      * 图片存放路径

@@ -75,7 +75,7 @@ public class TestShadeActivity extends AppCompatActivity {
             textView.setText(spannableStringBuilder);
             shadeRelativeLayout.setShadeView(shadeView);
             ShadeManager shadeManager = ShadeManager.getInstance();
-            List<ShaderBean> shaderBeans= ShaderXmlTool.analyseXml(FileUtil.getParentPath(path)+"/shade.shader");
+            List<ShaderBean> shaderBeans= ShaderXmlTool.analyseXml(FileUtil.getParentPath(FileUtil.getParentPath(path))+File.separator+"shader"+"/shade.shader");
             Log.d("20200409",FileUtil.getParentPath(path)+"/shade.shader ----- size = "+shaderBeans.size());
 
             List<Shader> shaders = new ArrayList<>();
@@ -114,8 +114,11 @@ public class TestShadeActivity extends AppCompatActivity {
                         shaderBeans.add(bean);
                     }
 
-                    ShaderXmlTool.createXml(shaderBeans,FileUtil.getParentPath(path),"shade");
+                    //存入方片
+                    ShaderXmlTool.createXml(shaderBeans,FileUtil.getParentPath(FileUtil.getParentPath(path))+File.separator+"shader","shade");
 
+
+                    //更新文字shade信息
                     String xml = shadeView.getXmlString();
                     //存入文件
                     //覆盖

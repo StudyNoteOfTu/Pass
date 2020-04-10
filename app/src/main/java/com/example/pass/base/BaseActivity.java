@@ -31,4 +31,5 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
         super.onDestroy();
         mPresenter.detachView();
     }
+
 }

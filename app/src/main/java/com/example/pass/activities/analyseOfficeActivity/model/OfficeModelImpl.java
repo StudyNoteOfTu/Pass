@@ -144,7 +144,7 @@ public class OfficeModelImpl implements IOfficeModel {
     private List<String> fixXmlLines(List<String> xmlLineList){
         List<String> fixedLines = new ArrayList<>(xmlLineList);
 
-        int top = 1;
+        int top = 0;
         int lastNum = 1;
         int i = 0 ;
         int curNum = 0;

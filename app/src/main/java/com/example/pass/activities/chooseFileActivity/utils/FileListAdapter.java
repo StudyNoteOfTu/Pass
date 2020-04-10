@@ -101,7 +101,7 @@ public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, AnalyseOfficeActivity.class);
-//                    Intent intent = new Intent(context, MainActivity.class);
+//                    Intent intent = new Intent(context, FragmentsHostActivity.class);
 //                    Intent intent = new Intent(context,TestShadeActivity.class);
                     intent.putExtra("path", file.getAbsolutePath());
                     context.startActivity(intent);

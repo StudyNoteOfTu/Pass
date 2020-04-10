@@ -25,11 +25,11 @@ public class TestMainActivity extends AppCompatActivity {
         btn_choosefile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(TestMainActivity.this, ChooseFileActivity.class);
-//                startActivity(intent);
-                Intent intent = new Intent(TestMainActivity.this,TestShadeActivity.class);
-                intent.putExtra("path","/storage/emulated/0/Pass/local_files/新版马克思主义基本原理复习提纲20191204(2)_1586416059692/新版马克思主义基本原理复习提纲20191204(2)_1586416059692_final.xml");
+                Intent intent = new Intent(TestMainActivity.this, ChooseFileActivity.class);
                 startActivity(intent);
+//                Intent intent = new Intent(TestMainActivity.this,TestShadeActivity.class);
+//                intent.putExtra("path","/storage/emulated/0/Pass/local_files/新版马克思主义基本原理复习提纲20191204(2)_1586416059692/新版马克思主义基本原理复习提纲20191204(2)_1586416059692_final.xml");
+//                startActivity(intent);
             }
         });
     }

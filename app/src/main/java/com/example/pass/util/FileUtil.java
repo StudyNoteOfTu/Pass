@@ -170,5 +170,6 @@ public class FileUtil {
         int lastSeperator = path.lastIndexOf("/");
         return path.substring(0,lastSeperator);
     }
+
 }
 
