@@ -2,19 +2,32 @@ package com.example.pass.util.shade.viewAndModels;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class ShadeRelativeLayout extends RelativeLayout {
 
     ShadeView shadeView;
+    View sendTouchView;
 
     public ShadeView getShadeView() {
         return shadeView;
     }
 
+
     public void setShadeView(ShadeView shadeView) {
         this.shadeView = shadeView;
+    }
+
+    public View getSendTouchView() {
+        return sendTouchView;
+    }
+
+    public void setSendTouchView(View sendTouchView) {
+        this.sendTouchView = sendTouchView;
     }
 
     public ShadeRelativeLayout(Context context) {
@@ -44,8 +57,11 @@ public class ShadeRelativeLayout extends RelativeLayout {
     public boolean onTouchEvent(MotionEvent event) {
         getParent().requestDisallowInterceptTouchEvent(true);
 
-        if (shadeView != null) {
+        Log.d("2020411D","visibility"+shadeView.getVisibility());
+        if (shadeView != null && shadeView.getVisibility()== VISIBLE) {
             shadeView.onTouchEvent(event);
+        }else{
+            sendTouchView.onTouchEvent(event);
         }
         return true;
     }

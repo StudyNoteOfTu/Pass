@@ -56,6 +56,8 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
     //TextView的Spannable（需要传入，无法直接从textView获取）
     private Spannable mSpannable;
 
+    private boolean isEditable = false;
+
 
     private int downX;
     private int downY;
@@ -188,7 +190,6 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
         //触摸，如果在图片内，则进行接下来的方片操作
         //如果超出图片范围则取消接下来的操作
 
-
         //判断一开始触摸的是在谁里面
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             //判断点的在不在优先Shader中,如果不在就把它取消掉
@@ -208,6 +209,9 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
             }
         }
 
+        if (!isEditable){
+            isDealingShader = false;
+        }
 
         //判断按下的位置在哪里。如果不在shader里面，那么就不传给shader
         if (!isDealingShader) {
@@ -222,22 +226,25 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
                     Log.d("ShadeView", "down");
                     downX = (int) event.getX();
                     downY = (int) event.getY();
-                    fingerPathLine.setDownX(downX);
-                    fingerPathLine.setDownY(downY);
+                    if (isEditable) {
+                        fingerPathLine.setDownX(downX);
+                        fingerPathLine.setDownY(downY);
+                    }
                     break;
                 case MotionEvent.ACTION_MOVE:
 
-                    Log.d("ShadeView", "move");
-                    fingerPathLine.setCalculating(true);
-                    //获取末端位置，绘制线条
-                    fingerPathLine.setNowX((int) event.getX());
-                    fingerPathLine.setNowY((int) event.getY());
-                    fingerPathLine.setWorking(true);
+                    if (isEditable) {
+                        fingerPathLine.setCalculating(true);
+                        //获取末端位置，绘制线条
+                        fingerPathLine.setNowX((int) event.getX());
+                        fingerPathLine.setNowY((int) event.getY());
+                        fingerPathLine.setWorking(true);
 
+                    }
                     //判断fingerPath是否在重要方向区域内
                     //如果不是，则控制TextView
 
-                    if (!fingerPathLine.isInDangerousDirection()) {
+                    if (!fingerPathLine.isInDangerousDirection() || !isEditable) {//可编辑，不在危险区，或者不可编辑
                         int delY = (int) event.getY() - lastY;
 
                         Layout layout = mTextView.getLayout();
@@ -266,37 +273,38 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
                     break;
                 case MotionEvent.ACTION_UP:
 
-                    if (fingerPathLine.isCalculating()) {
-                        fingerPathLine.setWorking(false);
-                        MyImageSpan imageSpan = mShadeManager.getPressedImageSpan(mSpannable, event);
-                        if (touchedSpan == null || imageSpan == null || imageSpan != touchedSpan) {
-                            //如果不在同个图片上，或者down的时候不在图片上，或者up时候不在图片内
-                            //则不可绘制shader
-                            if (touchedSpan == null && imageSpan == null ){
-                                //判断是否在文字上且在同一行
+                    if (isEditable) {//如果可编辑
+                        if (fingerPathLine.isCalculating()) {
+                            fingerPathLine.setWorking(false);
+                            MyImageSpan imageSpan = mShadeManager.getPressedImageSpan(mSpannable, event);
+                            if (touchedSpan == null || imageSpan == null || imageSpan != touchedSpan) {
+                                //如果不在同个图片上，或者down的时候不在图片上，或者up时候不在图片内
+                                //则不可绘制shader
+                                if (touchedSpan == null && imageSpan == null) {
+                                    //判断是否在文字上且在同一行
 
-                                int downX = fingerPathLine.getDownX();
-                                int nowX = fingerPathLine.getNowX();
-                                int downY= fingerPathLine.getDownY();
-                                int nowY = fingerPathLine.getNowY();
-                                if (mShadeManager.getPressedImageSpan(mSpannable,downX,downY)==null
-                                        && mShadeManager.getPressedImageSpan(mSpannable,nowX,nowY)==null
-                                        && mShadeManager.getPressedImageSpan(mSpannable,(downX+nowX)/2,(downY+nowY)/2)==null){
-                                    dealFingerPathLine();
+                                    int downX = fingerPathLine.getDownX();
+                                    int nowX = fingerPathLine.getNowX();
+                                    int downY = fingerPathLine.getDownY();
+                                    int nowY = fingerPathLine.getNowY();
+                                    if (mShadeManager.getPressedImageSpan(mSpannable, downX, downY) == null
+                                            && mShadeManager.getPressedImageSpan(mSpannable, nowX, nowY) == null
+                                            && mShadeManager.getPressedImageSpan(mSpannable, (downX + nowX) / 2, (downY + nowY) / 2) == null) {
+                                        dealFingerPathLine();
+                                    }
                                 }
+                            } else {
+                                dealFingerPathLine(touchedSpan);
                             }
-                        } else {
-                            dealFingerPathLine(touchedSpan);
-                        }
 
-                        if (touchedSpan == null && imageSpan == null) {
-                            //如果down和up都不在图片上
-                            //可能是文字涂抹，交给TextView处理？
-                        }
+                            if (touchedSpan == null && imageSpan == null) {
+                                //如果down和up都不在图片上
+                                //可能是文字涂抹，交给TextView处理？
+                            }
 
-                        fingerPathLine.setCalculating(false);
+                            fingerPathLine.setCalculating(false);
+                        }
                     }
-
                     //重置touchedSpan
                     touchedSpan = null;
                     break;
@@ -430,10 +438,12 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
             topShader.draw(mDrawRectPaint,(int) topShadersImageSpan.x, (int) topShadersImageSpan.y, topShadersImageSpan.bottom, mTextView.getScrollX(), mTextView.getScrollY(), canvas);
         }
 
-        //finger线是最顶层绘制的
-        if (fingerPathLine != null && fingerPathLine.isWorking() && fingerLinePaint != null) {
-            canvas.drawLine(fingerPathLine.getDownX(), fingerPathLine.getDownY(),
-                    fingerPathLine.getNowX(), fingerPathLine.getNowY(), fingerLinePaint);
+        if (isEditable) {
+            //finger线是最顶层绘制的
+            if (fingerPathLine != null && fingerPathLine.isWorking() && fingerLinePaint != null) {
+                canvas.drawLine(fingerPathLine.getDownX(), fingerPathLine.getDownY(),
+                        fingerPathLine.getNowX(), fingerPathLine.getNowY(), fingerLinePaint);
+            }
         }
 
         super.onDraw(canvas);
@@ -471,4 +481,7 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
     }
 
 
+    public void setEditable(boolean isEditable) {
+        this.isEditable = isEditable;
+    }
 }

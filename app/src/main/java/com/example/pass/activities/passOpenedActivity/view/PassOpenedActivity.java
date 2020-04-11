@@ -117,12 +117,9 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
     @Override
     public void getTop0(int top, SpannableStringBuilder spannableStringBuilder) {
         Log.d(TAG,"getTop0");
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
+        mFragment = mTextViewFragment;
+        getSupportFragmentManager().beginTransaction().add(R.id.container,mFragment).commit();
+        mTextViewFragment.setData(path,spannableStringBuilder);
     }
 
     @Override

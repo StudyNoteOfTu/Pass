@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -70,10 +72,12 @@ public class TestShadeActivity extends AppCompatActivity {
         shadeRelativeLayout = findViewById(R.id.shadeRelativeLayout);
         shadeView = findViewById(R.id.shadeView);
         textView = findViewById(R.id.textView);
+        textView.setMovementMethod(new LinkMovementMethod());
 
         if (spannableStringBuilder != null){
             textView.setText(spannableStringBuilder);
             shadeRelativeLayout.setShadeView(shadeView);
+            shadeRelativeLayout.setSendTouchView(textView);
             ShadeManager shadeManager = ShadeManager.getInstance();
             List<ShaderBean> shaderBeans= ShaderXmlTool.analyseXml(FileUtil.getParentPath(FileUtil.getParentPath(path))+File.separator+"shader"+"/shade.shader");
             Log.d("20200409",FileUtil.getParentPath(path)+"/shade.shader ----- size = "+shaderBeans.size());
