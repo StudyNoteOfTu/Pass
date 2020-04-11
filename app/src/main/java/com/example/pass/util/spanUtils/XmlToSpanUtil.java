@@ -87,7 +87,7 @@ public class XmlToSpanUtil {
                         if (tagBegin.equalsIgnoreCase("p")) {
                             p_key = xmlPullParser.getAttributeValue("","key");//key
                             p_value = xmlPullParser.getAttributeValue("","val");//value
-
+                            Log.d("2020411","p_key = "+p_key+" ,p_value"+p_value);
                         }
 
                         if (tagBegin.equalsIgnoreCase("pic")) {

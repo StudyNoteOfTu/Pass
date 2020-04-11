@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import com.example.pass.R;
 import com.example.pass.activities.TestShadeActivity;
 import com.example.pass.activities.mainActivity.fragments.passFoldersFragment.bean.PassFolder;
+import com.example.pass.activities.passOpenedActivity.view.PassOpenedActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +70,9 @@ public class FolderGridAdapter extends BaseAdapter {
         viewHolder.item_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, TestShadeActivity.class);
-                intent.putExtra("path",mPassFolderList.get(position).getPath()+"/final/final.xml");
+                Intent intent = new Intent(mContext, PassOpenedActivity.class);
+                //传入文件夹路径
+                intent.putExtra("path",mPassFolderList.get(position).getPath());
                 mContext.startActivity(intent);
             }
         });

@@ -17,9 +17,10 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setLayoutId());
-        initViews();
         mPresenter = createPresenter();
         mPresenter.attachView((V)this);
+        initViews();
+
     }
 
     protected abstract void initViews();

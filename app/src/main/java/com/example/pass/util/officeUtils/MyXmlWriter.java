@@ -1,6 +1,7 @@
 package com.example.pass.util.officeUtils;
 
 import android.os.Environment;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -37,6 +38,7 @@ public class MyXmlWriter {
             outputStream.write(XmlTags.getXmlBegin().getBytes());
             //逐个写入数据
             for (String xmlLine : xmlLines) {
+                Log.d("2020411B",xmlLine);
                 outputStream.write(xmlLine.getBytes());
             }
             //全部写完以后

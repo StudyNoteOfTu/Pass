@@ -2,6 +2,7 @@ package com.example.pass.activities.analyseOfficeActivity.model;
 
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -131,6 +132,9 @@ public class OfficeModelImpl implements IOfficeModel {
     @Override
     public boolean recompileListToXml(String dir, String name, OnLoadProgressListener<String> listener) {
         List<String> fixedXmlLines = fixXmlLines(xmlLineList);
+        for (String fixedXmlLine : fixedXmlLines) {
+            Log.d("2020411A",fixedXmlLine);
+        }
         return MyXmlWriter.compileLinesToXml(fixedXmlLines, dir, name, listener);
     }
 
@@ -190,6 +194,7 @@ public class OfficeModelImpl implements IOfficeModel {
         sb.append(XmlTags.getTextEnd());
         sb.append(XmlTags.getBlockEnd());
         sb.append(XmlTags.getLineEnd());
+        Log.d("2020411","create empty line String = "+sb.toString());
         return sb.toString();
     }
 

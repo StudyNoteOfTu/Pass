@@ -1,6 +1,7 @@
 package com.example.pass.activities.mainActivity.fragments.passFoldersFragment.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
 import com.example.pass.R;
+import com.example.pass.activities.chooseFileActivity.view.ChooseFileActivity;
 import com.example.pass.activities.mainActivity.fragments.passFoldersFragment.adapter.FolderGridAdapter;
 import com.example.pass.activities.mainActivity.fragments.passFoldersFragment.bean.PassFolder;
 import com.example.pass.activities.mainActivity.fragments.passFoldersFragment.presenter.PassFolderPresenter;
@@ -46,7 +48,7 @@ public class PassFolderFragment extends BaseFragment<IPassFolderView, PassFolder
 
     private void initData(){
         Log.d("2020410","begin init data");
-        mPresenter.loadLocalFolder();
+        if (mPresenter != null)mPresenter.loadLocalFolder();
     }
 
     @Override
@@ -56,12 +58,20 @@ public class PassFolderFragment extends BaseFragment<IPassFolderView, PassFolder
 
     @Override
     public void switchTitle(String title) {
+        initData();
         if (mActionBar != null) {
             Log.d("2020410","setTitle = "+title);
             mActionBar.setCustomView(R.layout.actionbar_pass_folder);
             mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
             View customView= mActionBar.getCustomView();
             ((TextView)customView.findViewById(R.id.tv_title)).setText(title);
+            customView.findViewById(R.id.img_add).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), ChooseFileActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
     }
 

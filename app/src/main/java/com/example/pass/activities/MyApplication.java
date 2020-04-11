@@ -10,14 +10,19 @@ import com.example.pass.configs.ScreenConfig;
 
 public class MyApplication extends Application {
 
+    private static Context mContext;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        mContext = this;
         initScreenParams();
 
+    }
+
+    public static Context getContextInstance(){
+        return mContext;
     }
 
     private void initScreenParams() {
