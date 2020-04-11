@@ -246,14 +246,14 @@ public class ShadeView extends View  implements ShadeManager.OnLocateCallBack {
                         if (layout != null) bottom = layout.getLineTop(line + 1);
 
                         //判断滑动范围
-                        if ((mTextView.getScrollY() - delY) <= 0) {
+                        if( bottom <= mTextView.getHeight()){
+                            //view 并不高，无法滑动
+                        }else if ((mTextView.getScrollY() - delY) <= 0) {
                             //如果滑动到顶部
                             mTextView.scrollTo(0, 0);
-
                         } else if (layout != null && (bottom - mTextView.getHeight()) <= (mTextView.getScrollY() - delY)) {
                             //如果滑动到底部,思路借鉴ScrollingMovementMethod.class
                             mTextView.scrollTo(0, bottom - mTextView.getHeight());
-
                         } else {
                             mTextView.scrollBy(0, -delY);
                         }

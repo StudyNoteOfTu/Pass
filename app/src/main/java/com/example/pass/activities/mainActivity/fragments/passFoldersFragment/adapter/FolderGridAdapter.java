@@ -70,9 +70,10 @@ public class FolderGridAdapter extends BaseAdapter {
         viewHolder.item_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, PassOpenedActivity.class);
-                //传入文件夹路径
-                intent.putExtra("path",mPassFolderList.get(position).getPath());
+                Intent intent = new Intent(mContext, TestShadeActivity.class);
+                intent.putExtra("path",mPassFolderList.get(position).getPath()+"/final/final.xml");
+//                Intent intent = new Intent(mContext, PassOpenedActivity.class);
+//                intent.putExtra("path",mPassFolderList.get(position).getPath());
                 mContext.startActivity(intent);
             }
         });

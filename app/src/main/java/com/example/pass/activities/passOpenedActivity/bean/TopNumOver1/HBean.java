@@ -18,22 +18,26 @@ public class HBean {
 
         public List<H3> h3List;
         public DataContainedSpannableStringBuilder h4Text;
+        public int marginLeftLevel;
 
         @TreeDataType(iClass = ItemH3.class)
         public static class H3{
 
             public List<H2> h2List;
             public DataContainedSpannableStringBuilder h3Text;
+            public int marginLeftLevel;
 
             @TreeDataType(iClass = ItemH2.class)
             public static class H2{
 
                 public List<H1> h1List;
                 public DataContainedSpannableStringBuilder h2Text;
+                public int marginLeftLevel;
 
                 @TreeDataType(iClass = ItemH1.class)
                 public static class H1{
 
+                    public int marginLeftLevel;
                     public DataContainedSpannableStringBuilder h1Text;
 
                     public SpannableStringBuilder detail;

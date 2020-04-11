@@ -77,6 +77,7 @@ public class XmlToSpanUtil {
             String valueOfHightlight = "";
 
             DataContainedSpannableStringBuilder spannableStringBuilder = null;
+            DataContainedSpannableStringBuilder dsb = null;
 
             int event_type = xmlPullParser.getEventType();
             while (event_type != XmlPullParser.END_DOCUMENT) {
@@ -88,6 +89,7 @@ public class XmlToSpanUtil {
                             p_key = xmlPullParser.getAttributeValue("","key");//key
                             p_value = xmlPullParser.getAttributeValue("","val");//value
                             Log.d("2020411","p_key = "+p_key+" ,p_value"+p_value);
+                            dsb = new DataContainedSpannableStringBuilder();
                         }
 
                         if (tagBegin.equalsIgnoreCase("pic")) {
@@ -196,15 +198,16 @@ public class XmlToSpanUtil {
                                     isShade = false;
                                 }
 
-                                spannableStringBuilder = setSBAttributes(spannableStringBuilder,p_key,p_value,false);
-                                editables.add(spannableStringBuilder);
+//                                spannableStringBuilder = setSBAttributes(spannableStringBuilder,p_key,p_value,false);
+//                                editables.add(spannableStringBuilder);
+                                dsb.append(spannableStringBuilder);
                             }
                         }
                         break;
                     case XmlPullParser.END_TAG:
                         String tagEnd = xmlPullParser.getName();
                         if (tagEnd.equalsIgnoreCase("p")) {
-                            DataContainedSpannableStringBuilder dsb = new DataContainedSpannableStringBuilder("\n");
+                            dsb.append("\n");
                             dsb = setSBAttributes(dsb,p_key,p_value,true);
                             editables.add(dsb);
                         }

@@ -126,6 +126,7 @@ public class PassModel {
                 HBean.H4.H3.H2.H1 tempH1 = null;
                 int nowLevel;
                 for (DataContainedSpannableStringBuilder dataContainedSpannableStringBuilder : dataContainedSpannableStringBuilders) {
+                    Log.d("2020411C",dataContainedSpannableStringBuilder.toString());
                     if (dataContainedSpannableStringBuilder.getKey().equalsIgnoreCase(XmlTags.getKey_ignore())) {
                         //如果忽略就不处理
                     } else {
@@ -133,21 +134,11 @@ public class PassModel {
                         if (dataContainedSpannableStringBuilder.getKey().equalsIgnoreCase(XmlTags.getKey_title())) {
                             //获取level
                             nowLevel = Integer.parseInt(dataContainedSpannableStringBuilder.getValue());
-                            //与上一个进行判断
-//                            if (lastLevel == -1){
-//                                //如果上一个是-1 说明这是第一个数据，应当是top等级的，新建一个h4
-//                                tempH4 = new HBean.H4();
-//                                tempH4.h3List = new ArrayList<>();
-//                                //加入hBean
-//                                hBean.h4List.add(tempH4);
-//                                //并且把标题传给H4
-//                                tempH4.h4Text = dataContainedSpannableStringBuilder;
-//                                lastLevel = nowLevel;
-//                            }else{
                             switch (nowLevel) {
                                 case 4:
                                     //初始化
                                     tempH4 = new HBean.H4();
+                                    tempH4.marginLeftLevel = 0;
                                     tempH4.h3List = new ArrayList<>();
                                     //加入
                                     hBean.h4List.add(tempH4);
@@ -157,6 +148,7 @@ public class PassModel {
                                 case 3:
                                     //初始化H3
                                     tempH3 = new HBean.H4.H3();
+                                    tempH3.marginLeftLevel = 1;
                                     tempH3.h2List = new ArrayList<>();
                                     //加入h4
                                     tempH4.h3List.add(tempH3);
@@ -167,6 +159,7 @@ public class PassModel {
                                 case 2:
                                     //初始化h2
                                     tempH2 = new HBean.H4.H3.H2();
+                                    tempH2.marginLeftLevel = 2;
                                     tempH2.h1List = new ArrayList<>();
                                     //加入h3
                                     tempH3.h2List.add(tempH2);
@@ -177,6 +170,7 @@ public class PassModel {
                                 case 1:
                                     //初始化h1
                                     tempH1 = new HBean.H4.H3.H2.H1();
+                                    tempH1.marginLeftLevel = 3;
                                     //加入h2
                                     tempH2.h1List.add(tempH1);
                                     //将标题信息传给H1
@@ -186,65 +180,6 @@ public class PassModel {
                                 default:
                                     break;
                             }
-                            //不需要大小判断
-                            //如果上一个level不是-1
-                            //将nowLevel和lastLevel进行判断
-                            //如果比上一个小
-                            //如果nowLevel = 3
-//                                if (nowLevel <= lastLevel){
-//                                    switch (nowLevel){
-//                                        case 3:
-//                                            //初始化H3
-//                                            tempH3 = new HBean.H4.H3();
-//                                            tempH3.h2List = new ArrayList<>();
-//                                            //加入h4
-//                                            tempH4.h3List.add(tempH3);
-//                                            //将标题信息传给H3
-//                                            tempH3.h3Text = dataContainedSpannableStringBuilder;
-//                                            lastLevel = nowLevel;
-//                                            break;
-//                                        case 2:
-//                                            //初始化h2
-//                                            tempH2 = new HBean.H4.H3.H2();
-//                                            tempH2.h1List = new ArrayList<>();
-//                                            //加入h3
-//                                            tempH3.h2List.add(tempH2);
-//                                            //将标题信息传给H2
-//                                            tempH2.h2Text = dataContainedSpannableStringBuilder;
-//                                            lastLevel = nowLevel;
-//                                            break;
-//                                        case 1:
-//                                            //初始化h1
-//                                            tempH1 = new HBean.H4.H3.H2.H1();
-//                                            //加入h2
-//                                            tempH2.h1List.add(tempH1);
-//                                            //将标题信息传给H1
-//                                            tempH1.h1Text = dataContainedSpannableStringBuilder;
-//                                            lastLevel = nowLevel;
-//                                            break;
-//                                        default:
-//                                            break;
-//                                    }
-//                                }else{
-//                                    //如果nowLevel大于lastLevel
-//                                    switch (nowLevel){
-//                                        //那么必然存给它的上一级，不可能跳级
-//                                        case 4:
-//                                            //初始化
-//                                            tempH4 = new HBean.H4();
-//                                            //加入
-//                                            hBean.h4List.add(tempH4);
-//                                            //标题信息
-//                                            tempH4.h4Text = dataContainedSpannableStringBuilder;
-//                                            lastLevel = nowLevel;
-//                                            break;
-//                                        case 3:
-//                                            //初始化
-//                                            tempH3 = new HBean.H4.H3();
-//
-//                                    }
-//                                }
-//                            }
                         } else {
                             //没有title，就是具体内容
                             tempH1.detail.append(dataContainedSpannableStringBuilder);
@@ -260,6 +195,7 @@ public class PassModel {
                 HBean.H4.H3.H2.H1 tempH1 = null;
                 int nowLevel;
                 for (DataContainedSpannableStringBuilder dataContainedSpannableStringBuilder : dataContainedSpannableStringBuilders) {
+                    Log.d("2020411C",dataContainedSpannableStringBuilder.toString());
                     if (dataContainedSpannableStringBuilder.getKey().equalsIgnoreCase(XmlTags.getKey_ignore())) {
                         //如果忽略就不处理
                     } else {
@@ -271,6 +207,7 @@ public class PassModel {
                                 case 3:
                                     //初始化
                                     tempH3 = new HBean.H4.H3();
+                                    tempH3.marginLeftLevel = 0;
                                     tempH3.h2List = new ArrayList<>();
                                     //insert
                                     h4.h3List.add(tempH3);
@@ -280,6 +217,7 @@ public class PassModel {
                                 case 2:
                                     //initial
                                     tempH2 = new HBean.H4.H3.H2();
+                                    tempH2.marginLeftLevel = 1;
                                     tempH2.h1List = new ArrayList<>();
                                     //insert
                                     tempH3.h2List.add(tempH2);
@@ -289,6 +227,7 @@ public class PassModel {
                                 case 1:
                                     //initial
                                     tempH1 = new HBean.H4.H3.H2.H1();
+                                    tempH1.marginLeftLevel = 2;
                                     //insert
                                     tempH2.h1List.add(tempH1);
                                     //set title
@@ -311,6 +250,7 @@ public class PassModel {
                 HBean.H4.H3.H2.H1 tempH1 = null;
                 int nowLevel;
                 for (DataContainedSpannableStringBuilder dataContainedSpannableStringBuilder : dataContainedSpannableStringBuilders) {
+                    Log.d("2020411C",dataContainedSpannableStringBuilder.toString());
                     if (dataContainedSpannableStringBuilder.getKey().equalsIgnoreCase(XmlTags.getKey_ignore())) {
                         //如果忽略就不做处理
                     } else {
@@ -321,6 +261,7 @@ public class PassModel {
                                 case 2:
                                     //初始化
                                     tempH2 = new HBean.H4.H3.H2();
+                                    tempH2.marginLeftLevel = 0;
                                     tempH2.h1List = new ArrayList<>();
                                     //insert
                                     h3.h2List.add(tempH2);
@@ -330,6 +271,7 @@ public class PassModel {
                                 case 1:
                                     //initial
                                     tempH1 = new HBean.H4.H3.H2.H1();
+                                    tempH1.marginLeftLevel = 1;
                                     //insert
                                     tempH2.h1List.add(tempH1);
                                     //set detail

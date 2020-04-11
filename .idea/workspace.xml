@@ -6,47 +6,25 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="MyXmlReader" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0a6509c-e197-42bb-88b0-295d99cac37c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNum1/ItemBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/HBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH3.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH4.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/FolderListFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ScatterLikeListFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/TextViewFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/model/PassModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/presenter/PassDetailPresenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/PassOpenedActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/impls/IPassDetailView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/base/ActionBarFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layouts/activities/layout/activity_pass_opened.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_folder_list.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/MyApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/analyseOfficeActivity/model/OfficeModelImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/analyseOfficeActivity/model/OfficeModelImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/adapter/FolderGridAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/adapter/FolderGridAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/view/PassFolderFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/view/PassFolderFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/base/BaseActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/base/BaseActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/base/BaseFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/base/BaseFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/recyclerentry/expandableBeans/Level0Item.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/recyclerentry/expandableBeans/Level1Item.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/recyclerentry/expandableBeans/Level2Item.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/recyclerentry/expandableBeans/Level3Item.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/recyclerentry/expandableBeans/TopLevelBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/officeUtils/MyXmlWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/officeUtils/MyXmlWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/HBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/HBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH1.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH2.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH3.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH4.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH4.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/model/PassModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/model/PassModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/viewAndModels/ShadeView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/viewAndModels/ShadeView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spanUtils/XmlToSpanUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spanUtils/XmlToSpanUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h4.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,25 +45,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/PassOpenedActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="138" column="48" selection-start-line="138" selection-start-column="48" selection-end-line="138" selection-end-column="48" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#795#796#0" expanded="true" />
-                <element signature="e#824#825#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/impls/IPassDetailView.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+            <state relative-caret-position="378">
+              <caret line="27" column="56" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,24 +58,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/presenter/PassDetailPresenter.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="61">
-              <caret line="40" column="51" selection-start-line="40" selection-start-column="51" selection-end-line="40" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#644#645#0" expanded="true" />
-                <element signature="e#687#688#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/HBean.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="378">
+              <caret line="36" column="56" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -120,10 +70,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.Jlanglang/TreeRecyclerView/1.3.1.1/b2fd1effc9ac13eb429c22b187ef312025221293/TreeRecyclerView-1.3.1.1-sources.jar!/com/baozi/treerecyclerview/annotation/TreeDataType.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH3.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+            <state relative-caret-position="542">
+              <caret line="37" column="56" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -131,8 +84,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH4.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+            <state relative-caret-position="467">
+              <caret line="37" column="56" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -141,46 +94,59 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/FolderListFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#361#362#0" expanded="true" />
-                <element signature="e#385#386#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.Jlanglang/TreeRecyclerView/1.3.1.1/b2fd1effc9ac13eb429c22b187ef312025221293/TreeRecyclerView-1.3.1.1-sources.jar!/com/baozi/treerecyclerview/factory/ItemHelperFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/base/ActionBarFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="37" column="25" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_folder_list.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h1.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+            <state relative-caret-position="225">
+              <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="17" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h2.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h4.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="403">
+              <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/viewAndModels/ShadeView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="247" column="32" lean-forward="true" selection-start-line="247" selection-start-column="32" selection-end-line="247" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/adapter/FolderGridAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="75" column="60" lean-forward="true" selection-start-line="75" selection-start-column="60" selection-end-line="75" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h3.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -238,9 +204,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/presenter/PassFolderPresenter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_folder.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/analyseOfficeActivity/view/AnalyseOfficeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/TestMainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/TestShadeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
@@ -256,8 +219,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/mineFragment/view/MineFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/PassOpenedActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/SpanBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h1.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/ItemH1.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/MyApplication.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/ItemH2.java" />
@@ -265,10 +226,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/ItemH4.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/SpanBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/H4.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH1.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH2.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH3.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH4.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNum1/ItemBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/base/ActionBarFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ScatterLikeListFragment.java" />
@@ -279,21 +236,30 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/presenter/PassDetailPresenter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/base/BaseFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/view/PassFolderFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/adapter/FolderGridAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/base/BaseActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spanUtils/XmlToSpanUtil.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/model/PassModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/analyseOfficeActivity/model/OfficeModelImpl.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/officeUtils/MyXmlWriter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_folder_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/FolderListFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/HBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/PassOpenedActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spanUtils/XmlToSpanUtil.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/HBean.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/model/PassModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH1.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH2.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH3.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH4.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h1.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h2.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h3.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h4.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/adapter/FolderGridAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/viewAndModels/ShadeView.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-8" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="952" />
     <option name="width" value="977" />
     <option name="height" value="1038" />
   </component>
@@ -398,74 +364,6 @@
               <item name="example" type="462c0819:PsiDirectoryNode" />
               <item name="pass" type="462c0819:PsiDirectoryNode" />
               <item name="activities" type="462c0819:PsiDirectoryNode" />
-              <item name="analyseOfficeActivity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="pass" type="462c0819:PsiDirectoryNode" />
-              <item name="activities" type="462c0819:PsiDirectoryNode" />
-              <item name="analyseOfficeActivity" type="462c0819:PsiDirectoryNode" />
-              <item name="bean" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="pass" type="462c0819:PsiDirectoryNode" />
-              <item name="activities" type="462c0819:PsiDirectoryNode" />
-              <item name="analyseOfficeActivity" type="462c0819:PsiDirectoryNode" />
-              <item name="presenter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="pass" type="462c0819:PsiDirectoryNode" />
-              <item name="activities" type="462c0819:PsiDirectoryNode" />
-              <item name="analyseOfficeActivity" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="pass" type="462c0819:PsiDirectoryNode" />
-              <item name="activities" type="462c0819:PsiDirectoryNode" />
-              <item name="chooseFileActivity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="pass" type="462c0819:PsiDirectoryNode" />
-              <item name="activities" type="462c0819:PsiDirectoryNode" />
               <item name="mainActivity" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -481,21 +379,6 @@
               <item name="activities" type="462c0819:PsiDirectoryNode" />
               <item name="mainActivity" type="462c0819:PsiDirectoryNode" />
               <item name="fragments" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="pass" type="462c0819:PsiDirectoryNode" />
-              <item name="activities" type="462c0819:PsiDirectoryNode" />
-              <item name="mainActivity" type="462c0819:PsiDirectoryNode" />
-              <item name="fragments" type="462c0819:PsiDirectoryNode" />
-              <item name="mineFragment" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
@@ -526,7 +409,7 @@
               <item name="mainActivity" type="462c0819:PsiDirectoryNode" />
               <item name="fragments" type="462c0819:PsiDirectoryNode" />
               <item name="passFoldersFragment" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="adapter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
@@ -540,32 +423,6 @@
               <item name="pass" type="462c0819:PsiDirectoryNode" />
               <item name="activities" type="462c0819:PsiDirectoryNode" />
               <item name="passOpenedActivity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="pass" type="462c0819:PsiDirectoryNode" />
-              <item name="activities" type="462c0819:PsiDirectoryNode" />
-              <item name="passOpenedActivity" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="pass" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
@@ -591,6 +448,45 @@
               <item name="pass" type="462c0819:PsiDirectoryNode" />
               <item name="recyclerentry" type="462c0819:PsiDirectoryNode" />
               <item name="selectTitle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="pass" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="pass" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="shade" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="pass" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="shade" type="462c0819:PsiDirectoryNode" />
+              <item name="viewAndModels" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
@@ -636,7 +532,17 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="res" type="462c0819:PsiDirectoryNode" />
               <item name="layouts" type="462c0819:PsiDirectoryNode" />
-              <item name="fragments" type="462c0819:PsiDirectoryNode" />
+              <item name="itemviews" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+              <item name="itemviews" type="462c0819:PsiDirectoryNode" />
               <item name="layout" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -790,11 +696,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.080882356" weight="0.58921164" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.080882356" visible="true" weight="0.386059" />
       <window_info id="Structure" order="2" sideWeight="0.9191176" side_tool="true" weight="0.20107238" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -803,7 +709,7 @@
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" weight="0.7058824" />
-      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49798927" weight="0.69558823" />
+      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49798927" weight="0.54558825" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32941177" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32794118" />
@@ -821,62 +727,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.Jlanglang/TreeRecyclerView/1.3.1.1/b2fd1effc9ac13eb429c22b187ef312025221293/TreeRecyclerView-1.3.1.1-sources.jar!/com/baozi/treerecyclerview/annotation/TreeItemType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/recyclerentry/selectTitle/LineAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="28" column="16" lean-forward="true" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/activities/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h3.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h4.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h2.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/ItemH0.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h1.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" selection-start-line="1" selection-end-line="12" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/MyApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -915,49 +765,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/SpannableStringBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="1222" column="18" selection-start-line="1222" selection-start-column="18" selection-end-line="1222" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/TestShadeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
           <caret line="221" column="40" lean-forward="true" selection-start-line="221" selection-start-column="40" selection-end-line="221" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="21" column="47" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#510#511#0" expanded="true" />
-            <element signature="e#560#561#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="53" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1067,17 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/adapter/FolderGridAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="72" column="71" selection-start-line="72" selection-start-column="71" selection-end-line="72" selection-end-column="71" />
-          <folding>
-            <element signature="e#951#952#0" expanded="true" />
-            <element signature="e#985#986#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/base/BaseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
@@ -1089,25 +889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-697">
           <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spanUtils/XmlToSpanUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="39" column="53" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/model/PassModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="50" column="25" selection-start-line="50" selection-start-column="25" selection-end-line="50" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#765#766#0" expanded="true" />
-            <element signature="e#815#816#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1175,18 +956,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/presenter/PassDetailPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="40" column="51" selection-start-line="40" selection-start-column="51" selection-end-line="40" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#644#645#0" expanded="true" />
-            <element signature="e#687#688#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/impls/IPassDetailView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
@@ -1197,30 +966,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH4.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.Jlanglang/TreeRecyclerView/1.3.1.1/b2fd1effc9ac13eb429c22b187ef312025221293/TreeRecyclerView-1.3.1.1-sources.jar!/com/baozi/treerecyclerview/annotation/TreeDataType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/HBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1243,15 +992,170 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/PassOpenedActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/presenter/PassDetailPresenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="138" column="48" selection-start-line="138" selection-start-column="48" selection-end-line="138" selection-end-column="48" />
+        <state relative-caret-position="461">
+          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#795#796#0" expanded="true" />
-            <element signature="e#824#825#0" expanded="true" />
+            <element signature="e#644#645#0" expanded="true" />
+            <element signature="e#687#688#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/SpannableStringBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="1222" column="18" selection-start-line="1222" selection-start-column="18" selection-end-line="1222" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/officeUtils/MyXmlReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spanUtils/XmlToSpanUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3050">
+          <caret line="78" column="70" selection-start-line="78" selection-start-column="48" selection-end-line="78" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_mine.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/HBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="36" column="52" lean-forward="true" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/PassOpenedActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="145" column="69" selection-start-line="145" selection-start-column="69" selection-end-line="145" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/model/PassModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-250">
+          <caret line="273" column="63" selection-start-line="273" selection-start-column="63" selection-end-line="273" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.Jlanglang/TreeRecyclerView/1.3.1.1/b2fd1effc9ac13eb429c22b187ef312025221293/TreeRecyclerView-1.3.1.1-sources.jar!/com/baozi/treerecyclerview/item/TreeItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/330f3d1f77c2f50358474489988e6e96/jetified-TreeRecyclerView-1.3.1.1/jars/classes.jar!/com/baozi/treerecyclerview/item/TreeItem.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="52" column="46" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="27" column="56" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="36" column="56" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="542">
+          <caret line="37" column="56" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ItemH4.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="37" column="56" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h1.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="17" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h2.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h3.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_expandable_h4.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/adapter/FolderGridAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="75" column="60" lean-forward="true" selection-start-line="75" selection-start-column="60" selection-end-line="75" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/viewAndModels/ShadeView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="247" column="32" lean-forward="true" selection-start-line="247" selection-start-column="32" selection-end-line="247" selection-end-column="32" />
         </state>
       </provider>
     </entry>

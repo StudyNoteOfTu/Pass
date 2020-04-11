@@ -1,7 +1,10 @@
 package com.example.pass.activities.passOpenedActivity.bean.TopNumOver1;
 
+import android.graphics.Rect;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
@@ -27,5 +30,11 @@ public class ItemH4 extends TreeItemGroup<HBean.H4> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
         viewHolder.setText(R.id.tv_title,getData().h4Text.toString());
 
+    }
+
+    @Override
+    public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
+        super.getItemOffsets(outRect, layoutParams, position);
+        outRect.left = getData().marginLeftLevel*100+20;
     }
 }
