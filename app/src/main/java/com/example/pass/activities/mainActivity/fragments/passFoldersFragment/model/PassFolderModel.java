@@ -30,6 +30,7 @@ public class PassFolderModel implements IPassFolderModel {
         if (folders != null) {
             for (File folder : folders) {
                 if (folder.isDirectory()) {
+                    Log.d("2020411F","folder isdirectory "+folder.getName());
                     //进入该分类
                     //首先判断是什么类型，比如local_files
                     if (folder.getName().equalsIgnoreCase(PathConfig.LOCAL_PATH_TAG)) {
@@ -40,11 +41,13 @@ public class PassFolderModel implements IPassFolderModel {
 
                     //开始获取该文件夹下的所有文件
                     File[] local_files = folder.listFiles();
+                    if (local_files != null)Log.d("2020411F","size = "+local_files.length);
                     String file_name;
                     Long createTime;
                     if (local_files != null) {
                         for (File local_file : local_files) {
                             file_name = local_file.getName();
+                            Log.d("2020411F",file_name);
                             createTime = Long.parseLong(file_name.substring(file_name.lastIndexOf("_") + 1));
                             file_name = file_name.substring(0, file_name.lastIndexOf("_"));
                             Log.e(TAG, " create time = " + createTime + " result file_name = " + file_name);

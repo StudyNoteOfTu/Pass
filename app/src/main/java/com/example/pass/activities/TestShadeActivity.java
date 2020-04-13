@@ -25,6 +25,7 @@ import com.example.pass.util.officeUtils.PPTX.PptxUtil;
 import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderBean;
 import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderXmlTool;
 import com.example.pass.util.shade.ShadeManager;
+import com.example.pass.util.shade.util.ShadePaintManager;
 import com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout;
 import com.example.pass.util.shade.viewAndModels.ShadeView;
 import com.example.pass.util.shade.viewAndModels.Shader;
@@ -100,7 +101,8 @@ public class TestShadeActivity extends AppCompatActivity {
                     //holder设置必须在init之前
                     shadeManager.setHolder(textView);
                     shadeManager.setOnLocateCallBack(shadeView);
-                    shadeView.init(shaders,textView,shadeManager,spannableStringBuilder);
+
+                    shadeView.init(shaders,textView,shadeManager,spannableStringBuilder, ShadePaintManager.getPaint(true));
                 }
             });
 
@@ -117,11 +119,8 @@ public class TestShadeActivity extends AppCompatActivity {
                                 shader.getWidth(),shader.getHeight());
                         shaderBeans.add(bean);
                     }
-
                     //存入方片
                     ShaderXmlTool.createXml(shaderBeans,FileUtil.getParentPath(FileUtil.getParentPath(path))+File.separator+"shader","shade");
-
-
                     //更新文字shade信息
                     String xml = shadeView.getXmlString();
                     //存入文件
@@ -142,12 +141,8 @@ public class TestShadeActivity extends AppCompatActivity {
 
                         }
                     });
-
-
                     //同时保存xml编辑
                     //往path里面更新
-
-
 //                    String result = ShaderXmlTool.analyseXml(Environment.getExternalStorageDirectory().getAbsolutePath()
 //                    + File.separator+"Pass/Test/test.shader").toString();
 //                    Log.d("XmlTest",result);

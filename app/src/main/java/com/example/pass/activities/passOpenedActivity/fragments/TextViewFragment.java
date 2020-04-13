@@ -13,10 +13,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pass.R;
 import com.example.pass.base.ActionBarFragment;
+import com.example.pass.callbacks.LoadObjectCallback;
 import com.example.pass.util.FileUtil;
+import com.example.pass.util.officeUtils.MyXmlWriter;
 import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderBean;
 import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderXmlTool;
 import com.example.pass.util.shade.ShadeManager;
+import com.example.pass.util.shade.util.ShadePaintManager;
 import com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout;
 import com.example.pass.util.shade.viewAndModels.ShadeView;
 import com.example.pass.util.shade.viewAndModels.Shader;
@@ -34,8 +37,18 @@ public class TextViewFragment extends ActionBarFragment {
     Button img_see;
     TextView tv_finish;
 
+    String path;
+    SpannableStringBuilder sb;
+
+
+    ShadeManager shadeManager;
+
     ShadeRelativeLayout shadeRelativeLayout;
 
+
+    //初始状态：不可编辑，可视
+    boolean isEdit;
+    boolean isShow;
 
 
     @Override
@@ -46,84 +59,107 @@ public class TextViewFragment extends ActionBarFragment {
         tv_finish = mContentView.findViewById(R.id.tv_finish);
         textView.setMovementMethod(new LinkMovementMethod());
         img_edit_shade = mContentView.findViewById(R.id.btn_edit_shade);
-        img_edit_shade.setSelected(false);
         img_edit_shade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (img_edit_shade.isSelected()){
-                    //选中
-                    setState(1);
-                    img_edit_shade.setSelected(false);
-                }else{
-                    //位被选中
-                    setState(2);
-                    img_edit_shade.setSelected(true);
-                }
+                changeEditState();
             }
         });
         img_see = mContentView.findViewById(R.id.btn_see);
-        img_see.setSelected(false);
         img_see.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (img_see.isSelected()){
-                    setState(3);
-                    img_see.setSelected(false);
-                }else{
-                    setState(4);
-                    img_see.setSelected(true);
-                }
+                changeSeeState();
             }
         });
 
         tv_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setState(5);
+                //完成编辑
+                isEdit = false;
+                isShow = true;
+                //保存shade
+                saveShaders();
+                refreshState();
             }
         });
 
     }
 
-    private void setState(int type){
-        switch(type){
-            case 1:
-                //普通,所有置空
-                tv_finish.setVisibility(View.GONE);
-                img_edit_shade.setVisibility(View.VISIBLE);
-                img_see.setVisibility(View.VISIBLE);
-                //不显示shadeView，不可编辑shadeView，
-                shadeView.setVisibility(View.GONE);
-                shadeView.setEditable(false);
-                break;
-            case 2:
-                //开启shadeView
-                img_edit_shade.setVisibility(View.GONE);
-                img_see.setVisibility(View.GONE);
-                tv_finish.setVisibility(View.VISIBLE);
-                //显示shadeView，可编辑shadeView
-                shadeView.setVisibility(View.VISIBLE);
-                shadeView.setEditable(true);
-                break;
-            case 3:
-                tv_finish.setVisibility(View.GONE);
-                img_edit_shade.setVisibility(View.VISIBLE);
-                img_see.setVisibility(View.VISIBLE);
-                //不显示shadeView
-                shadeView.setVisibility(View.GONE);
-                break;
-            case 4:
-            case 5:
-                tv_finish.setVisibility(View.GONE);
-                img_edit_shade.setVisibility(View.VISIBLE);
-                img_see.setVisibility(View.VISIBLE);
-                //显示shadeView，不可编辑
-                shadeView.setVisibility(View.VISIBLE);
-                shadeView.setEditable(false);
-                break;
+    //存入方片信息
+    private void saveShaders() {
+        List<ShaderBean> shaderBeans = new ArrayList<>();
+        List<Shader> shaders = shadeView.getAllShaders();
+        ShaderBean bean;
+        for (Shader shader : shaders) {
+            bean = new ShaderBean(shader.getImgUrl(),shader.getTimeTag(),
+                    shader.getLeftPadding(),shader.getTopPadding(),
+                    shader.getWidth(),shader.getHeight());
+            shaderBeans.add(bean);
         }
+        //存入方片
+        ShaderXmlTool.createXml(shaderBeans,path+File.separator+"shader","shade");
+        //存入当前页面文字信息
+        String xml = shadeView.getXmlString();
+        //存入文件
+        //覆盖
+        MyXmlWriter.compileLinesToXml(xml,path+"/final","final" , new LoadObjectCallback<String>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onFinish(String result) {
+                Log.d("OnFinishTest",result);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
     }
 
+    private void changeSeeState() {
+        //设置shadeView不可编辑
+        isEdit = false;
+        //是否可见可以修改一下
+        isShow = !isShow;
+        refreshState();
+    }
+
+    private void changeEditState() {
+        //设置shadeView为可见
+        isShow = true;
+        //设置是否可编辑
+        isEdit = !isEdit;
+        refreshState();
+    }
+
+    private void refreshState() {
+        if (isEdit){
+            tv_finish.setVisibility(View.VISIBLE);
+            img_edit_shade.setVisibility(View.GONE);
+            img_see.setVisibility(View.GONE);
+            shadeView.setEditable(true);
+            shadeView.getmDrawRectPaint().setAlpha(180);
+        }else{
+            tv_finish.setVisibility(View.GONE);
+            img_edit_shade.setVisibility(View.VISIBLE);
+            img_see.setVisibility(View.VISIBLE);
+            shadeView.setEditable(false);
+            shadeView.getmDrawRectPaint().setAlpha(255);
+        }
+        //shadeView是否可见
+        if (isShow){
+            shadeView.setVisibility(View.VISIBLE);
+        }else{
+            shadeView.setVisibility(View.GONE);
+        }
+
+    }
     @Override
     protected int setLayoutId() {
         return R.layout.fragment_pass_text_view;
@@ -135,20 +171,24 @@ public class TextViewFragment extends ActionBarFragment {
     }
 
     public void setData(String path,SpannableStringBuilder spannableStringBuilder){
+        this.path = path;
+        this.sb = spannableStringBuilder;
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while(textView==null){
                     Log.d("2020411LOOP","loop");
                 }
-                getActivity().runOnUiThread(new Runnable() {
+                myActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         textView.setText(spannableStringBuilder);
                         shadeRelativeLayout.setShadeView(shadeView);
                         shadeRelativeLayout.setSendTouchView(textView);
-                        ShadeManager shadeManager = ShadeManager.getInstance();
-                        List<ShaderBean> shaderBeans= ShaderXmlTool.analyseXml(FileUtil.getParentPath(FileUtil.getParentPath(path))+ File.separator+"shader"+"/shade.shader");
+                        shadeManager = ShadeManager.newInstance();
+                        ShadeManager.currentShadeManager = shadeManager;//设置shademanager为当前shademanager
+                        List<ShaderBean> shaderBeans= ShaderXmlTool.analyseXml(path+ File.separator+"shader"+"/shade.shader");
                         List<Shader> shaders = new ArrayList<>();
                         Shader shader;
                         for (ShaderBean shaderBean : shaderBeans) {
@@ -159,9 +199,14 @@ public class TextViewFragment extends ActionBarFragment {
                             shader.setTimeTag(shaderBean.getTime_tag());
                             shaders.add(shader);
                         }
+
                         shadeManager.setHolder(textView);
                         shadeManager.setOnLocateCallBack(shadeView);
-                        shadeView.init(shaders,textView,shadeManager,spannableStringBuilder);
+                        shadeView.init(shaders,textView,shadeManager,spannableStringBuilder,ShadePaintManager.getPaint(true));
+
+                        isEdit = false;
+                        isShow = true;
+                        refreshState();
                     }
                 });
             }

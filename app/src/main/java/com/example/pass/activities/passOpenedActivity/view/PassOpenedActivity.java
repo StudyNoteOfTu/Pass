@@ -12,6 +12,7 @@ import com.example.pass.activities.passOpenedActivity.fragments.FolderListFragme
 import com.example.pass.activities.passOpenedActivity.fragments.ScatterLikeListFragment;
 import com.example.pass.activities.passOpenedActivity.fragments.TextViewFragment;
 import com.example.pass.activities.passOpenedActivity.fragments.ViewPagerFragment;
+import com.example.pass.activities.passOpenedActivity.fragments.ViewPagerItemFragment;
 import com.example.pass.activities.passOpenedActivity.presenter.PassDetailPresenter;
 import com.example.pass.activities.passOpenedActivity.view.impls.IPassDetailView;
 import com.example.pass.base.ActionBarFragment;
@@ -47,7 +48,10 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
 
         initFragments();
 
-        mPresenter.getDetail(path);
+//        mPresenter.getDetail(path);
+        mFragment = mViewPagerFragment;
+        getSupportFragmentManager().beginTransaction().add(R.id.container,mFragment).commit();
+        mViewPagerFragment.initData(getSupportFragmentManager(),path);
     }
 
     private void initFragments() {

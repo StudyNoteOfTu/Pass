@@ -60,6 +60,7 @@ public class MyXmlWriter {
         try {
             listener.onStart();
             String root_path = Environment.getExternalStorageDirectory().getAbsolutePath();
+            Log.d("2020411F","root path = "+ root_path+" ,dir = "+dir);
             if (dir.startsWith(root_path)){
                 root_path = dir;
             }else{
@@ -86,11 +87,12 @@ public class MyXmlWriter {
             //关闭输出流
             outputStream.close();
 
+            String out_path = path+".xml";
+            listener.onFinish(out_path);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String out_path = Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+dir+File.separator+name+".xml";
-        listener.onFinish(out_path);
+
 
         return true;
     }

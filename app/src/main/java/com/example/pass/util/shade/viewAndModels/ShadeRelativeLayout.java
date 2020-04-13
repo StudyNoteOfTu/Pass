@@ -56,12 +56,10 @@ public class ShadeRelativeLayout extends RelativeLayout {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         getParent().requestDisallowInterceptTouchEvent(true);
-
-        Log.d("2020411D","visibility"+shadeView.getVisibility());
         if (shadeView != null && shadeView.getVisibility()== VISIBLE) {
             shadeView.onTouchEvent(event);
         }else{
-            sendTouchView.onTouchEvent(event);
+            sendTouchView.dispatchTouchEvent(event);
         }
         return true;
     }

@@ -23,4 +23,17 @@ public class ShadePaintManager {
         return mPaint;
     }
 
+    public static Paint getPaint(boolean isAlpha255){
+        Paint paint = new Paint();
+        paint.setColor(0xffffff00);
+        paint.setStyle(Paint.Style.FILL);
+        if (isAlpha255){
+            paint.setAlpha(255);
+            return paint;
+        }else{
+            paint.setAlpha(180);
+            return paint;
+        }
+    }
+
 }
