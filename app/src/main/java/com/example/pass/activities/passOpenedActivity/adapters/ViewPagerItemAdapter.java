@@ -1,11 +1,15 @@
 package com.example.pass.activities.passOpenedActivity.adapters;
 
+import android.os.Parcelable;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.pass.activities.passOpenedActivity.fragments.ViewPagerItemFragment;
 
@@ -56,5 +60,16 @@ public class ViewPagerItemAdapter extends FragmentPagerAdapter {
         position = position % fragmentList.size();
 
         return super.instantiateItem(container, position);
+    }
+
+
+    @Override
+    public void restoreState(@Nullable Parcelable state, @Nullable ClassLoader loader) {
+//        super.restoreState(state, loader);
+    }
+
+    @Override
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        return super.isViewFromObject(view, object);
     }
 }

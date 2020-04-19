@@ -187,12 +187,12 @@ public class TextViewFragment extends ActionBarFragment {
                         shadeRelativeLayout.setShadeView(shadeView);
                         shadeRelativeLayout.setSendTouchView(textView);
                         shadeManager = ShadeManager.newInstance();
-                        ShadeManager.currentShadeManager = shadeManager;//设置shademanager为当前shademanager
+                        ShadeManager.setCurrentShadeManager(shadeManager);//设置shademanager为当前shademanager
                         List<ShaderBean> shaderBeans= ShaderXmlTool.analyseXml(path+ File.separator+"shader"+"/shade.shader");
                         List<Shader> shaders = new ArrayList<>();
                         Shader shader;
                         for (ShaderBean shaderBean : shaderBeans) {
-                            shader = new Shader(shadeView,0,0-shaderBean.getHeight()-100,shaderBean.getWidth(),shaderBean.getHeight());
+                            shader = new Shader(shadeView,0,0-shaderBean.getHeight(),shaderBean.getWidth(),shaderBean.getHeight());
                             shader.setLeftPadding(shaderBean.getLeftPadding());
                             shader.setTopPadding(shaderBean.getTopPadding());
                             shader.setImgUrl(shaderBean.getImage_path());

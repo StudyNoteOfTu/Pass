@@ -17,21 +17,24 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.example.pass.util.shade.ShadeManager;
-import com.example.pass.util.shade.util.ShadePaintManager;
 import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spans.customSpans.MyImageSpan;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
 
     //树的形式存储shader
-    Map<String, Map<String, Shader>> shaderMap = new HashMap<>();
+    ConcurrentHashMap<String, ConcurrentHashMap<String, Shader>> dataSourceShaderMap = new ConcurrentHashMap<>();
 
-    Map<String, String> appearPic = new HashMap<>();
+    ConcurrentHashMap<String,Shader> deleteShaderMap = new ConcurrentHashMap<>();
+
+    ConcurrentHashMap<String, String> appearPic = new ConcurrentHashMap<>();
+
+    String url = "aabb";
 
     //shader盖住的textView的所有MyImageSpan
     List<MyImageSpan> myImageSpanList = new ArrayList<>();
@@ -121,6 +124,10 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
 //    }
 
     public void init(List<Shader> shaders, TextView textView, ShadeManager shadeManager, Spannable spannable, Paint drawRectPaint) {
+        Log.d("CreateShadeView", "init createShadeView data" + shadeManager.data);
+        mSpannable = spannable;
+        mShadeManager = shadeManager;
+        mTextView = textView;
         //手指画笔
         fingerPathLine = new FingerLine();
         fingerLinePaint = new Paint();
@@ -142,9 +149,7 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
             @Override
             public void onGlobalLayout() {
                 //初始化信息
-                mSpannable = spannable;
-                mShadeManager = shadeManager;
-                mTextView = textView;
+
                 if (mShadeManager.getHolder() == null) {
                     mShadeManager.setHolder(textView);
                 }
@@ -152,56 +157,106 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
                 //获取所有centerImageSpan
                 myImageSpanList.clear();
                 myImageSpanList.addAll(mShadeManager.getAllCenterImageSpan(spannable));
+
+                Log.d("MyImageSpanList", "centerImageSpan size = " + myImageSpanList.size());
                 myTextShaderList.clear();
                 myTextShaderList.addAll(mShadeManager.getAllShadeSpan(spannable));
 
                 //将shaders添加到map当中去
                 String image_path;
                 String time_tag;
-                Map<String, Shader> inner;
+                ConcurrentHashMap<String, Shader> inner;
+                boolean needContinue = true;
+                Log.d("Loop", "--------------------");
                 for (Shader shader : shaders) {
+                    //不是自己的不加进来
+                    needContinue = true;
+                    //如果有image
+                    //有一样的就加入
+                    for (MyImageSpan myImageSpan : myImageSpanList) {
+                        Log.d("Loop", "shader.imageUrl = " + shader.getImgUrl() + " ,myImageSpan.ImageUrl = " + myImageSpan.getImgUrl());
+//                        if (!shader.getImgUrl().equalsIgnoreCase(myImageSpan.getImgUrl())){
+//                            Log.d("Loop","not same, continue");
+//                            needContinue = true;
+//                        }else{
+//                            Log.d("Loop","same , insert");
+//                            needContinue = false;
+//                            break;
+//                        }
+                        if (shader.getImgUrl().equalsIgnoreCase(myImageSpan.getImgUrl())) {
+                            //如果有一样的，那么就添加进来
+                            needContinue = false;
+                            Log.d("Loop", "same , insert");
+                        }
+                    }
+                    //如果压根没有image
+                    if (myImageSpanList.size() == 0) needContinue = true;
+
+                    if (needContinue) continue;
+
+
+                    Log.d("Loop", "  ADD  shader.imageUrl = " + shader.getImgUrl() + "");
+
                     image_path = shader.getImgUrl();
                     time_tag = shader.getTimeTag();
                     //获取路径
-                    inner = shaderMap.get(image_path);
+                    inner = dataSourceShaderMap.get(image_path);
                     if (inner == null) {
-                        inner = new HashMap<>();
+                        inner = new ConcurrentHashMap<>();
                         inner.put(time_tag, shader);
-                        shaderMap.put(image_path, inner);
+                        dataSourceShaderMap.put(image_path, inner);
                     } else {
                         inner.put(time_tag, shader);
                     }
+
                 }
 
+                Log.d("Loop", "--------------------");
                 initialed = true;
             }
         });
     }
 
+
     private void addShaderToMap(String url, String timeTag, Shader shader) {
         if (shader != null) {
-            Map<String, Shader> map = shaderMap.get(url);
+            ConcurrentHashMap<String, Shader> map = dataSourceShaderMap.get(url);
             if (map != null) {
                 map.put(timeTag, shader);
             } else {
-                Map<String, Shader> inner = new HashMap<>();
+                ConcurrentHashMap<String, Shader> inner = new ConcurrentHashMap<>();
                 inner.put(timeTag, shader);
-                shaderMap.put(url, inner);
+                dataSourceShaderMap.put(url, inner);
             }
         }
     }
 
 
-    public void delShader(String url, String timeTag) {
-        Map<String, Shader> inner = shaderMap.get(url);
-        if (inner != null) {
-            inner.remove(timeTag);
+    public synchronized void delShader(String url, String timeTag) {
+        Log.d("getAllShaders", "--------------------");
+
+        try {
+            ConcurrentHashMap<String, Shader> inner = dataSourceShaderMap.get(url);
+
+            if (inner != null) {
+                if (inner.get(timeTag) == Shader.currentTouchShader) {
+                    Shader.currentTouchShader = null;
+                }
+                deleteShaderMap.put(timeTag,inner.get(timeTag));
+                inner.remove(timeTag);
+
+            }
+        } catch (Exception e) {
+            Log.d("TestException", e.getMessage());
         }
+
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (!initialed) return false;
+
+
         int x = (int) event.getX();
         int y = (int) event.getY();
         //触摸必须在图片上，且不能超出去
@@ -216,7 +271,7 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
                 Shader.currentTouchShader = null;
             }
 
-            for (Map<String, Shader> inner : shaderMap.values()) {
+            for (Map<String, Shader> inner : dataSourceShaderMap.values()) {
                 for (Shader shader : inner.values()) {
                     if (shader.isPointInner(x, y)) {
                         isDealingShader = true;
@@ -330,6 +385,7 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
 
             }
         } else {
+            Log.d("ShadeView", "downInShader");
             //如果在方块里面
             //交给最后添加的shader
             //优先交给顶层优先Shader
@@ -337,7 +393,7 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
                 Shader.currentTouchShader.onTouch(event);
                 isDealingShader = true;
             } else {
-                for (Map<String, Shader> inner : shaderMap.values()) {
+                for (Map<String, Shader> inner : dataSourceShaderMap.values()) {
                     for (Shader shader : inner.values()) {
                         if (shader.onTouch(event)) {
                             //如果处理了，拦截
@@ -412,6 +468,7 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
         //绘制文字遮罩
         for (TextShader shader : myTextShaderList) {
             shader.draw(canvas, mDrawRectPaint, mTextView.getScrollX(), mTextView.getScrollY());
@@ -422,8 +479,10 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
         for (MyImageSpan centerImageSpan : myImageSpanList) {
             y_top = (int) (centerImageSpan.y - mTextView.getScrollY());
             y_bottom = (int) (centerImageSpan.bottom - mTextView.getScrollY());
-            if (y_bottom < 0 || y_top > mTextView.getMeasuredHeight() || appearPic.get(centerImageSpan.getImgUrl()) == null) {
+
+            if (y_bottom < 0 || y_top > mTextView.getMeasuredHeight() || mShadeManager != null && appearPic.get(centerImageSpan.getImgUrl()) == null) {
                 //底部已经在上面或者顶部在下面
+                Log.d("2020418DrawTest", "can not draw，url= " + centerImageSpan.getImgUrl());
             } else {
                 //在绘制
                 myImageSpansShown.add(centerImageSpan);
@@ -435,9 +494,17 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
         MyImageSpan topShadersImageSpan = null;
 
         //根据url获取需要绘制的shader
+
         for (MyImageSpan myImageSpan : myImageSpansShown) {
-            Map<String, Shader> inner = shaderMap.get(myImageSpan.getImgUrl());
+            Map<String, Shader> inner = dataSourceShaderMap.get(myImageSpan.getImgUrl());
+
             if (inner != null) {
+                //删除数据
+                for (String s : inner.keySet()) {
+                    if (deleteShaderMap.get(s)!=null){
+                        inner.remove(s);
+                    }
+                }
                 for (Shader shader : inner.values()) {
                     if (shader != null) {
                         if (shader == Shader.currentTouchShader) {
@@ -480,23 +547,27 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
 
     public List<Shader> getAllShaders() {
         List<Shader> shaders = new ArrayList<>();
-        for (Map<String, Shader> values : shaderMap.values()) {
+        for (Map<String, Shader> values : dataSourceShaderMap.values()) {
             shaders.addAll(values.values());
         }
+        Log.d("getAllShaders", "shader hashcode = " + dataSourceShaderMap.hashCode() + "size = " + shaders.size());
         return shaders;
     }
 
 
     @Override
     public void onLocate(String url) {
-        Log.d("ImageShownTest", "add url = " + url);
-        appearPic.put(url, "a");
+        addUrl(url);
+    }
+
+    public void addUrl(String url) {
+        this.appearPic.put(url, "");
+        Log.d("2020419UrlTest", "url = " + url);
     }
 
     public String getXmlString() {
         return SpanToXmlUtil.transformAllSpanToXmlFile(new SpannableStringBuilder(mSpannable));
     }
-
 
     public void setEditable(boolean isEditable) {
         this.isEditable = isEditable;

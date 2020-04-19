@@ -111,7 +111,7 @@ public class Shader implements Touchable {
                     currentTouchShader = this;
                 }
 
-                //判断是不是矩形
+                //判断触摸的是哪部分
                 if(pointInCircle(mLocationX+mWidth,mLocationY, OUTER_RADIUS,x,y)){
                     Log.d("ShaderTAG","pointInCircle");
                     //叉叉

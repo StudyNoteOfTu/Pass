@@ -18,12 +18,16 @@ import com.example.pass.util.spans.utils.SpanTool;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShadeManager {
 
+    public long data = System.currentTimeMillis();
 
-    public static ShadeManager currentShadeManager;
+    private static ShadeManager currentShadeManager;
+
 
     private TextView holder;
 
@@ -48,7 +52,7 @@ public class ShadeManager {
     private ShadeManager() {
     }
 
-    public static ShadeManager getInstance(){
+    public static ShadeManager getInstance() {
         return currentShadeManager;
     }
 
@@ -124,9 +128,9 @@ public class ShadeManager {
     public TextShader transformShadeSpanToTextShader(Spannable spannable, MyShadeSpan shadeSpan) {
 
         Layout layout = getHolder().getLayout();
-        Log.d("2020411F","text is null? "+(getHolder()==null));
+        Log.d("2020411F", "text is null? " + (getHolder() == null));
         if (layout == null) {
-            Log.d("2020411F","layout is null");
+            Log.d("2020411F", "layout is null");
             return null;
         }
         int span_start = spannable.getSpanStart(shadeSpan);
@@ -195,5 +199,12 @@ public class ShadeManager {
         }
     }
 
+    public static ShadeManager getCurrentShadeManager() {
+        return currentShadeManager;
+    }
 
+    public static void setCurrentShadeManager(ShadeManager currentShadeManager) {
+        Log.d("2020419CurrentShadeManager","setCurrentShadeManager");
+        ShadeManager.currentShadeManager = currentShadeManager;
+    }
 }

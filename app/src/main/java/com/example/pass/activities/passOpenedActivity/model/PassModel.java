@@ -141,6 +141,7 @@ public class PassModel {
                                     tempH4.marginLeftLevel = 0;
                                     tempH4.h3List = new ArrayList<>();
                                     //加入
+                                    tempH4.parent = hBean;
                                     hBean.h4List.add(tempH4);
                                     //传入标题
                                     tempH4.h4Text = dataContainedSpannableStringBuilder;
@@ -151,6 +152,7 @@ public class PassModel {
                                     tempH3.marginLeftLevel = 1;
                                     tempH3.h2List = new ArrayList<>();
                                     //加入h4
+                                    tempH3.parent = tempH4;
                                     tempH4.h3List.add(tempH3);
                                     //将标题信息传给H3
                                     tempH3.h3Text = dataContainedSpannableStringBuilder;
@@ -162,6 +164,7 @@ public class PassModel {
                                     tempH2.marginLeftLevel = 2;
                                     tempH2.h1List = new ArrayList<>();
                                     //加入h3
+                                    tempH2.parent = tempH3;
                                     tempH3.h2List.add(tempH2);
                                     //将标题信息传给H2
                                     tempH2.h2Text = dataContainedSpannableStringBuilder;
@@ -172,6 +175,7 @@ public class PassModel {
                                     tempH1 = new HBean.H4.H3.H2.H1();
                                     tempH1.marginLeftLevel = 3;
                                     //加入h2
+                                    tempH1.parent = tempH2;
                                     tempH2.h1List.add(tempH1);
                                     //将标题信息传给H1
                                     tempH1.h1Text = dataContainedSpannableStringBuilder;
@@ -210,6 +214,7 @@ public class PassModel {
                                     tempH3.marginLeftLevel = 0;
                                     tempH3.h2List = new ArrayList<>();
                                     //insert
+                                    tempH3.parent = h4;
                                     h4.h3List.add(tempH3);
                                     //set title
                                     tempH3.h3Text = dataContainedSpannableStringBuilder;
@@ -220,6 +225,7 @@ public class PassModel {
                                     tempH2.marginLeftLevel = 1;
                                     tempH2.h1List = new ArrayList<>();
                                     //insert
+                                    tempH2.parent = tempH3;
                                     tempH3.h2List.add(tempH2);
                                     //set title
                                     tempH2.h2Text = dataContainedSpannableStringBuilder;
@@ -229,6 +235,7 @@ public class PassModel {
                                     tempH1 = new HBean.H4.H3.H2.H1();
                                     tempH1.marginLeftLevel = 2;
                                     //insert
+                                    tempH1.parent = tempH2;
                                     tempH2.h1List.add(tempH1);
                                     //set title
                                     tempH1.h1Text = dataContainedSpannableStringBuilder;
@@ -264,6 +271,7 @@ public class PassModel {
                                     tempH2.marginLeftLevel = 0;
                                     tempH2.h1List = new ArrayList<>();
                                     //insert
+                                    tempH2.parent = h3;
                                     h3.h2List.add(tempH2);
                                     //set title
                                     tempH2.h2Text = dataContainedSpannableStringBuilder;
@@ -273,6 +281,7 @@ public class PassModel {
                                     tempH1 = new HBean.H4.H3.H2.H1();
                                     tempH1.marginLeftLevel = 1;
                                     //insert
+                                    tempH1.parent = tempH2;
                                     tempH2.h1List.add(tempH1);
                                     //set detail
                                     tempH1.detail.append(dataContainedSpannableStringBuilder);

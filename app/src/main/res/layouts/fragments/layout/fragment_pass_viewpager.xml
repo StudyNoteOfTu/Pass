@@ -7,6 +7,7 @@
         <com.example.pass.view.PassViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
+            android:background="#ffc108"
             android:layout_height="0dp"
             android:layout_weight="1"/>
 

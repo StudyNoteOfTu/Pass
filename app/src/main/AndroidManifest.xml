@@ -40,7 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.passOpenedActivity.view.PassOpenedActivity" />
+        <activity android:name=".activities.passOpenedActivity.view.PassOpenedActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
 
     </application>
 

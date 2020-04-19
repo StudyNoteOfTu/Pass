@@ -33,6 +33,7 @@ public class ShaderXmlTool {
     public static List<ShaderBean> analyseXml(String xmlPath) {
         List<ShaderBean> shaderBeans = new ArrayList<>();
         File file = new File(xmlPath);
+        if (!file.exists()) return shaderBeans;
         try {
             FileInputStream fis = new FileInputStream(file);
             //获取xlm的pull解析器

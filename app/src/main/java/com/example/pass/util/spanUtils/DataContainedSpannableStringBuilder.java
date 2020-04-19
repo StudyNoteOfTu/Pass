@@ -42,4 +42,5 @@ public class DataContainedSpannableStringBuilder extends SpannableStringBuilder 
     public void setLineEnd(boolean lineEnd) {
         isLineEnd = lineEnd;
     }
+
 }

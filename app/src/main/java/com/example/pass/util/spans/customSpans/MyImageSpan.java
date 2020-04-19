@@ -18,7 +18,7 @@ import com.example.pass.util.spans.impls.TouchableSpan;
 
 import java.lang.ref.WeakReference;
 
-public class MyImageSpan extends ClickableImageSpan implements CustomSpan , TouchableSpan {
+public class MyImageSpan extends ClickableImageSpan implements CustomSpan, TouchableSpan {
 
     public float x;
     public float y;//canvas上真实top
@@ -30,7 +30,7 @@ public class MyImageSpan extends ClickableImageSpan implements CustomSpan , Touc
     private WeakReference<Drawable> mDrawableRef;
 
     //只允许用这个
-    public MyImageSpan(Context context, Bitmap bitmap,String imgUrl) {
+    public MyImageSpan(Context context, Bitmap bitmap, String imgUrl) {
         super(context, ImageFormatTools.scaleBitmapByWidth(bitmap, ScreenConfig.getmImageTargetWidth()));
         this.imgUrl = imgUrl;
     }
@@ -41,8 +41,9 @@ public class MyImageSpan extends ClickableImageSpan implements CustomSpan , Touc
     }
 
 
-    @Override public int getSize(Paint paint, CharSequence text, int start, int end,
-                                 Paint.FontMetricsInt fontMetricsInt) {
+    @Override
+    public int getSize(Paint paint, CharSequence text, int start, int end,
+                       Paint.FontMetricsInt fontMetricsInt) {
         Drawable drawable = getDrawable();
         Rect rect = drawable.getBounds();
         if (fontMetricsInt != null) {
@@ -62,10 +63,15 @@ public class MyImageSpan extends ClickableImageSpan implements CustomSpan , Touc
     @Override
     public void draw(Canvas canvas, CharSequence text, int start, int end, float x, int top, int y,
                      int bottom, Paint paint) {
-
-        if (ShadeManager.getInstance() != null)ShadeManager.getInstance().imageAppear(imgUrl);
+        Log.d("2020419SpanDraw","draw url = "+imgUrl);
+        if (ShadeManager.getInstance() != null) {
+            ShadeManager.getInstance().imageAppear(imgUrl);
+        }else{
+            Log.d("2020413Image","shadeManager is null");
+        }
         this.x = x;
         this.y = top;
+
         this.bottom = bottom;
         Drawable drawable = getCachedDrawable();
         canvas.save();
@@ -96,7 +102,7 @@ public class MyImageSpan extends ClickableImageSpan implements CustomSpan , Touc
     }
 
 
-    public boolean clicked(int touchX, int touchY){
+    public boolean clicked(int touchX, int touchY) {
 //        Log.d(TAG,"clicked, touchX = "+touchX + " ,touch Y = "+touchY);
         Drawable drawable = getDrawable();
         if (drawable != null) {

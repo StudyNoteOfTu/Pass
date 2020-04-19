@@ -1,30 +1,22 @@
 package com.example.pass.activities.passOpenedActivity.fragments;
 
-import android.text.SpannableStringBuilder;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.pass.R;
-import com.example.pass.activities.MyApplication;
 import com.example.pass.activities.passOpenedActivity.adapters.ViewPagerItemAdapter;
+import com.example.pass.activities.passOpenedActivity.bean.TopNumOver1.HBean;
+import com.example.pass.activities.passOpenedActivity.bean.TopNumOver1.ParentInterface;
+import com.example.pass.activities.passOpenedActivity.observer.PagerStateObserverable;
+import com.example.pass.activities.passOpenedActivity.observer.State;
 import com.example.pass.base.ActionBarFragment;
-import com.example.pass.base.NormalFragment;
+import com.example.pass.util.FileUtil;
 import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderBean;
 import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderXmlTool;
-import com.example.pass.util.shade.ShadeManager;
-import com.example.pass.util.shade.util.ShadePaintManager;
-import com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout;
-import com.example.pass.util.shade.viewAndModels.ShadeView;
 import com.example.pass.util.shade.viewAndModels.Shader;
 import com.example.pass.view.PassViewPager;
 
@@ -35,36 +27,32 @@ import java.util.List;
 public class ViewPagerFragment extends ActionBarFragment {
 
 
-    PassViewPager mViewPager;
+    private PassViewPager mViewPager;
 
 
-    Button btn_edit_shade;
-    Button btn_see;
-    TextView tv_finish;
+    private Button btn_edit_shade;
+    private Button btn_see;
+    private TextView tv_finish;
 
-    ViewPagerItemFragment fragmentA;
-    ViewPagerItemFragment fragmentB;
-    ViewPagerItemFragment fragmentC;
-    ViewPagerItemFragment fragmentD;
+    private ViewPagerItemFragment currentFragment;
 
-
-    ViewPagerItemFragment currentFragment;
+    private boolean isEdit = false;
+    private boolean isShow = false;
 
 
-    List<ViewPagerItemFragment> list;
+    private String path;
+    private int selectedIndex;
 
+    private List<HBean.H4.H3.H2.H1> h1List;
 
-    private SpannableStringBuilder test = new SpannableStringBuilder("ekflhajkfh\n\nkldasf\nkl;asjfkl;asjklfa\nfjkljakl;flk;afdl7nfjk\nlasd\njfla7\njflkffdsafdsaf\ndsa\nhfkdslahfi;kad\nshfkl\nadsnjk;fh\nasjk;dfnjkas\nnvj\nksn\nfvklnvkl\nanlfnl.aaflkaj\njklfja\nfjklajlkaf\njfkldaj\nn\nfdasfdasf\nasdfas\njk\nlafjlak;s\n");
+    private List<ViewPagerItemFragment> viewPagerItemFragmentList;
 
-    boolean isEdit = false;
-    boolean isShow = false;
-
-    List<ShaderBean> shaderBeans;
+    private PagerStateObserverable pagerStateObserverable = new PagerStateObserverable();
 
     @Override
     protected void initViews(View mContentView) {
+        //初始化控件
         mViewPager = mContentView.findViewById(R.id.viewPager);
-
 
         btn_edit_shade = mContentView.findViewById(R.id.btn_edit_shade);
         btn_see = mContentView.findViewById(R.id.btn_see);
@@ -91,114 +79,168 @@ public class ViewPagerFragment extends ActionBarFragment {
                 isEdit = false;
                 isShow = true;
                 //保存shade
-//                saveShaders();
+                saveShaders();
                 refresh();
             }
         });
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        List<ShaderBean> shaderBeans = ShaderXmlTool.analyseXml(path + File.separator + "shader" + "/shade.shader");
+        viewPagerItemFragmentList = new ArrayList<>();
+        ViewPagerItemFragment fragment;
+        for (int i = 0; i < h1List.size(); i++) {
+            fragment = new ViewPagerItemFragment();
+//            fragment.setData(isShow, h1List.get(i).h1Text, h1List.get(i).detail, shaderBeans);
+            fragment.setData(isShow, h1List.get(i), shaderBeans, pagerStateObserverable);
+            viewPagerItemFragmentList.add(fragment);
+        }
+
+        mViewPager.setAdapter(new ViewPagerItemAdapter(getChildFragmentManager(), viewPagerItemFragmentList, h1List.size()));
+
+        mViewPager.setOffscreenPageLimit(viewPagerItemFragmentList.size());
+        ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                Log.d("2020413F", "onScrolling");
+                //注意，如果正在编辑，则不允许滑动
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //设置currentItem
+                currentFragment = viewPagerItemFragmentList.get(position);
+                Log.d("2020419ADDR", "currentFragment =" + currentFragment.tag);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                Log.d("20204013G", "state = " + state);
+            }
+        };
+        mViewPager.setOnPageChangeListener(pageChangeListener);
+        mViewPager.setCurrentItem(selectedIndex);
+        pageChangeListener.onPageSelected(selectedIndex);
+        currentFragment = viewPagerItemFragmentList.get(selectedIndex);
+    }
+
+    //保存所有文件和方片
+    private void saveShaders() {
+        Log.d("2020418SaveShaders", "save shaders path = " + path);
+//        ShaderXmlTool.createXml(shaderBeans, FileUtil.getParentPath(FileUtil.getParentPath(path))+File.separator+"shader","shade");
+        List<ShaderBean> shaderBeans = new ArrayList<>();
+        ShaderBean bean;
+        for (ViewPagerItemFragment fragment : viewPagerItemFragmentList) {
+            //循环获得所有fragment的所有shader，并且转为ShaderBean存入数据
+            for (Shader shader : fragment.getAllShaderOfThisFragment()) {
+                bean = new ShaderBean(shader.getImgUrl(), shader.getTimeTag(),
+                        shader.getLeftPadding(), shader.getTopPadding(),
+                        shader.getWidth(), shader.getHeight());
+                shaderBeans.add(bean);
+            }
+        }
+        //获取到所有shader之后，存入数据
+        ShaderXmlTool.createXml(shaderBeans, path + File.separator + "shader", "shade");
+
+        //存储所有文字信息
+        //拿到所有viewpagerItemFragment
+        for (ViewPagerItemFragment fragment : viewPagerItemFragmentList) {
+            //更新h1信息
+            fragment.refreshH1();
+        }
+        //将bean重新整理
+        //尝试获取顶层，而后获取底层
+        if (h1List.size() != 0) {
+            HBean.H4.H3.H2.H1 h1 = h1List.get(0);
+            ParentInterface rootParent = h1.parent;
+            while (rootParent != null) {
+                if (rootParent.getParent() != null) {
+                    rootParent = (ParentInterface) rootParent.getParent();
+                }else{
+                    break;
+                }
+            }
+            //获取rootparent，开始遍历
+            if (rootParent instanceof HBean){
+                for (HBean.H4 h4 : ((HBean) rootParent).h4List) {
+                    Log.d("2020419RootParentTest",h4.h4Text.toString());
+                    for (HBean.H4.H3 h3 : h4.h3List) {
+                        Log.d("2020419RootParentTest",h3.h3Text.toString());
+                        for (HBean.H4.H3.H2 h2 : h3.h2List) {
+                            Log.d("2020419RootParentTest",h2.h2Text.toString()+"h1 list size = "+h2.h1List.size());
+                            for (HBean.H4.H3.H2.H1 h11 : h2.h1List) {
+                                Log.d("2020419RootParentTest",h11.h1Text.toString()+" "+Math.random());
+                            }
+                        }
+                    }
+                }
+            }else if (rootParent instanceof HBean.H4){
+                for (HBean.H4.H3 h3 : ((HBean.H4) rootParent).h3List) {
+                    Log.d("2020419RootParentTest",h3.h3Text.toString());
+                    for (HBean.H4.H3.H2 h2 : h3.h2List) {
+                        Log.d("2020419RootParentTest",h2.h2Text.toString()+"h1 list size = "+h2.h1List.size());
+                        for (HBean.H4.H3.H2.H1 h11 : h2.h1List) {
+                            Log.d("2020419RootParentTest",h11.h1Text.toString()+" "+Math.random());
+                        }
+                    }
+                }
+            }else if (rootParent instanceof HBean.H4.H3){
+                for (HBean.H4.H3.H2 h2 : ((HBean.H4.H3) rootParent).h2List) {
+                    Log.d("2020419RootParentTest",h2.h2Text.toString());
+                    for (HBean.H4.H3.H2.H1 h11 : h2.h1List) {
+                        Log.d("2020419RootParentTest",h11.h1Text.toString()+" "+Math.random());
+                    }
+                }
+            }else if (rootParent instanceof HBean.H4.H3.H2){
+                for (HBean.H4.H3.H2.H1 h11 : ((HBean.H4.H3.H2) rootParent).h1List) {
+                    Log.d("2020419RootParentTest",h11.h1Text.toString()+" "+Math.random());
+                }
+            }
+        }
+
+
     }
 
     private void refresh() {
-        if (currentFragment != null)currentFragment.refreshState(isEdit,isShow);
-        if (isEdit){
+        if (currentFragment != null) currentFragment.refreshState(isEdit, isShow);
+        if (isEdit) {
             mViewPager.setCanScroll(false);
             tv_finish.setVisibility(View.VISIBLE);
             btn_edit_shade.setVisibility(View.GONE);
             btn_see.setVisibility(View.GONE);
-        }else{
+        } else {
             mViewPager.setCanScroll(true);
             tv_finish.setVisibility(View.GONE);
             btn_edit_shade.setVisibility(View.VISIBLE);
             btn_see.setVisibility(View.VISIBLE);
         }
 
+        //通知所有修改，isEdit只对currentFragment生效，所以state不包含这个
+        notifyStateChanged();
     }
 
-    public void initData(FragmentManager fragmentManager,String path) {
 
-//        List<ShaderBean> shaderBeans= ShaderXmlTool.analyseXml(path+ File.separator+"shader"+"/shade.shader");
-        List<ShaderBean> shaderBeans= new ArrayList<>();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(mViewPager == null){}
-                myActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        list = new ArrayList<>();
-
-                        fragmentA = new ViewPagerItemFragment();
-                        fragmentB = new ViewPagerItemFragment();
-                        fragmentC = new ViewPagerItemFragment();
-                        fragmentD = new ViewPagerItemFragment();
-
-                        list.add(fragmentA);
-                        list.add(fragmentB);
-                        list.add(fragmentC);
-                        list.add(fragmentD);
-
-                        List<SpannableStringBuilder> spanlist = new ArrayList<>();
-                        for (int i = 0; i < 10; i++) {
-                            spanlist.add(new SpannableStringBuilder(test));
-                        }
-
-
-                        mViewPager.setAdapter(new ViewPagerItemAdapter(fragmentManager,list,10));
-                        ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener(){
-
-                            @Override
-                            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                                Log.d("2020413F","onScrolling");
-                                //注意，如果正在编辑，则不允许滑动
-                            }
-
-                            @Override
-                            public void onPageSelected(int position) {
-                                Log.d("2020413H","position = "+position);
-                                int realPosition = position;
-                                //预处理
-                                //如果有上一个
-                                if (realPosition > 0){
-                                    //如果有前一个
-                                    //预设前一个
-                                    Log.d("20204113O","set previous");
-                                    list.get((realPosition-1)%list.size()).setData(isShow,new SpannableStringBuilder("aaa"+realPosition),spanlist.get(realPosition-1),shaderBeans);
-                                }
-                                //如果有下一个
-                                if (realPosition < 10-1){
-                                    Log.d("20204113O","set later");
-                                    list.get((realPosition+1)%list.size()).setData(isShow,new SpannableStringBuilder("aaa"+realPosition),spanlist.get(realPosition+1),shaderBeans);
-                                }
-
-                                //处理position。让position落在[0,fragmentList.size)中，防止数组越界
-                                position = position % list.size();
-                                ViewPagerItemFragment fragment= list.get(position); //获得此时选中的fragment
-
-
-                                //前后fragment也要预设
-                                currentFragment = fragment;
-                                fragment.setData(isShow,new SpannableStringBuilder("aaa"+realPosition),spanlist.get(realPosition) ,shaderBeans); //翻页的时候每个页面需要改变的参数使用这个方法来实现，这个方法在ReadF
-                            }
-
-                            @Override
-                            public void onPageScrollStateChanged(int state) {
-                                Log.d("20204013G","state = "+state);
-                            }
-                        };
-                        mViewPager.setOnPageChangeListener(pageChangeListener);
-
-
-
-                        mViewPager.setCurrentItem(0);
-                        pageChangeListener.onPageSelected(0);
-                    }
-                });
-            }
-        }).start();
+    public void initData(String path, List<HBean.H4.H3.H2.H1> h1List, int selectIndex) {
+        this.h1List = h1List;
+        this.path = path;
+        this.selectedIndex = selectIndex;
+        Log.d("2020419RootParentTest","h1 list size = "+h1List.size());
 
     }
 
+
+    private void notifyStateChanged() {
+        State state = new State();
+        state.setShow(isShow);
+        state.setEdit(isEdit);
+        pagerStateObserverable.notifyObserver(state);
+    }
 
     private void changeSeeState() {
         //设置shadeView不可编辑
@@ -206,6 +248,7 @@ public class ViewPagerFragment extends ActionBarFragment {
         //是否可见可以修改一下
         isShow = !isShow;
         refresh();
+
     }
 
     private void changeEditState() {
@@ -214,6 +257,7 @@ public class ViewPagerFragment extends ActionBarFragment {
         //设置是否可编辑
         isEdit = !isEdit;
         refresh();
+
     }
 
     @Override
