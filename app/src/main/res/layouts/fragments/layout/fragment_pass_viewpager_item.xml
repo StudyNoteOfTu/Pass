@@ -6,6 +6,7 @@
     android:id="@+id/ll_linearLayout">
 
     <TextView
+        android:textColor="#000000"
         android:id="@+id/tv_title"
         android:layout_marginTop="10dp"
         android:padding="5dp"
@@ -17,7 +18,7 @@
         android:gravity="center_vertical|start"
         android:hint="无标题"
         android:maxLines="1"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <View
         android:background="#B3B3B3"
@@ -27,6 +28,7 @@
         android:layout_marginRight="10dp" />
 
     <com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout
+        android:layout_marginTop="5dp"
         android:id="@+id/shadeRelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -34,9 +36,10 @@
         <TextView
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:textSize="20sp"
-            android:scrollbars="none"
-            android:lineSpacingExtra="2dp"
+            android:textSize="19sp"
+            android:scrollbars="vertical"
+            android:scrollbarThumbVertical="@drawable/text_scroll_bar"
+            android:lineSpacingMultiplier="1.5"
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
@@ -46,7 +49,6 @@
             android:visibility="gone"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="#60000000"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

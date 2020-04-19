@@ -99,30 +99,6 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-//    /**
-//     * 绑定的几个model
-//     *
-//     * @param textView     绑定覆盖的TextView
-//     * @param shadeManager 指定上层调度者
-//     * @param spannable    TextView的Spannable
-//     */
-//    public void init(TextView textView, ShadeManager shadeManager, Spannable spannable) {
-//        //初始化信息
-//        mSpannable = spannable;
-//        mShadeManager = shadeManager;
-//        mTextView = textView;
-//        //手指画笔
-//        fingerPathLine = new FingerLine();
-//        fingerLinePaint = new Paint();
-//        fingerLinePaint.setColor(Color.RED);
-//        fingerLinePaint.setStrokeWidth(10f);
-//        fingerLinePaint.setStyle(Paint.Style.FILL);
-//
-//        //获取所有centerImageSpan
-//        myImageSpanList.addAll(mShadeManager.getAllCenterImageSpan(spannable));
-//        myTextShaderList.addAll(shadeManager.getAllShadeSpan(spannable));
-//    }
-
     public void init(List<Shader> shaders, TextView textView, ShadeManager shadeManager, Spannable spannable, Paint drawRectPaint) {
         Log.d("CreateShadeView", "init createShadeView data" + shadeManager.data);
         mSpannable = spannable;
@@ -174,28 +150,15 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
                     //如果有image
                     //有一样的就加入
                     for (MyImageSpan myImageSpan : myImageSpanList) {
-                        Log.d("Loop", "shader.imageUrl = " + shader.getImgUrl() + " ,myImageSpan.ImageUrl = " + myImageSpan.getImgUrl());
-//                        if (!shader.getImgUrl().equalsIgnoreCase(myImageSpan.getImgUrl())){
-//                            Log.d("Loop","not same, continue");
-//                            needContinue = true;
-//                        }else{
-//                            Log.d("Loop","same , insert");
-//                            needContinue = false;
-//                            break;
-//                        }
                         if (shader.getImgUrl().equalsIgnoreCase(myImageSpan.getImgUrl())) {
                             //如果有一样的，那么就添加进来
                             needContinue = false;
-                            Log.d("Loop", "same , insert");
                         }
                     }
                     //如果压根没有image
                     if (myImageSpanList.size() == 0) needContinue = true;
 
                     if (needContinue) continue;
-
-
-                    Log.d("Loop", "  ADD  shader.imageUrl = " + shader.getImgUrl() + "");
 
                     image_path = shader.getImgUrl();
                     time_tag = shader.getTimeTag();
@@ -211,7 +174,6 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
 
                 }
 
-                Log.d("Loop", "--------------------");
                 initialed = true;
             }
         });
@@ -232,8 +194,7 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
     }
 
 
-    public synchronized void delShader(String url, String timeTag) {
-        Log.d("getAllShaders", "--------------------");
+    public void delShader(String url, String timeTag) {
 
         try {
             ConcurrentHashMap<String, Shader> inner = dataSourceShaderMap.get(url);

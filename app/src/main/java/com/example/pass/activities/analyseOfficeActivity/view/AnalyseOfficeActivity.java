@@ -18,6 +18,7 @@ import com.example.pass.activities.analyseOfficeActivity.model.impls.IOfficeMode
 import com.example.pass.activities.analyseOfficeActivity.presenter.AnalyseOfficePresenter;
 import com.example.pass.activities.analyseOfficeActivity.view.impls.ITitleSelectView;
 import com.example.pass.activities.analyseOfficeActivity.view.impls.Updatable;
+import com.example.pass.activities.passOpenedActivity.view.PassOpenedActivity;
 import com.example.pass.configs.PathConfig;
 import com.example.pass.base.BaseActivity;
 import com.example.pass.util.FileUtil;
@@ -64,8 +65,6 @@ public class AnalyseOfficeActivity extends BaseActivity<ITitleSelectView, Analys
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initData();
-
-
     }
 
     private void initData() {
@@ -140,10 +139,11 @@ public class AnalyseOfficeActivity extends BaseActivity<ITitleSelectView, Analys
 
     private void doIntent(String result) {
         //开始跳转，判断是否有设置小标题，如果有，如果没有
+        Log.d("2020419Test","result = "+result);
 
         //这里不做判断，直接跳入
-        Intent intent = new Intent(this, TestShadeActivity.class);
-        intent.putExtra("path",result);
+        Intent intent = new Intent(this, PassOpenedActivity.class);
+        intent.putExtra("path",FileUtil.getParentPath(FileUtil.getParentPath(result)));
         startActivity(intent);
     }
 

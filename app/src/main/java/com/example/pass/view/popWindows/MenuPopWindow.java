@@ -15,48 +15,46 @@ import android.widget.TextView;
 
 import com.example.pass.R;
 
-public class TitlePopWindow extends PopupWindow {
+
+public class MenuPopWindow extends PopupWindow {
 
     private float mAlpha = 0.5f;
 
-    TextView tv_h1;
-    TextView tv_h2;
-    TextView tv_h3;
-    TextView tv_h4;
-
     private Context mContext;
 
-    public TitlePopWindow(Context context) {
+    private TextView tv_size;
+    private TextView tv_mode;
+    private TextView tv_edit;
+    private TextView tv_copy;
+
+    public MenuPopWindow(Context context) {
         super(context);
         this.mContext = context;
         setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         setOutsideTouchable(true);
         setFocusable(true);
-        setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        View contentView = LayoutInflater.from(context).inflate(R.layout.pop_title_select,null,false);
+        setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        View contentView = LayoutInflater.from(context).inflate(R.layout.pop_pass_open_menu,null,false);
         setContentView(contentView);
+
         initViews(contentView);
     }
 
-
-
-    private void initViews(View view) {
-        tv_h1 = view.findViewById(R.id.tv_h1);
-        tv_h2 = view.findViewById(R.id.tv_h2);
-        tv_h3 = view.findViewById(R.id.tv_h3);
-        tv_h4 = view.findViewById(R.id.tv_h4);
+    private void initViews(View contentView) {
+        tv_size = contentView.findViewById(R.id.tv_size);
+        tv_mode = contentView.findViewById(R.id.tv_mode);
+        tv_edit = contentView.findViewById(R.id.tv_edit);
+        tv_copy = contentView.findViewById(R.id.tv_copy);
     }
 
     public void setOnOnClickListener(View.OnClickListener listener){
-
-        if (tv_h1 != null && listener != null){
-            tv_h1.setOnClickListener(listener);
-            tv_h2.setOnClickListener(listener);
-            tv_h3.setOnClickListener(listener);
-            tv_h4.setOnClickListener(listener);
+        if (tv_size != null && listener != null){
+            tv_size.setOnClickListener(listener);
+            tv_mode.setOnClickListener(listener);
+            tv_edit.setOnClickListener(listener);
+            tv_copy.setOnClickListener(listener);
         }
-
     }
 
     /**
@@ -71,6 +69,7 @@ public class TitlePopWindow extends PopupWindow {
             window.setAttributes(layoutParams);
         }
     }
+
 
 
     /**
@@ -90,6 +89,7 @@ public class TitlePopWindow extends PopupWindow {
         animator.setDuration(360);
         animator.start();
     }
+
 
 
 }

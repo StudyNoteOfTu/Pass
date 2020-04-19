@@ -496,7 +496,6 @@ public class SpanToXmlUtil {
     public static String transformAllSpanToXmlFile(SpannableStringBuilder spannableStringBuilder) {
         List<String> list = editableToXml(spannableStringBuilder);
 
-
         StringBuilder finalXmlResult = new StringBuilder();
         finalXmlResult.append(XmlTags.getXmlBegin());
 

@@ -1,15 +1,25 @@
 package com.example.pass.activities.passOpenedActivity.observer;
 
 public class State {
+
+    public static enum MODE{
+        SHADE,
+        FONT_SIZE,
+    }
+
+    MODE mode;
+
+    //mode SHADE
     boolean isShow;
     boolean isEdit;
 
-    public State(boolean isShow, boolean isEdit) {
-        this.isShow = isShow;
-        this.isEdit = isEdit;
-    }
+    //mode FONT_SIZE
+    int fontSize;
 
-    public State() {
+
+
+    public State(MODE mode) {
+        this.mode = mode;
     }
 
     public boolean isShow() {
@@ -26,5 +36,21 @@ public class State {
 
     public void setEdit(boolean edit) {
         isEdit = edit;
+    }
+
+    public int getFontSize() {
+        return fontSize;
+    }
+
+    public void setFontSize(int fontSize) {
+        this.fontSize = fontSize;
+    }
+
+    public MODE getMode() {
+        return mode;
+    }
+
+    public void setMode(MODE mode) {
+        this.mode = mode;
     }
 }

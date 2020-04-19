@@ -14,9 +14,11 @@
 
         <TextView
             android:id="@+id/textView"
+            android:scrollbars="vertical"
+            android:scrollbarThumbVertical="@drawable/text_scroll_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="20sp" />
+            android:textSize="19sp" />
 
         <com.example.pass.util.shade.viewAndModels.ShadeView
             android:id="@+id/shadeView"
@@ -28,6 +30,7 @@
     </com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/tabbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

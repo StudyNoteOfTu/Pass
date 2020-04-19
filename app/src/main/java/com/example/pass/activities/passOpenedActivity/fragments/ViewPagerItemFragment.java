@@ -2,6 +2,7 @@ package com.example.pass.activities.passOpenedActivity.fragments;
 
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
@@ -210,14 +211,23 @@ public class ViewPagerItemFragment extends NormalFragment implements Observer<St
 
 
     @Override
-    public void update(State obj) {
-        isShow = obj.isShow();
-        //shadeView是否可见
-        if (isShow) {
-            shadeView.setVisibility(View.VISIBLE);
-        } else {
-            shadeView.setVisibility(View.GONE);
+    public void update(State state) {
+        switch (state.getMode()){
+            case SHADE:
+                isShow = state.isShow();
+                //shadeView是否可见
+                if (isShow) {
+                    shadeView.setVisibility(View.VISIBLE);
+                } else {
+                    shadeView.setVisibility(View.GONE);
+                }
+                break;
+            case FONT_SIZE:
+                if (tv_content != null)tv_content.setTextSize(state.getFontSize());
+                break;
+
         }
+
     }
 
     public List<Shader> getAllShaderOfThisFragment() {
@@ -227,11 +237,12 @@ public class ViewPagerItemFragment extends NormalFragment implements Observer<St
     public void refreshH1(){
         DataContainedSpannableStringBuilder title = h1.h1Text;
         title.clear();
-//        title.append(tv_title.getText());
-        title.append("sasasaaaaaaaaasas");
+        title.append(tv_title.getText());
         this.h1.h1Text = title;
-        this.h1.detail = (SpannableStringBuilder) tv_content.getEditableText();
+        this.h1.detail = new SpannableStringBuilder(tv_content.getText());
     }
+
+
 }
 
 

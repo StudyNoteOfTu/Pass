@@ -4,14 +4,21 @@ import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.core.widget.PopupWindowCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.pass.R;
+import com.example.pass.activities.passOpenedActivity.observer.State;
 import com.example.pass.base.ActionBarFragment;
 import com.example.pass.callbacks.LoadObjectCallback;
 import com.example.pass.util.FileUtil;
@@ -23,6 +30,8 @@ import com.example.pass.util.shade.util.ShadePaintManager;
 import com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout;
 import com.example.pass.util.shade.viewAndModels.ShadeView;
 import com.example.pass.util.shade.viewAndModels.Shader;
+import com.example.pass.view.popWindows.FontSizePopWindow;
+import com.example.pass.view.popWindows.MenuPopWindow;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,29 +39,39 @@ import java.util.List;
 
 public class TextViewFragment extends ActionBarFragment {
 
-    TextView textView;
-    ShadeView shadeView;
+    private TextView textView;
+    private ShadeView shadeView;
 
-    Button img_edit_shade;
-    Button img_see;
-    TextView tv_finish;
+    private Button img_edit_shade;
+    private Button img_see;
+    private TextView tv_finish;
 
-    String path;
-    SpannableStringBuilder sb;
+    private RelativeLayout tabBar;
+
+    private String path;
+    private SpannableStringBuilder sb;
 
 
-    ShadeManager shadeManager;
+    private ShadeManager shadeManager;
 
-    ShadeRelativeLayout shadeRelativeLayout;
+    private ShadeRelativeLayout shadeRelativeLayout;
 
 
     //初始状态：不可编辑，可视
-    boolean isEdit;
-    boolean isShow;
+    private boolean isEdit;
+    private boolean isShow;
 
+    private int currentFontSize = 19;
 
     @Override
     protected void initViews(View mContentView) {
+
+        String folderName= FileUtil.getFolderName(path);
+        folderName =  folderName.substring(0,folderName.lastIndexOf("_"));
+        switchTitle(folderName);
+
+
+        tabBar = mContentView.findViewById(R.id.tabbar);
         textView = mContentView.findViewById(R.id.textView);
         shadeView = mContentView.findViewById(R.id.shadeView);
         shadeRelativeLayout = mContentView.findViewById(R.id.shadeRelativeLayout);
@@ -84,6 +103,7 @@ public class TextViewFragment extends ActionBarFragment {
                 refreshState();
             }
         });
+
 
     }
 
@@ -165,10 +185,6 @@ public class TextViewFragment extends ActionBarFragment {
         return R.layout.fragment_pass_text_view;
     }
 
-    @Override
-    public void switchTitle(String title) {
-
-    }
 
     public void setData(String path,SpannableStringBuilder spannableStringBuilder){
         this.path = path;
@@ -212,5 +228,101 @@ public class TextViewFragment extends ActionBarFragment {
             }
         }).start();
 
+    }
+
+
+    @Override
+    public void switchTitle(String title) {
+        if (mActionBar != null) {
+            mActionBar.setCustomView(R.layout.actionbar_pass_open_viewpager);
+            mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            View customView= mActionBar.getCustomView();
+            ((TextView)customView.findViewById(R.id.tv_title)).setText(title);
+
+            (customView.findViewById(R.id.img_menu)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showMenuPopWindow(v);
+                }
+            });
+
+        }
+    }
+
+
+    public void showMenuPopWindow(View childView){
+        MenuPopWindow window = new MenuPopWindow(myContext);
+        View contentView = window.getContentView();
+        ///需要先测量，PopupWindow还未弹出时，宽高为0
+        contentView.measure(makeDropDownMeasureSpec(window.getWidth()),
+                makeDropDownMeasureSpec(window.getHeight()));
+        int offsetX = 0;
+//        int offsetY = -(window.getContentView().getMeasuredHeight()+childView.getHeight())/2;
+        int offsetY = 0;
+        PopupWindowCompat.showAsDropDown(window,childView,offsetX,offsetY, Gravity.BOTTOM);
+        //有问题
+//        window.showBackgroundAnimator();
+        window.setOnOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.tv_size:
+                        setFontSize();
+                        window.dismiss();
+                        break;
+                    case R.id.tv_mode:
+                        break;
+                    case R.id.tv_edit:
+                        break;
+                    case R.id.tv_copy:
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        });
+    }
+
+    private void setFontSize() {
+        showFontSizePopWindow(tabBar);
+    }
+
+    private void showFontSizePopWindow(View childView){
+        //最小字体16sp，我们用百分比来做，最大是36sp 那么 100份，每份是0.2sp
+        FontSizePopWindow window = new FontSizePopWindow(myContext, ((currentFontSize-16)*5), new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                currentFontSize = 16+(int)(0.2*progress);
+                textView.setTextSize(currentFontSize);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        View contentView = window.getContentView();
+        ///需要先测量，PopupWindow还未弹出时，宽高为0
+        contentView.measure(makeDropDownMeasureSpec(window.getWidth()),
+                makeDropDownMeasureSpec(window.getHeight()));
+        int offsetX = Math.abs((window.getContentView().getMeasuredWidth()-childView.getWidth())/2);
+        int offsetY = -(window.getContentView().getMeasuredHeight()+childView.getHeight());
+        PopupWindowCompat.showAsDropDown(window,childView,offsetX,offsetY, Gravity.START);
+    }
+
+    @SuppressWarnings("ResourceType")
+    private static int makeDropDownMeasureSpec(int measureSpec) {
+        int mode;
+        if (measureSpec == ViewGroup.LayoutParams.WRAP_CONTENT) {
+            mode = View.MeasureSpec.UNSPECIFIED;
+        } else {
+            mode = View.MeasureSpec.EXACTLY;
+        }
+        return View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.getSize(measureSpec), mode);
     }
 }

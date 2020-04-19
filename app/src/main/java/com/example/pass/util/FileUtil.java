@@ -46,6 +46,20 @@ public class FileUtil {
     }
 
     /**
+     * 获得文件夹名
+     * @param pathandname
+     * @return
+     */
+    public static String getFolderName(String pathandname) {
+        int start = pathandname.lastIndexOf("/");
+        if (start != -1 ) {
+            return pathandname.substring(start + 1);
+        } else {
+            return "";
+        }
+    }
+
+    /**
      * 获取带随机数的文件名，不带后缀
      * @param pathandname 文件路径
      * @return
