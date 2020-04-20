@@ -1,11 +1,11 @@
 <?slide version="1.0" encoding="utf-8"?>
-<com.example.pass.view.SwipeItemLayout
+<com.example.pass.view.swipeViews.SwipeItemLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swipeItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.example.pass.view.DataContainedLinearLayout
+    <com.example.pass.view.datacontainedViews.DataContainedLinearLayout
         android:id="@+id/dataContainedLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,7 +14,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <com.example.pass.view.DataContainedImageView
+        <com.example.pass.view.datacontainedViews.DataContainedImageView
             android:id="@+id/image_select"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -40,7 +40,7 @@
             android:maxLines="4"
             android:textSize="18sp" />
 
-    </com.example.pass.view.DataContainedLinearLayout>
+    </com.example.pass.view.datacontainedViews.DataContainedLinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,4 +53,4 @@
     </LinearLayout>
 
 
-</com.example.pass.view.SwipeItemLayout>
+</com.example.pass.view.swipeViews.SwipeItemLayout>

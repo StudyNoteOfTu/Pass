@@ -1,4 +1,4 @@
-package com.example.pass.view;
+package com.example.pass.view.swipeViews;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -14,6 +14,8 @@ import android.widget.Scroller;
 
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.pass.view.datacontainedViews.DataContainedLinearLayout;
 
 public class SwipeItemLayout extends ViewGroup{
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.pass.view.SwipeItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.pass.view.swipeViews.SwipeItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.example.pass.view.DataContainedLinearLayout
+    <com.example.pass.view.datacontainedViews.DataContainedLinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ll_data_contained">
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-    </com.example.pass.view.DataContainedLinearLayout>
+    </com.example.pass.view.datacontainedViews.DataContainedLinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_slide"
@@ -59,4 +59,4 @@
 
     </LinearLayout>
 
-</com.example.pass.view.SwipeItemLayout>
+</com.example.pass.view.swipeViews.SwipeItemLayout>

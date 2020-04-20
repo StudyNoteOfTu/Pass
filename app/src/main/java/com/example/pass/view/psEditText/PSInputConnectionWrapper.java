@@ -1,23 +1,20 @@
-package com.example.pass.richEditTextView;
+package com.example.pass.view.psEditText;
 
 import android.view.KeyEvent;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputConnectionWrapper;
 
-public class RichInputConnectionWrapper extends InputConnectionWrapper {
+public class PSInputConnectionWrapper extends InputConnectionWrapper {
 
     private BackspaceListener mBackspaceListener;
 
-    public interface BackspaceListener {
-        /**
-         * @return true: 消费了退格键，false：未消费退格键
-         */
+    public interface BackspaceListener{
         boolean onBackspace();
     }
 
     /**
      * Initializes a wrapper.
-     * <p>
+     *
      * <p><b>Caveat:</b> Although the system can accept {@code (InputConnection) null} in some
      * places, you cannot emulate such a behavior by non-null {@link InputConnectionWrapper} that
      * has {@code null} in {@code target}.</p>
@@ -26,7 +23,7 @@ public class RichInputConnectionWrapper extends InputConnectionWrapper {
      * @param mutable set {@code true} to protect this object from being reconfigured to target
      *                another {@link InputConnection}.  Note that this is ignored while the target is {@code null}.
      */
-    public RichInputConnectionWrapper(InputConnection target, boolean mutable) {
+    public PSInputConnectionWrapper(InputConnection target, boolean mutable) {
         super(target, mutable);
     }
 
@@ -63,5 +60,4 @@ public class RichInputConnectionWrapper extends InputConnectionWrapper {
         }
         return super.sendKeyEvent(event);
     }
-
 }

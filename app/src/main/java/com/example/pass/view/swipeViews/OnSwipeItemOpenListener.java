@@ -1,4 +1,4 @@
-package com.example.pass.view;
+package com.example.pass.view.swipeViews;
 
 public interface OnSwipeItemOpenListener {
 

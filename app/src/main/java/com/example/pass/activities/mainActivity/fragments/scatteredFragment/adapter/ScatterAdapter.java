@@ -9,10 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pass.R;
-import com.example.pass.activities.analyseOfficeActivity.bean.LineHolder;
 import com.example.pass.activities.mainActivity.fragments.scatteredFragment.bean.ScatterItem;
 import com.example.pass.activities.mainActivity.fragments.scatteredFragment.bean.ScatterViewHolder;
-import com.example.pass.view.DataContainedLinearLayout;
+import com.example.pass.view.datacontainedViews.DataContainedLinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;

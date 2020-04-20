@@ -1,5 +1,4 @@
-package com.example.pass.richEditTextView.utils;
-
+package com.example.pass.view.psEditText.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -8,7 +7,6 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 
 public class SoftKeyboardUtil {
-
 
     /**
      * 判断软键盘是否弹出
@@ -45,5 +43,4 @@ public class SoftKeyboardUtil {
             return 0;
         }
     }
-
 }

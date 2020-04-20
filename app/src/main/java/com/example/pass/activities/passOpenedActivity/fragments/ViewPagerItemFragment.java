@@ -1,18 +1,13 @@
 package com.example.pass.activities.passOpenedActivity.fragments;
 
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
-import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.example.pass.R;
 import com.example.pass.activities.passOpenedActivity.bean.TopNumOver1.HBean;
@@ -21,7 +16,6 @@ import com.example.pass.base.NormalFragment;
 import com.example.pass.observers.base.Observer;
 import com.example.pass.observers.base.Observerable;
 import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderBean;
-import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderXmlTool;
 import com.example.pass.util.shade.ShadeManager;
 import com.example.pass.util.shade.util.ShadePaintManager;
 import com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout;
@@ -29,10 +23,8 @@ import com.example.pass.util.shade.viewAndModels.ShadeView;
 import com.example.pass.util.shade.viewAndModels.Shader;
 import com.example.pass.util.spanUtils.DataContainedSpannableStringBuilder;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class ViewPagerItemFragment extends NormalFragment implements Observer<State> {
 

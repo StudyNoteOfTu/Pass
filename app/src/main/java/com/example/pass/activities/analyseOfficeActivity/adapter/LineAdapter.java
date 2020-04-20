@@ -20,9 +20,9 @@ import com.example.pass.activities.analyseOfficeActivity.bean.LineItem;
 import com.example.pass.activities.analyseOfficeActivity.view.impls.Updatable;
 import com.example.pass.util.FileUtil;
 import com.example.pass.util.officeUtils.XmlTags;
-import com.example.pass.view.DataContainedImageView;
-import com.example.pass.view.DataContainedLinearLayout;
-import com.example.pass.view.OnSwipeItemOpenListener;
+import com.example.pass.view.datacontainedViews.DataContainedImageView;
+import com.example.pass.view.datacontainedViews.DataContainedLinearLayout;
+import com.example.pass.view.swipeViews.OnSwipeItemOpenListener;
 import com.example.pass.view.popWindows.TitlePopWindow;
 
 import java.util.ArrayList;

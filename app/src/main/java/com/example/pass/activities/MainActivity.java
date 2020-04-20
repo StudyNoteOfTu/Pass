@@ -27,7 +27,7 @@ import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spanUtils.XmlToSpanUtil;
 import com.example.pass.util.spans.callbacks.ClickImageMovementMethodCallback;
 import com.example.pass.util.spans.movementMethods.ClickableLinkMovementMethod;
-import com.example.pass.view.SwipeItemLayout;
+import com.example.pass.view.swipeViews.SwipeItemLayout;
 
 
 import java.util.List;

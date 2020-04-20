@@ -8,9 +8,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pass.R;
-import com.example.pass.view.DataContainedImageView;
-import com.example.pass.view.DataContainedLinearLayout;
-import com.example.pass.view.SwipeItemLayout;
+import com.example.pass.view.datacontainedViews.DataContainedImageView;
+import com.example.pass.view.datacontainedViews.DataContainedLinearLayout;
+import com.example.pass.view.swipeViews.SwipeItemLayout;
 
 public class LineHolder extends RecyclerView.ViewHolder {
 

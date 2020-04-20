@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pass.R;
-import com.example.pass.view.DataContainedLinearLayout;
+import com.example.pass.view.datacontainedViews.DataContainedLinearLayout;
 
 public class ScatterViewHolder extends RecyclerView.ViewHolder {
 

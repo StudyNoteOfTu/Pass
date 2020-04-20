@@ -1,13 +1,12 @@
-package com.example.pass.view;
+package com.example.pass.view.datacontainedViews;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.pass.view.swipeViews.OnSwipeItemOpenListener;
 
 public class DataContainedLinearLayout extends LinearLayout {
 

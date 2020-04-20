@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pass.R;
-import com.example.pass.activities.TestShadeActivity;
 import com.example.pass.activities.analyseOfficeActivity.adapter.LineAdapter;
 import com.example.pass.activities.analyseOfficeActivity.model.impls.IOfficeModel;
 import com.example.pass.activities.analyseOfficeActivity.presenter.AnalyseOfficePresenter;
@@ -22,7 +21,7 @@ import com.example.pass.activities.passOpenedActivity.view.PassOpenedActivity;
 import com.example.pass.configs.PathConfig;
 import com.example.pass.base.BaseActivity;
 import com.example.pass.util.FileUtil;
-import com.example.pass.view.SwipeItemLayout;
+import com.example.pass.view.swipeViews.SwipeItemLayout;
 
 import java.io.File;
 import java.util.ArrayList;
