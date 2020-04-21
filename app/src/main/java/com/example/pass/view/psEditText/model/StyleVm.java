@@ -50,7 +50,7 @@ public class StyleVm {
      * 标题文本正常的颜色
      */
     private @ColorInt
-    int titleNormal;
+    int titleNormalColor;
 
     /**
      * 标题文本点亮的颜色
@@ -67,7 +67,7 @@ public class StyleVm {
         this.iconLightResId = builder.iconLightResId;
         this.clickedView = builder.clickedView;
         this.tvTitle = builder.tvTitle;
-        this.titleNormal = builder.titleNormal;
+        this.titleNormalColor = builder.titleNormal;
         this.titleLightColor = builder.titleLightColor;
     }
 
@@ -103,8 +103,8 @@ public class StyleVm {
         return tvTitle;
     }
 
-    public int getTitleNormal() {
-        return titleNormal;
+    public int getTitleNormalColor() {
+        return titleNormalColor;
     }
 
     public int getTitleLightColor() {

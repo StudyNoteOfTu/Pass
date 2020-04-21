@@ -3,12 +3,17 @@ package com.example.pass.view.psEditText;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.Editable;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
 
 import com.example.pass.R;
+import com.example.pass.view.psEditText.model.StyleVm;
+import com.example.pass.view.psEditText.utils.ClipboardUtil;
 import com.example.pass.view.psEditText.utils.WindowUtil;
 import com.hanks.lineheightedittext.LineHeightEditText;
 
@@ -96,7 +101,7 @@ public class PSEditText extends LineHeightEditText {
 
         mPSInputConnection = new PSInputConnectionWrapper(null,true);
 
-        setMovementMethod(new LinkMovementMethod());
+        setMovementMethod(new MyLinkMovementMethod());
 
         requestFocus();
 
@@ -117,5 +122,89 @@ public class PSEditText extends LineHeightEditText {
     public void setOnSelectionChangedListener(OnSelectionChangedListener onSelectionChangedListener) {
         this.mOnSelectionChangedListener = onSelectionChangedListener;
     }
+
+    public void initStyleButton(StyleVm styleVm){
+        mPSUtils.initStyleButton(styleVm);
+    }
+
+    /**
+     * 插入一些东西之前，先删除被光标选中的区域
+     */
+    private void removeSelectedContent(){
+        Editable editable = getEditableText();
+        int selectionStart = getSelectionStart();
+        int selectionEnd = getSelectionEnd();
+
+        if (selectionStart >= selectionEnd){
+            return;
+        }
+
+        editable.delete(selectionStart,selectionEnd);
+    }
+
+
+    public PSUtils getPSUtils(){
+        return mPSUtils;
+    }
+
+    @Override
+    protected void onSelectionChanged(int selStart, int selEnd) {
+        if (mOnSelectionChangedListener != null){
+            mOnSelectionChangedListener.onChange(selEnd);
+        }
+        super.onSelectionChanged(selStart, selEnd);
+
+    }
+
+    /**
+     * 处理黏贴
+     */
+    private void handlePaste(){
+        int selectionStart = getSelectionStart();
+        int selectionEnd = getSelectionEnd();
+        Editable editable = getEditableText();
+        editable.delete(selectionStart, selectionEnd);
+        selectionStart = getSelectionStart();
+        mPSUtils.insertStringIntoEditText(ClipboardUtil.getInstance(mContext),selectionStart);
+    }
+
+    @Override
+    public boolean onTextContextMenuItem(int id) {
+        Log.d("EditTextMenuItem","id = "+id);
+        switch (id) {
+            case android.R.id.cut:
+                if (mContext instanceof IClipCallback) {
+                    ((IClipCallback) mContext).onCut();
+                }
+                break;
+            case android.R.id.copy:
+                Log.d(TAG, "getSelectionStart: " + getSelectionStart() + ", getSelectionEnd: " + getSelectionEnd());
+                if (mContext instanceof IClipCallback) {
+                    ((IClipCallback) mContext).onCopy();
+                }
+                break;
+            case android.R.id.paste:
+                if (mContext instanceof IClipCallback) {
+                    ((IClipCallback) mContext).onPaste();
+                }
+                handlePaste();
+                return true;
+            default:
+                break;
+        }
+
+        return super.onTextContextMenuItem(id);
+    }
+
+    /**
+     * 当输入法和EditText建立连接的时候会通过这个方法返回一个InputConnection。
+     * 我们需要代理这个方法的父类方法生成的InputConnection并返回我们自己的代理类。
+     */
+    @Override
+    public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+        mPSInputConnection.setTarget(super.onCreateInputConnection(outAttrs));
+        return mPSInputConnection;
+    }
+
 
 }

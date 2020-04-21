@@ -1,5 +1,6 @@
 package com.example.pass.util.spans.customSpans;
 
+import android.graphics.Typeface;
 import android.os.Parcel;
 import android.text.style.StyleSpan;
 
@@ -19,6 +20,12 @@ public class MyStyleSpan extends StyleSpan implements CustomSpan {
 
     @Override
     public int getType() {
+        switch (getStyle()) {
+            case Typeface.BOLD:
+                return CustomTypeEnum.BOLD;
+            case Typeface.ITALIC:
+                return CustomTypeEnum.ITALIC;
+        }
         return CustomTypeEnum.BOLD;
     }
 }
