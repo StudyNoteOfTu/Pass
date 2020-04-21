@@ -151,7 +151,7 @@ public class SpanToXmlUtil {
                     result.append(XmlTags.getBlockBegin());
 
                     for (CustomSpan customSpan : innerList) {
-                        Log.e("IndexTest", "type = "+customSpan.getType()+" ,span_start = "+span_start+" ,span_end = "+ span_end);
+                        Log.e("IndexTest", "type = "+customSpan.getType()+" ,span_start = "+span_start+" ,span_end = "+ span_end+" ,flag = "+line.getSpanFlags(customSpan));
                         switch (customSpan.getType()) {
                             case CustomTypeEnum.NORMAL:
                                 break;

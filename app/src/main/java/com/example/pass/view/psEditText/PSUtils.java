@@ -1,6 +1,7 @@
 package com.example.pass.view.psEditText;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.Spanned;
@@ -433,5 +434,41 @@ public class PSUtils {
     public void insertStringIntoEditText(ClipboardUtil instance, int selectionStart) {
 
 
+    }
+
+    //插入回车时候，修改前后样式
+    public void changeLastLineSpanFlag() {
+        Editable editable = mPSEditText.getEditableText();
+        //此时cursorPos在 \n 后面
+        int cursorPos = mPSEditText.getSelectionStart();
+
+        CustomSpan[] customSpans = editable.getSpans(cursorPos -1, cursorPos-1 , CustomSpan.class);
+        int spanStart;
+        int spanEnd;
+        for (CustomSpan customSpan : customSpans) {
+
+            if (customSpan instanceof MyImageSpan) continue;
+
+            spanStart = editable.getSpanStart(customSpan);
+            spanEnd = editable.getSpanEnd(customSpan);
+            Log.d(TAG,"\\n前面的span type= "+customSpan.getType()+" ,start = "+spanStart+" ,end = "+spanEnd);
+            if (cursorPos > spanEnd){
+                //如果光标在span之外，不处理（span在\n前面）
+                continue;
+            }
+            editable.removeSpan(customSpan);
+            if (cursorPos == spanEnd){
+                Log.d(TAG,"在 type = "+customSpan.getType()+" 的末尾回车");
+                //如果span末尾点击了回车
+                editable.setSpan(CustomSpanFactory.getCustomSpanInstance(customSpan),spanStart,spanEnd-1,Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+
+            }else{
+                Log.d(TAG,"在 type = "+customSpan.getType()+" 的中间回车");
+                //如果span中间点击了回车，需要进行拆分
+                editable.setSpan(CustomSpanFactory.getCustomSpanInstance(customSpan),spanStart,cursorPos-1,Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+                editable.setSpan(CustomSpanFactory.getCustomSpanInstance(customSpan),cursorPos,spanEnd,Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+            }
+
+        }
     }
 }

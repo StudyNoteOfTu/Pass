@@ -1,5 +1,6 @@
 package com.example.pass.activities;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -9,11 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pass.R;
 import com.example.pass.util.spanUtils.SpanToXmlUtil;
+import com.example.pass.util.spans.customSpans.MyHighLightColoSpan;
 import com.example.pass.util.spans.customSpans.MyNormalSpan;
 import com.example.pass.util.spans.customSpans.MyStyleSpan;
 import com.example.pass.util.spans.customSpans.MyUnderlineSpan;
@@ -59,7 +62,12 @@ public class TestEditTextActivity extends AppCompatActivity {
         });
 
         SpannableStringBuilder sb =new SpannableStringBuilder(content);
-        sb.setSpan(new MyNormalSpan(),0,sb.length(),Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        sb.setSpan(new MyNormalSpan(),0,2,Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        sb.setSpan(new MyNormalSpan(),2,5,Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        sb.setSpan(new MyNormalSpan(),5,sb.length(),Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+
+        sb.setSpan(new MyStyleSpan(Typeface.BOLD),0,2,Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        sb.setSpan(new MyHighLightColoSpan(Color.BLUE),2,5,Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         mEditText.setText(sb);
     }
 
