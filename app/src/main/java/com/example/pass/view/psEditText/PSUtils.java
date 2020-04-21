@@ -168,7 +168,7 @@ public class PSUtils {
             //开始修改所有span
             //1. 前后切分
             if (mPSTypeToVmMap.get(type) == null) return;
-            handleSelectBoundary(mPSTypeToVmMap.get(type));
+            handleSelectBoundary();
             //2. remove掉所有同类span
             //3. 如果点亮，各个节点插入此类Span，如果不点亮，不插入
             //注意，只删除spanStart在选框中的同类Span
@@ -217,7 +217,7 @@ public class PSUtils {
                     //可以自己根据StyleVm来new一个出来
                     customSpan = CustomSpanFactory.getCustomSpanInstance(getSpanClassFromType(type));
                     editable.setSpan(customSpan,beginIndex,integer,Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-                    beginIndex = beginIndex;
+                    beginIndex = integer;
                 }
                 customSpan = CustomSpanFactory.getCustomSpanInstance(getSpanClassFromType(type));
                 editable.setSpan(customSpan,beginIndex,end,Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
@@ -242,14 +242,13 @@ public class PSUtils {
 
     /**
      * 处理选框便捷
-     *
-     * @param styleVm
      */
-    private void handleSelectBoundary(StyleVm styleVm) {
+    private void handleSelectBoundary() {
         Editable editable = mPSEditText.getEditableText();
         int start = mPSEditText.getSelectionStart();
         int end = mPSEditText.getSelectionEnd();
-        CustomSpan[] customSpans = editable.getSpans(start, end, CustomSpan.class);
+        //获取整个的editable
+        CustomSpan[] customSpans = editable.getSpans(0, editable.length(), CustomSpan.class);
         if (customSpans.length <= 0) return;
         //判断谁的start在前外面，谁的end在后外面
         int spanStart;
@@ -257,21 +256,33 @@ public class PSUtils {
         for (CustomSpan customSpan : customSpans) {
             spanStart = editable.getSpanStart(customSpan);
             spanEnd = editable.getSpanEnd(customSpan);
-            //判断开始是否在前面
-            if (spanStart < start) {
+            //判断开始是否在前面，但是结束在内部
+            if (spanStart < start && start < spanEnd && spanEnd <= end) {
                 //删去
                 editable.removeSpan(customSpan);
                 //插入Span
                 editable.setSpan(CustomSpanFactory.getCustomSpanInstance(customSpan), spanStart, start, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
                 editable.setSpan(CustomSpanFactory.getCustomSpanInstance(customSpan), start, spanEnd, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
             }
-            if (end < spanEnd) {
+            //判断是否在后面，但是开始在内部
+            if (end < spanEnd && start <= spanStart && spanStart < end) {
                 //删去
                 editable.removeSpan(customSpan);
                 //插入
                 editable.setSpan(CustomSpanFactory.getCustomSpanInstance(customSpan), spanStart, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
                 editable.setSpan(CustomSpanFactory.getCustomSpanInstance(customSpan), end, spanEnd, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
             }
+            //判断是否刚好卡在区域（如果刚好卡在区域就不用切分了
+            //判断是否在纯外部
+            if (spanStart < start && end < spanEnd){
+                //删去
+                editable.removeSpan(customSpan);
+                //插入
+                editable.setSpan(CustomSpanFactory.getCustomSpanInstance(customSpan),spanStart,start,Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+                editable.setSpan(CustomSpanFactory.getCustomSpanInstance(customSpan),start,end,Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+                editable.setSpan(CustomSpanFactory.getCustomSpanInstance(customSpan),end,spanEnd,Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+            }
+
         }
         //此时已经前后切分
     }

@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.example.pass.util.spans.enumtype.CustomTypeEnum;
 
-public class MyNormalSpan extends CharacterStyle implements CustomSpan, ParcelableSpan {
+public class MyNormalSpan extends CharacterStyle implements CustomSpan {
 
     private int mWidth=-1;
 
@@ -33,18 +33,4 @@ public class MyNormalSpan extends CharacterStyle implements CustomSpan, Parcelab
     }
 
 
-    @Override
-    public int getSpanTypeId() {
-        return 0;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-    }
 }
