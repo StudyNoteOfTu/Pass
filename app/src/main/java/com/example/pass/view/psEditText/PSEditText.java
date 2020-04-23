@@ -101,7 +101,7 @@ public class PSEditText extends LineHeightEditText {
 
         mPSInputConnection = new PSInputConnectionWrapper(null,true);
 
-        setMovementMethod(new MyLinkMovementMethod());
+        setMovementMethod(new MyLinkMovementMethod(context));
 
         requestFocus();
 
@@ -165,7 +165,7 @@ public class PSEditText extends LineHeightEditText {
         Editable editable = getEditableText();
         editable.delete(selectionStart, selectionEnd);
         selectionStart = getSelectionStart();
-        mPSUtils.insertStringIntoEditText(ClipboardUtil.getInstance(mContext),selectionStart);
+        mPSUtils.insertStringIntoEditText(ClipboardUtil.getInstance(mContext).getClipboardText(),selectionStart);
     }
 
     @Override

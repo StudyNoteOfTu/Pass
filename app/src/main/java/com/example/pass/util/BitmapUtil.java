@@ -13,6 +13,11 @@ import java.io.IOException;
 
 public class BitmapUtil {
 
+    /**
+     * 获取图片旋转角度
+     * @param path 图片路径
+     * @return
+     */
     public static int readPictureDegree(String path) {
         int degree = 0;
         try {
@@ -139,6 +144,26 @@ public class BitmapUtil {
         }
 
         bitmap = ImageFormatTools.scaleBitmapByWidth(bitmap,800);
+
+        if (bitmap != null) bitmap = BitmapUtil.compressBitmap(bitmap,1);
+
+        return bitmap;
+    }
+
+    public  static Bitmap getFixedBitmap(String picPath, int width){
+
+        Bitmap bitmap;
+
+        int rotate = BitmapUtil.readPictureDegree(picPath);
+
+        if (rotate >0){
+            //若图片角度大于0 则需要旋转角度
+            bitmap = BitmapUtil.rotateBitmap(rotate,picPath);
+        }else{
+            bitmap = getLocalBitmap(picPath);
+        }
+
+        bitmap = ImageFormatTools.scaleBitmapByWidth(bitmap,width);
 
         if (bitmap != null) bitmap = BitmapUtil.compressBitmap(bitmap,1);
 

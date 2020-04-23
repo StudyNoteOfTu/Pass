@@ -2,9 +2,14 @@ package com.example.pass.view.psEditText.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class SoftKeyboardUtil {
 
@@ -43,4 +48,16 @@ public class SoftKeyboardUtil {
             return 0;
         }
     }
+
+    /**
+     * 隐藏键盘
+     */
+    public static void hideInput(Activity context) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
+        View v = context.getWindow().peekDecorView();
+        if (null != v && imm != null) {
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
+    }
+
 }

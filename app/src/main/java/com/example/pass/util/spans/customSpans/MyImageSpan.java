@@ -29,9 +29,15 @@ public class MyImageSpan extends ClickableImageSpan implements CustomSpan, Touch
 
     private WeakReference<Drawable> mDrawableRef;
 
-    //只允许用这个
+    //TextView用这个
     public MyImageSpan(Context context, Bitmap bitmap, String imgUrl) {
-        super(context, ImageFormatTools.scaleBitmapByWidth(bitmap, ScreenConfig.getmImageTargetWidth()));
+        this(context, bitmap,imgUrl,ScreenConfig.getmImageTargetWidth());
+        this.imgUrl = imgUrl;
+    }
+
+    //EditText用这个
+    public MyImageSpan(Context context, Bitmap bitmap, String imgUrl,int width) {
+        super(context, ImageFormatTools.scaleBitmapByWidth(bitmap, width));
         this.imgUrl = imgUrl;
     }
 
@@ -102,8 +108,8 @@ public class MyImageSpan extends ClickableImageSpan implements CustomSpan, Touch
     }
 
 
-    public boolean clicked(int touchX, int touchY) {
-//        Log.d(TAG,"clicked, touchX = "+touchX + " ,touch Y = "+touchY);
+    public boolean clickInside(int touchX, int touchY) {
+//        Log.d(TAG,"clickInside, touchX = "+touchX + " ,touch Y = "+touchY);
         Drawable drawable = getDrawable();
         if (drawable != null) {
             Rect rect = drawable.getBounds();

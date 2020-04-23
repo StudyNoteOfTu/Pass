@@ -3,24 +3,18 @@ package com.example.pass.util.shade;
 import android.graphics.Rect;
 import android.text.Layout;
 import android.text.Spannable;
-import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.example.pass.util.shade.viewAndModels.TextShader;
-import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spans.customSpans.MyImageSpan;
 import com.example.pass.util.spans.customSpans.MyShadeSpan;
 import com.example.pass.util.spans.utils.SpanTool;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ShadeManager {
 
@@ -79,7 +73,7 @@ public class ShadeManager {
         MyImageSpan[] blockImageSpans = spannable.getSpans(position, position, MyImageSpan.class);
         MyImageSpan touchedSpan = null;
         if (blockImageSpans.length > 0 && positionWithinTag(position, spannable, blockImageSpans[0])
-                && blockImageSpans[0].clicked(x, y)) {
+                && blockImageSpans[0].clickInside(x, y)) {
             touchedSpan = blockImageSpans[0];
         }
 
@@ -98,7 +92,7 @@ public class ShadeManager {
         MyImageSpan[] blockImageSpans = spannable.getSpans(position, position, MyImageSpan.class);
         MyImageSpan touchedSpan = null;
         if (blockImageSpans.length > 0 && positionWithinTag(position, spannable, blockImageSpans[0])
-                && blockImageSpans[0].clicked(x, y)) {
+                && blockImageSpans[0].clickInside(x, y)) {
             touchedSpan = blockImageSpans[0];
         }
 

@@ -50,7 +50,7 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
                     if (mTouchableSpan != null){
                         //如果触摸的事MyImageSpan
                         if (mTouchableSpan instanceof ClickableImageSpan){
-                            Drawable drawable = ((ClickableImageSpan) mTouchableSpan).clicked();
+                            Drawable drawable = ((ClickableImageSpan) mTouchableSpan).clickGetDrawable();
                             if (callback!=null && callback instanceof ClickImageMovementMethodCallback){
                                 ((ClickImageMovementMethodCallback)callback).onClicked(drawable);
                             }
@@ -63,7 +63,7 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
                         }
                     }
 //                    if (mClickableImageSpan!=null){
-//                        Drawable drawable = mClickableImageSpan.clicked();
+//                        Drawable drawable = mClickableImageSpan.clickInside();
 //                        if (callback!=null && callback instanceof ClickImageMovementMethodCallback){
 //                            ((ClickImageMovementMethodCallback)callback).onClicked(drawable);
 //                        }
@@ -165,7 +165,7 @@ public class ClickableLinkMovementMethod extends LinkMovementMethod {
         MyImageSpan[] blockImageSpans = spannable.getSpans(position, position, MyImageSpan.class);
         MyImageSpan touchedSpan = null;
         if (blockImageSpans.length > 0 && positionWithinTag(position, spannable, blockImageSpans[0])
-                && blockImageSpans[0].clicked(x, y)) {
+                && blockImageSpans[0].clickInside(x, y)) {
             touchedSpan = blockImageSpans[0];
         }
 

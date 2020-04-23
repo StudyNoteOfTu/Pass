@@ -1,9 +1,11 @@
 package com.example.pass.view.psEditText;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Editable;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -11,6 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pass.configs.ScreenConfig;
+import com.example.pass.util.BitmapUtil;
 import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spans.customSpans.CustomSpan;
 import com.example.pass.util.spans.customSpans.CustomSpanFactory;
@@ -40,7 +44,11 @@ public class PSUtils {
 
     private PSEditText mPSEditText;
 
+    private PSTextWatcher mTextWatcher;
+
     private Activity mActivity;
+
+    private boolean isInsertingPicture = false;
 
     /**
      * 标记支持注册了的样式
@@ -54,7 +62,7 @@ public class PSUtils {
     }
 
     private void registerEvents() {
-        PSTextWatcher mTextWatcher = new PSTextWatcher(mPSEditText);
+        mTextWatcher = new PSTextWatcher(mPSEditText);
         mPSEditText.addTextWatcher(mTextWatcher);
 
         //监听光标位置变化
@@ -327,12 +335,34 @@ public class PSUtils {
      */
     private void handleSelectionChanged(int curPos) {
 
+
+
         Log.d(TAG, "curPos = " + curPos);
+
         Editable editable = mPSEditText.getEditableText();
         if (editable.length() <= 0 && curPos <= 0) {
             //位置不对
             mPSEditText.requestFocus();
             mPSEditText.setSelection(0);
+        }
+
+        if (!isInsertingPicture) {
+            //更改光标位置，图片点击事件重写
+            //如果光标在图片前面，再往前移，如果在图片后面，再往后移（已经确保有\n)了， 此外，有图片的复制黏贴是不允许的
+            MyImageSpan[] imageSpans = editable.getSpans(0, editable.length(), MyImageSpan.class);
+            int spanStart;
+            int spanEnd;
+            for (MyImageSpan imageSpan : imageSpans) {
+                spanStart = editable.getSpanStart(imageSpan);
+                spanEnd = editable.getSpanEnd(imageSpan);
+                if (curPos == spanStart) {
+                    mPSEditText.setSelection(curPos - 1);
+                    break;
+                } else if (curPos == spanEnd) {
+                    mPSEditText.setSelection(curPos + 1);
+                    break;
+                }
+            }
         }
 
         //修改各个按钮的状态
@@ -428,14 +458,17 @@ public class PSUtils {
     /**
      * 插入文本
      *
-     * @param instance
-     * @param selectionStart
      */
-    public void insertStringIntoEditText(ClipboardUtil instance, int selectionStart) {
+    public void insertStringIntoEditText(CharSequence content, int selectionStart) {
         //可以直接写入吧？
-
-
-
+        Editable editable = mPSEditText.getEditableText();
+        if (selectionStart < 0 || selectionStart >= editable.length()){
+            editable.append(content);
+            mPSEditText.setSelection(editable.length());
+        }else{
+            editable.insert(selectionStart,content);
+            mPSEditText.setSelection(selectionStart+content.length());
+        }
     }
 
     //插入回车时候，修改前后样式
@@ -472,5 +505,30 @@ public class PSUtils {
             }
 
         }
+    }
+
+    public void insertImage(String relativePath,String picPath){
+        Bitmap bitmap = BitmapUtil.getFixedBitmap(picPath);
+        //宽度占屏幕一半
+        MyImageSpan imageSpan = new MyImageSpan(mActivity,bitmap,relativePath);
+        insertImage(imageSpan,relativePath);
+    }
+
+    private synchronized void insertImage(MyImageSpan imageSpan,String replaceString){
+        //只在start处加入
+        isInsertingPicture = true;
+        //首先前面加个回车
+        insertStringIntoEditText("\n",mPSEditText.getSelectionStart());
+        //将bitmap插入
+        SpannableStringBuilder imageSpannableString = new SpannableStringBuilder(replaceString);
+
+        imageSpannableString.setSpan(imageSpan,0,replaceString.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        insertStringIntoEditText(imageSpannableString,mPSEditText.getSelectionStart());
+
+        insertStringIntoEditText("\n",mPSEditText.getSelectionStart());
+
+        isInsertingPicture = false;
+
     }
 }

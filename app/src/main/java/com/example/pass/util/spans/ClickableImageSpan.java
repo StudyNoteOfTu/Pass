@@ -59,14 +59,14 @@ public class ClickableImageSpan extends CenterImageSpan implements LongClickable
         this.y = top;
     }
 
-    public Drawable clicked(){
+    public Drawable clickGetDrawable(){
         Drawable drawable = getDrawable();
-        Log.d(TAG,"clicked, get drawable"+drawable.toString());
+        Log.d(TAG,"clickInside, get drawable"+drawable.toString());
         return drawable;
     }
 
-    public boolean clicked(int touchX, int touchY){
-//        Log.d(TAG,"clicked, touchX = "+touchX + " ,touch Y = "+touchY);
+    public boolean clickInside(int touchX, int touchY){
+//        Log.d(TAG,"clickInside, touchX = "+touchX + " ,touch Y = "+touchY);
         Drawable drawable = getDrawable();
         if (drawable != null) {
             Rect rect = drawable.getBounds();

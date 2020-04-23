@@ -1,11 +1,13 @@
 package com.example.pass.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pass.R;
+import com.example.pass.configs.RequestCodeConfig;
+import com.example.pass.util.PhotoUtil;
 import com.example.pass.util.spanUtils.SpanToXmlUtil;
 import com.example.pass.util.spans.customSpans.MyHighLightColoSpan;
 import com.example.pass.util.spans.customSpans.MyNormalSpan;
@@ -37,6 +41,8 @@ public class TestEditTextActivity extends AppCompatActivity {
 
     Button btn_test_xml;
 
+    Button btn_insert_pic;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +53,34 @@ public class TestEditTextActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == RequestCodeConfig.PICTURE_GALLERY && resultCode == RESULT_OK){
+            String path = PhotoUtil.getRealPathWithResultIntent(this,data);
+            Log.d(TAG,"onActivityResult, path = "+path);
+            if (!TextUtils.isEmpty(path)){
+                handleReturnedPicPath(path);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    private void handleReturnedPicPath(String path) {
+        mEditText.getPSUtils().insertImage("aaaa",path);
+    }
 
     private void initViews() {
         mEditText = findViewById(R.id.editText);
+
+        btn_insert_pic = findViewById(R.id.btn_insert_pic);
+        btn_insert_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PhotoUtil.getGalleryPictureWithResultByIntent(TestEditTextActivity.this);
+            }
+        });
+
         btn_test_xml = findViewById(R.id.btn_test_xml);
         btn_test_xml.setOnClickListener(new View.OnClickListener() {
             @Override

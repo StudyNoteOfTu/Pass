@@ -149,6 +149,7 @@ public class SpanToXmlUtil {
                 if (innerList.get(0) != null && innerList.get(0).getType() == CustomTypeEnum.IMAGE) {
                     //如果是图片
                     picPath = line.subSequence(span_start, span_end).toString();
+                    Log.e("IndexTest", "find picture， path =  "+picPath);
                     result.append(XmlTags.getPicBegin());
                     result.append(picPath);
                     result.append(XmlTags.getPicEnd());

@@ -141,7 +141,7 @@ public class BigView extends View implements GestureDetector.OnGestureListener, 
         switch (action) {
             case MotionEvent.ACTION_UP: {
                 if (Math.abs(System.currentTimeMillis() - lastPressTime)>50){
-                    Log.d(TAG,"bigView has been clicked");
+                    Log.d(TAG,"bigView has been clickInside");
                 }
                 lastPressTime = 0;
                 break;
