@@ -41,11 +41,17 @@ public class SpanToXmlUtil {
     //转回的xml应该是节段形式的，即 <p>aaa</p><p>bbb</p>...
     //deal it line by line
     public static List<String> editableToXml(Editable editable) {
-
         //获取到的Editable的每一行
         List<SpannableStringBuilder> lines = new ArrayList<>();
         //需要处理的Editable转为SpannableStringBuilder
+        //注意这里对editable的操作，可能会影响原来的文本， 因为是直接引用，我们做个副本
         SpannableStringBuilder delEditable = new SpannableStringBuilder(editable);
+
+        //editable可能末尾没有\n，这里默认补上一个\n
+        if (!delEditable.toString().endsWith("\n")){
+            //补上个\n
+            delEditable.append('\n');
+        }
         //将需要处理的Editable按行拆分，并转换类型为SpannableStringBuilder到lines集合中
         int start = 0, end = 0;
         for (int i = 0; i < delEditable.length(); i++) {

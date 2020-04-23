@@ -173,17 +173,22 @@ public class PSEditText extends LineHeightEditText {
         Log.d("EditTextMenuItem","id = "+id);
         switch (id) {
             case android.R.id.cut:
+                Log.d(TAG,"cut ，getSelectionStart: " + getSelectionStart() + ", getSelectionEnd: " + getSelectionEnd());
+
                 if (mContext instanceof IClipCallback) {
                     ((IClipCallback) mContext).onCut();
                 }
                 break;
             case android.R.id.copy:
-                Log.d(TAG, "getSelectionStart: " + getSelectionStart() + ", getSelectionEnd: " + getSelectionEnd());
+                Log.d(TAG, "copy getSelectionStart: " + getSelectionStart() + ", getSelectionEnd: " + getSelectionEnd());
+
                 if (mContext instanceof IClipCallback) {
                     ((IClipCallback) mContext).onCopy();
                 }
                 break;
             case android.R.id.paste:
+                Log.d(TAG, "paste getSelectionStart: " + getSelectionStart() + ", getSelectionEnd: " + getSelectionEnd());
+
                 if (mContext instanceof IClipCallback) {
                     ((IClipCallback) mContext).onPaste();
                 }

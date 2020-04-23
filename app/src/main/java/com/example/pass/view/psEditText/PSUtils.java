@@ -432,6 +432,8 @@ public class PSUtils {
      * @param selectionStart
      */
     public void insertStringIntoEditText(ClipboardUtil instance, int selectionStart) {
+        //可以直接写入吧？
+
 
 
     }
