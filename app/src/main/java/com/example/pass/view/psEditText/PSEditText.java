@@ -8,6 +8,7 @@ import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 
@@ -211,5 +212,9 @@ public class PSEditText extends LineHeightEditText {
         return mPSInputConnection;
     }
 
-
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG,"onTouchEvent, action = "+event.getAction());
+        return super.onTouchEvent(event);
+    }
 }

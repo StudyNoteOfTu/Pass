@@ -12,23 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0a6509c-e197-42bb-88b0-295d99cac37c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/configs/RequestCodeConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/PhotoUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/TestEditTextActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/TestEditTextActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/BitmapUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/BitmapUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/ShadeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/ShadeManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spanUtils/SpanToXmlUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spanUtils/SpanToXmlUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/ClickableImageSpan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/ClickableImageSpan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyImageSpan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyImageSpan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/movementMethods/ClickableLinkMovementMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/movementMethods/ClickableLinkMovementMethod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/BigView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/BigView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/MyLinkMovementMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/MyLinkMovementMethod.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSEditText.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSEditText.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSTextWatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSTextWatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/utils/SoftKeyboardUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/utils/SoftKeyboardUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layouts/activities/layout/test_activity_edittext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/activities/layout/test_activity_edittext.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,10 +38,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSEditText.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="103" column="44" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="44" />
+            <state relative-caret-position="367">
+              <caret line="216" column="53" lean-forward="true" selection-start-line="216" selection-start-column="53" selection-end-line="216" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/view/MotionEvent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="2054" column="52" lean-forward="true" selection-start-line="2054" selection-start-column="52" selection-end-line="2054" selection-end-column="52" />
+              <folding>
+                <element signature="e#84615#84616#0" expanded="true" />
+                <element signature="e#84665#84666#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,24 +63,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/MyLinkMovementMethod.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+            <state relative-caret-position="430">
+              <caret line="91" column="42" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="42" />
               <folding>
-                <element signature="e#1398#1399#0" expanded="true" />
-                <element signature="e#1432#1433#0" expanded="true" />
-                <element signature="e#4869#4902#0" expanded="true" />
-                <element signature="e#5758#5759#0" expanded="true" />
-                <element signature="e#5853#5854#0" expanded="true" />
+                <element signature="e#1338#1339#0" expanded="true" />
+                <element signature="e#1372#1373#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/movementMethods/ClickableLinkMovementMethod.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="43" column="14" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -89,7 +76,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/view/ViewConfiguration.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
+            <state relative-caret-position="13000">
               <caret line="562" column="22" selection-start-line="562" selection-start-column="22" selection-end-line="562" selection-end-column="22" />
             </state>
           </provider>
@@ -98,7 +85,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/analyseOfficeActivity/adapter/LineAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
+            <state relative-caret-position="1825">
               <caret line="98" column="30" selection-start-line="98" selection-start-column="19" selection-end-line="98" selection-end-column="30" />
             </state>
           </provider>
@@ -107,7 +94,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/LinkMovementMethod.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
+            <state relative-caret-position="250">
               <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
             </state>
           </provider>
@@ -134,7 +121,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/MovementMethod.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-183">
+            <state relative-caret-position="425">
               <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
             </state>
           </provider>
@@ -143,7 +130,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/TestEditTextActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
+            <state relative-caret-position="500">
               <caret line="48" column="43" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
             </state>
           </provider>
@@ -262,10 +249,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="-8" />
-    <option name="width" value="977" />
-    <option name="height" value="1038" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="951" />
+    <option name="y" value="-9" />
+    <option name="width" value="978" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -631,7 +619,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="781" height="830" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
@@ -644,7 +632,7 @@
       <window_info id="Resources Explorer" order="7" weight="0.3297587" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" weight="0.4735294" />
-      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49798927" weight="0.84970236" />
+      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49798927" weight="0.76911765" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32941177" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.60119045" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32794118" />
@@ -662,13 +650,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyShadeSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/style/StrikethroughSpan.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="127">
@@ -985,41 +966,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/TestEditTextActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/movementMethods/ClickableLinkMovementMethod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="48" column="43" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
+        <state relative-caret-position="675">
+          <caret line="43" column="14" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/view/ViewConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13000">
+          <caret line="562" column="22" selection-start-line="562" selection-start-column="22" selection-end-line="562" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/analyseOfficeActivity/adapter/LineAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
+        <state relative-caret-position="1825">
           <caret line="98" column="30" selection-start-line="98" selection-start-column="19" selection-end-line="98" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSEditText.java">
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/LinkMovementMethod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="103" column="44" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/MovementMethod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-183">
-          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/BaseMovementMethod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="28" column="50" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
+        <state relative-caret-position="250">
+          <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -1030,37 +1001,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/LinkMovementMethod.java">
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/BaseMovementMethod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+        <state relative-caret-position="225">
+          <caret line="28" column="50" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/movementMethods/ClickableLinkMovementMethod.java">
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/MovementMethod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="43" column="14" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
+        <state relative-caret-position="425">
+          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/view/ViewConfiguration.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/TestEditTextActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="562" column="22" selection-start-line="562" selection-start-column="22" selection-end-line="562" selection-end-column="22" />
+        <state relative-caret-position="500">
+          <caret line="48" column="43" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/view/MotionEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="2054" column="52" lean-forward="true" selection-start-line="2054" selection-start-column="52" selection-end-line="2054" selection-end-column="52" />
+          <folding>
+            <element signature="e#84615#84616#0" expanded="true" />
+            <element signature="e#84665#84666#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSEditText.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="216" column="53" lean-forward="true" selection-start-line="216" selection-start-column="53" selection-end-line="216" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/MyLinkMovementMethod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+        <state relative-caret-position="430">
+          <caret line="91" column="42" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="42" />
           <folding>
-            <element signature="e#1398#1399#0" expanded="true" />
-            <element signature="e#1432#1433#0" expanded="true" />
-            <element signature="e#4869#4902#0" expanded="true" />
-            <element signature="e#5758#5759#0" expanded="true" />
-            <element signature="e#5853#5854#0" expanded="true" />
+            <element signature="e#1338#1339#0" expanded="true" />
+            <element signature="e#1372#1373#0" expanded="true" />
           </folding>
         </state>
       </provider>

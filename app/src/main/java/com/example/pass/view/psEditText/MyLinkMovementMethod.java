@@ -38,7 +38,7 @@ public class MyLinkMovementMethod extends LinkMovementMethod {
     //是否移动了
     private boolean isMoved;
     //移动的阈值
-    private static final int TOUCH_SLOP = 5;
+    private static final int TOUCH_SLOP = 10;
 
     private LongClickTimer longClickTimer;
     //popWindow需要的当前View
@@ -64,18 +64,18 @@ public class MyLinkMovementMethod extends LinkMovementMethod {
         nowY = y;
 
         int action = event.getAction();
-        Log.d(TAG,"--------motion = "+action);
+
         switch (action) {
             case MotionEvent.ACTION_DOWN:
 
                 mLastMotionX = x;
                 mLastMotionY = y;
-                isMoved = false;
+                Log.d(TAG,"lastX = "+x+" lastY = "+y);
                 longClickTimer = new LongClickTimer(ViewConfiguration.getLongPressTimeout());
                 mPressedSpan = getPressedSpan(widget, buffer, event);
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (isMoved) break;
+                Log.d(TAG,"nowX = "+x+" nowY = "+y);
                 if (Math.abs(mLastMotionX - x) > TOUCH_SLOP
                         || Math.abs(mLastMotionY - y) > TOUCH_SLOP) {
                     if (longClickTimer != null && longClickTimer.timer != null) {
@@ -89,7 +89,11 @@ public class MyLinkMovementMethod extends LinkMovementMethod {
                 }
                 break;
             case MotionEvent.ACTION_UP:
-
+            case MotionEvent.ACTION_CANCEL:
+                if (longClickTimer != null && longClickTimer.timer != null) {
+                    longClickTimer.timer.cancel();
+                    longClickTimer = null;
+                }
                 break;
         }
         return true;
