@@ -5,6 +5,7 @@ public class State {
     public static enum MODE{
         SHADE,
         FONT_SIZE,
+        TYPEFACE
     }
 
     MODE mode;
@@ -15,6 +16,8 @@ public class State {
 
     //mode FONT_SIZE
     int fontSize;
+
+    String typeface;
 
 
 
@@ -52,5 +55,13 @@ public class State {
 
     public void setMode(MODE mode) {
         this.mode = mode;
+    }
+
+    public String getTypeface() {
+        return typeface;
+    }
+
+    public void setTypeface(String typeface) {
+        this.typeface = typeface;
     }
 }

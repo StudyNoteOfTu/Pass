@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.core.widget.PopupWindowCompat;
@@ -21,8 +20,8 @@ import com.example.pass.activities.passOpenedActivity.bean.TopNumOver1.HBean;
 import com.example.pass.activities.passOpenedActivity.bean.TopNumOver1.ParentInterface;
 import com.example.pass.activities.passOpenedActivity.observer.PagerStateObserverable;
 import com.example.pass.activities.passOpenedActivity.observer.State;
-import com.example.pass.base.ActionBarFragment;
 import com.example.pass.callbacks.LoadObjectCallback;
+import com.example.pass.util.FileUtil;
 import com.example.pass.util.officeUtils.MyXmlWriter;
 import com.example.pass.util.officeUtils.XmlTags;
 import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderBean;
@@ -30,16 +29,20 @@ import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderXmlTool;
 import com.example.pass.util.shade.viewAndModels.Shader;
 import com.example.pass.util.spanUtils.DataContainedSpannableStringBuilder;
 import com.example.pass.util.spanUtils.SpanToXmlUtil;
+import com.example.pass.util.typefaceUtils.TypefaceUtil;
 import com.example.pass.view.PassViewPager;
-import com.example.pass.view.popWindows.FontSizePopWindow;
+import com.example.pass.view.popWindows.fontstylePopWindows.FontSizePopWindow;
 import com.example.pass.view.popWindows.MenuPopWindow;
+import com.example.pass.view.popWindows.fontstylePopWindows.bean.TextTypeface;
+import com.example.pass.view.popWindows.fontstylePopWindows.impls.OnTypefaceChangeListener;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewPagerFragment extends ActionBarFragment {
+public class ViewPagerFragment extends PassOpenBaseFragment {
 
+    private static final String TAG = "ViewPagerFragment";
 
     private PassViewPager mViewPager;
 
@@ -66,6 +69,16 @@ public class ViewPagerFragment extends ActionBarFragment {
 
     private int currentFontSize = 19;//默认
 
+    /**
+     * 在fragment 预先加载本地的TextTypeface
+     */
+    private List<TextTypeface> typefaceList = new ArrayList<>();
+
+    /**
+     * 当前字体样式（由路径标识）
+     */
+    private String currentTypefaceTagWithPath = "";
+
     @Override
     protected int setLayoutId() {
         return R.layout.fragment_pass_viewpager;
@@ -73,6 +86,10 @@ public class ViewPagerFragment extends ActionBarFragment {
 
     @Override
     protected void initViews(View mContentView) {
+
+        //开线程加载本地typeface
+        getLocalTypefaceList();
+
         //初始化控件
         mViewPager = mContentView.findViewById(R.id.viewPager);
 
@@ -110,6 +127,42 @@ public class ViewPagerFragment extends ActionBarFragment {
 
     }
 
+    private void getLocalTypefaceList() {
+
+        //再从本地获取
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                typefaceList.clear();
+
+                //造假数据预览ui
+                List<TextTypeface> list = new ArrayList<>();
+                list.add(new TextTypeface("","aaa"));
+                list.add(new TextTypeface("","aaa"));
+                list.add(new TextTypeface("","aaa"));
+                list.add(new TextTypeface("","aaa"));
+                list.add(new TextTypeface("","aaa"));
+                list.add(new TextTypeface("","aaa"));
+
+                typefaceList.addAll(list);
+//                typefaceList.addAll(TypefaceUtil.getLocalTextTypeface());
+            }
+        }).start();
+    }
+
+    /**
+     * 在所有fragment都注册之后，更新typeface信息
+     */
+    private void refreshTypefaceState(){
+        //首先获取当前是什么字体,然后更新所有observer信息
+        currentTypefaceTagWithPath = "";
+
+        State state = new State(State.MODE.TYPEFACE);
+        state.setTypeface(currentTypefaceTagWithPath);
+        pagerStateObserverable.notifyObserver(state);
+
+    }
+
 
     @Override
     public void onResume() {
@@ -124,6 +177,9 @@ public class ViewPagerFragment extends ActionBarFragment {
             fragment.setData(isShow, h1List.get(i), shaderBeans, pagerStateObserverable);
             viewPagerItemFragmentList.add(fragment);
         }
+
+        //更新typeface信息
+        refreshTypefaceState();
 
         mViewPager.setAdapter(new ViewPagerItemAdapter(getChildFragmentManager(), viewPagerItemFragmentList, h1List.size()));
 
@@ -190,7 +246,7 @@ public class ViewPagerFragment extends ActionBarFragment {
             while (rootParent != null) {
                 if (rootParent.getParent() != null) {
                     rootParent = (ParentInterface) rootParent.getParent();
-                }else{
+                } else {
                     break;
                 }
             }
@@ -205,7 +261,7 @@ public class ViewPagerFragment extends ActionBarFragment {
             DataContainedSpannableStringBuilder sb;
             List<String> xmlList;
             //获取rootparent，开始遍历
-            if (rootParent instanceof HBean){
+            if (rootParent instanceof HBean) {
                 for (HBean.H4 h4 : ((HBean) rootParent).h4List) {
                     //写入标题字段
                     sb = h4.h4Text;
@@ -221,9 +277,9 @@ public class ViewPagerFragment extends ActionBarFragment {
                                 sb = h11.h1Text;
                                 createXmlStringLine(xmlStringBuilder, sb);
                                 //写入内容
-                                Log.d("2020419SpanToXmlUtil",""+h11.h1Text);
+                                Log.d("2020419SpanToXmlUtil", "" + h11.h1Text);
                                 if (h11.detail != null) {
-                                    Log.d("2020419SpanToXmlUtil",""+h11.detail.toString());
+                                    Log.d("2020419SpanToXmlUtil", "" + h11.detail.toString());
                                     xmlList = SpanToXmlUtil.editableToXml(h11.detail);
                                     for (String s : xmlList) {
                                         xmlStringBuilder.append(s);
@@ -233,7 +289,7 @@ public class ViewPagerFragment extends ActionBarFragment {
                         }
                     }
                 }
-            }else if (rootParent instanceof HBean.H4){
+            } else if (rootParent instanceof HBean.H4) {
                 for (HBean.H4.H3 h3 : ((HBean.H4) rootParent).h3List) {
                     sb = h3.h3Text;
                     createXmlStringLine(xmlStringBuilder, sb);
@@ -245,9 +301,9 @@ public class ViewPagerFragment extends ActionBarFragment {
                             sb = h11.h1Text;
                             createXmlStringLine(xmlStringBuilder, sb);
                             //写入内容
-                            Log.d("2020419SpanToXmlUtil",""+h11.h1Text);
+                            Log.d("2020419SpanToXmlUtil", "" + h11.h1Text);
                             if (h11.detail != null) {
-                                Log.d("2020419SpanToXmlUtil",""+h11.detail.toString());
+                                Log.d("2020419SpanToXmlUtil", "" + h11.detail.toString());
                                 xmlList = SpanToXmlUtil.editableToXml(h11.detail);
                                 for (String s : xmlList) {
                                     xmlStringBuilder.append(s);
@@ -256,7 +312,7 @@ public class ViewPagerFragment extends ActionBarFragment {
                         }
                     }
                 }
-            }else if (rootParent instanceof HBean.H4.H3){
+            } else if (rootParent instanceof HBean.H4.H3) {
                 for (HBean.H4.H3.H2 h2 : ((HBean.H4.H3) rootParent).h2List) {
                     sb = h2.h2Text;
                     createXmlStringLine(xmlStringBuilder, sb);
@@ -265,9 +321,9 @@ public class ViewPagerFragment extends ActionBarFragment {
                         sb = h11.h1Text;
                         createXmlStringLine(xmlStringBuilder, sb);
                         //写入内容
-                        Log.d("2020419SpanToXmlUtil",""+h11.h1Text);
+                        Log.d("2020419SpanToXmlUtil", "" + h11.h1Text);
                         if (h11.detail != null) {
-                            Log.d("2020419SpanToXmlUtil",""+h11.detail.toString());
+                            Log.d("2020419SpanToXmlUtil", "" + h11.detail.toString());
                             xmlList = SpanToXmlUtil.editableToXml(h11.detail);
                             for (String s : xmlList) {
                                 xmlStringBuilder.append(s);
@@ -275,15 +331,15 @@ public class ViewPagerFragment extends ActionBarFragment {
                         }
                     }
                 }
-            }else if (rootParent instanceof HBean.H4.H3.H2){
+            } else if (rootParent instanceof HBean.H4.H3.H2) {
                 for (HBean.H4.H3.H2.H1 h11 : ((HBean.H4.H3.H2) rootParent).h1List) {
                     //写入标题数据
                     sb = h11.h1Text;
                     createXmlStringLine(xmlStringBuilder, sb);
                     //写入内容
-                    Log.d("2020419SpanToXmlUtil",""+h11.h1Text);
+                    Log.d("2020419SpanToXmlUtil", "" + h11.h1Text);
                     if (h11.detail != null) {
-                        Log.d("2020419SpanToXmlUtil",""+h11.detail.toString());
+                        Log.d("2020419SpanToXmlUtil", "" + h11.detail.toString());
                         xmlList = SpanToXmlUtil.editableToXml(h11.detail);
                         for (String s : xmlList) {
                             xmlStringBuilder.append(s);
@@ -302,7 +358,7 @@ public class ViewPagerFragment extends ActionBarFragment {
 
                 @Override
                 public void onFinish(String result) {
-                    Log.d("OnFinishTest",result);
+                    Log.d("OnFinishTest", result);
                 }
 
                 @Override
@@ -350,6 +406,7 @@ public class ViewPagerFragment extends ActionBarFragment {
 
     /**
      * 初始化数据
+     *
      * @param path
      * @param h1List
      * @param selectIndex
@@ -358,7 +415,7 @@ public class ViewPagerFragment extends ActionBarFragment {
         this.h1List = h1List;
         this.path = path;
         this.selectedIndex = selectIndex;
-        Log.d("2020419RootParentTest","h1 list size = "+h1List.size());
+        Log.d("2020419RootParentTest", "h1 list size = " + h1List.size());
 
     }
 
@@ -403,9 +460,10 @@ public class ViewPagerFragment extends ActionBarFragment {
         if (mActionBar != null) {
             mActionBar.setCustomView(R.layout.actionbar_pass_open_viewpager);
             mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            View customView= mActionBar.getCustomView();
-            ((TextView)customView.findViewById(R.id.tv_title)).setText(title);
+            View customView = mActionBar.getCustomView();
+            ((TextView) customView.findViewById(R.id.tv_title)).setText(title);
 
+            //菜单键
             (customView.findViewById(R.id.img_menu)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -413,10 +471,23 @@ public class ViewPagerFragment extends ActionBarFragment {
                 }
             });
 
+            //返回键
+            (customView.findViewById(R.id.img_back)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG,"back pressed");
+                    if (mOnBackPressedListener != null){
+                        mOnBackPressedListener.onBackPressed(ViewPagerFragment.this);
+                    }else{
+                        Log.d(TAG,"mOnBackPressedListener is null");
+                    }
+                }
+            });
+
         }
     }
 
-    public void showMenuPopWindow(View childView){
+    public void showMenuPopWindow(View childView) {
         MenuPopWindow window = new MenuPopWindow(myContext);
         View contentView = window.getContentView();
         ///需要先测量，PopupWindow还未弹出时，宽高为0
@@ -425,15 +496,15 @@ public class ViewPagerFragment extends ActionBarFragment {
         int offsetX = 0;
 //        int offsetY = -(window.getContentView().getMeasuredHeight()+childView.getHeight())/2;
         int offsetY = 0;
-        PopupWindowCompat.showAsDropDown(window,childView,offsetX,offsetY, Gravity.BOTTOM);
+        PopupWindowCompat.showAsDropDown(window, childView, offsetX, offsetY, Gravity.BOTTOM);
         //有问题
 //        window.showBackgroundAnimator();
         window.setOnOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (v.getId()){
+                switch (v.getId()) {
                     case R.id.tv_size:
-                        setFontSize();
+                        setFontStyle();
                         window.dismiss();
                         break;
                     case R.id.tv_mode:
@@ -450,16 +521,16 @@ public class ViewPagerFragment extends ActionBarFragment {
         });
     }
 
-    private void setFontSize() {
-        showFontSizePopWindow(tabBar);
+    private void setFontStyle() {
+        showFontStylePopWindow(tabBar);
     }
 
-    private void showFontSizePopWindow(View childView){
+    private void showFontStylePopWindow(View childView) {
         //最小字体16sp，我们用百分比来做，最大是36sp 那么 100份，每份是0.2sp
-        FontSizePopWindow window = new FontSizePopWindow(myContext, ((currentFontSize-16)*5), new SeekBar.OnSeekBarChangeListener() {
+        FontSizePopWindow window = new FontSizePopWindow(myContext, ((currentFontSize - 16) * 5), new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                currentFontSize = 16+(int)(0.2*progress);
+                currentFontSize = 16 + (int) (0.2 * progress);
                 State state = new State(State.MODE.FONT_SIZE);
                 state.setFontSize(currentFontSize);
                 pagerStateObserverable.notifyObserver(state);
@@ -478,10 +549,32 @@ public class ViewPagerFragment extends ActionBarFragment {
         ///需要先测量，PopupWindow还未弹出时，宽高为0
         contentView.measure(makeDropDownMeasureSpec(window.getWidth()),
                 makeDropDownMeasureSpec(window.getHeight()));
-        int offsetX = Math.abs((window.getContentView().getMeasuredWidth()-childView.getWidth())/2);
+
+
+        int offsetX = Math.abs((window.getContentView().getMeasuredWidth() - childView.getWidth()) / 2);
 //        int offsetY = -(window.getContentView().getMeasuredHeight()+childView.getHeight())/2;
-        int offsetY = -(window.getContentView().getMeasuredHeight()+childView.getHeight());
-        PopupWindowCompat.showAsDropDown(window,childView,offsetX,offsetY, Gravity.START);
+        int offsetY = -(window.getContentView().getMeasuredHeight() + childView.getHeight());
+
+        Log.d("OffsetLOG","measure height = "+window.getContentView().getMeasuredHeight()+" ,offsetY = "+offsetY);
+//
+//        window.showAtLocation(parentView,Gravity.TOP,0,0);
+
+        window.showAsDropDown(childView,0,offsetY);
+
+        window.changeCurrentTypeface(FileUtil.getFileName(currentTypefaceTagWithPath));
+        window.setTypefaceData(typefaceList, new OnTypefaceChangeListener() {
+            @Override
+            public void onTypefaceChange(String chosenTtfPath) {
+
+                window.changeCurrentTypeface(FileUtil.getFileName(chosenTtfPath));
+                currentTypefaceTagWithPath = chosenTtfPath;
+
+                State state = new State(State.MODE.TYPEFACE);
+                state.setTypeface(chosenTtfPath);
+                pagerStateObserverable.notifyObserver(state);
+            }
+        });
+
         //有问题
 //        window.showBackgroundAnimator();
     }

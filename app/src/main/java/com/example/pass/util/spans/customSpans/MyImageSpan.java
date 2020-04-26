@@ -78,8 +78,11 @@ public class MyImageSpan extends ClickableImageSpan implements CustomSpan, Touch
         this.x = x;
         this.y = top;
 
-        this.bottom = bottom;
         Drawable drawable = getCachedDrawable();
+
+        //如果要吧LineExtra去掉，就要利用drawable的真实高度来计算
+        this.bottom = top+drawable.getBounds().height();
+
         canvas.save();
         Paint.FontMetricsInt fmPaint = paint.getFontMetricsInt();
         int fontHeight = fmPaint.descent - fmPaint.ascent;

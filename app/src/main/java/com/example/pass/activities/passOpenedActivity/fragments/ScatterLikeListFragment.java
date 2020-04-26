@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pass.base.ActionBarFragment;
 
-public class ScatterLikeListFragment extends ActionBarFragment {
+public class ScatterLikeListFragment extends PassOpenBaseFragment {
     @Override
     protected void initViews(View mContentView) {
 

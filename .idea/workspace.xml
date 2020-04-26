@@ -6,15 +6,33 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="MyLinkMovementMethod" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="OffsetLOG" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0a6509c-e197-42bb-88b0-295d99cac37c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/PassOpenBaseFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/configs/TypefaceConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/typefaceUtils/TypefaceUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/TtfGridAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/bean/TextTypeface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/impls/OnTypefaceChangeListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_popwindow_text_choose.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/MyLinkMovementMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/MyLinkMovementMethod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSEditText.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSEditText.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/view/PassFolderFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/view/PassFolderFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/FolderListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/FolderListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ScatterLikeListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ScatterLikeListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/TextViewFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/TextViewFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerItemFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerItemFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/observer/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/observer/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/PassOpenedActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/PassOpenedActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyImageSpan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyImageSpan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/FontSizePopWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/FontSizePopWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_text_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_text_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layouts/popwindows/layout/pop_seekbar_fontsize.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/popwindows/layout/pop_seekbar_fontsize.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +43,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="f59e4234" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_28" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -36,102 +54,115 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSEditText.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/FontSizePopWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="216" column="53" lean-forward="true" selection-start-line="216" selection-start-column="53" selection-end-line="216" selection-end-column="53" />
+            <state relative-caret-position="-145">
+              <caret line="70" column="5" lean-forward="true" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
               <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/view/MotionEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="2054" column="52" lean-forward="true" selection-start-line="2054" selection-start-column="52" selection-end-line="2054" selection-end-column="52" />
-              <folding>
-                <element signature="e#84615#84616#0" expanded="true" />
-                <element signature="e#84665#84666#0" expanded="true" />
+                <element signature="e#2577#2578#0" expanded="true" />
+                <element signature="e#2618#2619#0" expanded="true" />
+                <element signature="e#2841#2842#0" expanded="true" />
+                <element signature="e#2882#2883#0" expanded="true" />
+                <element signature="e#2668#2669#0" expanded="true" />
+                <element signature="e#2725#2726#0" expanded="true" />
+                <element signature="e#2511#2512#0" expanded="true" />
+                <element signature="e#2591#2592#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/MyLinkMovementMethod.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_viewpager_item.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="91" column="42" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="42" />
+            <state relative-caret-position="1025">
+              <caret line="41" column="46" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_viewpager.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_text_view.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="20" column="46" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyImageSpan.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="355">
+              <caret line="82" column="46" selection-start-line="82" selection-start-column="46" selection-end-line="82" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/ClickableImageSpan.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="316">
+              <caret line="79" column="20" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/viewAndModels/ShadeView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="482" column="123" lean-forward="true" selection-start-line="482" selection-start-column="123" selection-end-line="482" selection-end-column="123" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/viewAndModels/Shader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="326" column="19" selection-start-line="326" selection-start-column="19" selection-end-line="326" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/popwindows/layout/pop_seekbar_fontsize.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="556" selection-start-line="556" selection-end-line="556" />
               <folding>
-                <element signature="e#1338#1339#0" expanded="true" />
-                <element signature="e#1372#1373#0" expanded="true" />
+                <element signature="e#2836#2837#0" expanded="true" />
+                <element signature="e#2891#2892#0" expanded="true" />
+                <element signature="e#3486#3487#0" expanded="true" />
+                <element signature="e#3535#3536#0" expanded="true" />
+                <element signature="e#3676#3677#0" expanded="true" />
+                <element signature="e#3724#3725#0" expanded="true" />
+                <element signature="e#17245#17246#0" expanded="true" />
+                <element signature="e#17290#17291#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/view/ViewConfiguration.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13000">
-              <caret line="562" column="22" selection-start-line="562" selection-start-column="22" selection-end-line="562" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/analyseOfficeActivity/adapter/LineAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1825">
-              <caret line="98" column="30" selection-start-line="98" selection-start-column="19" selection-end-line="98" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/LinkMovementMethod.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/ScrollingMovementMethod.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="27" column="52" selection-start-line="27" selection-start-column="52" selection-end-line="27" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/BaseMovementMethod.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="28" column="50" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/MovementMethod.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/TestEditTextActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="48" column="43" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -151,7 +182,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>shaderBeans</find>
       <find>2020419SpanDraw</find>
       <find>refresh</find>
       <find>getall</find>
@@ -172,7 +202,6 @@
       <find>Delete</find>
       <find>delete</find>
       <find>action</find>
-      <find>onTouch</find>
       <find>ontouch</find>
       <find>addTextChange</find>
       <find>textWatcher</find>
@@ -181,6 +210,8 @@
       <find>insertI</find>
       <find>setSelection</find>
       <find>MyLinkMovementMethod</find>
+      <find>FolderList</find>
+      <find>onTouch</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -195,32 +226,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/observers/base/BaseObserverable.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/observer/PagerStateObserverable.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/ShadeManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spanUtils/DataContainedSpannableStringBuilder.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/ParentInterface.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/bean/TopNumOver1/HBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/viewAndModels/Shader.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/viewAndModels/ShadeView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/analyseOfficeActivity/view/AnalyseOfficeActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/actionbar_pass_open_viewpager_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layouts/popwindows/layout/pop_pass_open_menu.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/TitlePopWindow.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/observer/State.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/MenuPopWindow.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_viewpager.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/FontSizePopWindow.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layouts/popwindows/layout/pop_seekbar_fontsize.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/text_scroll_bar.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_viewpager_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_text_view.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/FileUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/actionbar_pass_folder.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/TextViewFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/actionbar_pass_open_viewpager.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerItemFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/PSEditText.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/slideViews/SwipeItemLayout.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/swipeViews/OnSwipeItemOpenListener.java" />
@@ -230,7 +241,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/model/StyleVm.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyStyleSpan.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spanUtils/XmlToSpanUtil.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyNormalSpan.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/configs/RequestCodeConfig.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/TestEditTextActivity.java" />
@@ -240,20 +250,41 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/PhotoUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/movementMethods/ClickableLinkMovementMethod.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/ClickableImageSpan.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyImageSpan.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layouts/activities/layout/test_activity_edittext.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSTextWatcher.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/utils/SoftKeyboardUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSEditText.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/MyLinkMovementMethod.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ScatterLikeListFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/PassOpenBaseFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/TextViewFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/FolderListFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/PassOpenedActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/view/PassFolderFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/bean/TextTypeface.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_popwindow_text_choose.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/impls/OnTypefaceChangeListener.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/configs/TypefaceConfig.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/typefaceUtils/TypefaceUtil.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/observer/State.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerItemFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/TtfGridAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_viewpager.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/FontSizePopWindow.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layouts/popwindows/layout/pop_seekbar_fontsize.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyImageSpan.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_text_view.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_viewpager_item.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="951" />
-    <option name="y" value="-9" />
-    <option name="width" value="978" />
-    <option name="height" value="1048" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="979" />
+    <option name="height" value="1049" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -263,9 +294,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -408,6 +439,73 @@
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="example" type="462c0819:PsiDirectoryNode" />
               <item name="pass" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="shade" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="pass" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="shade" type="462c0819:PsiDirectoryNode" />
+              <item name="viewAndModels" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="pass" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="spans" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="pass" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="spans" type="462c0819:PsiDirectoryNode" />
+              <item name="customSpans" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="pass" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="typefaceUtils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="pass" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -422,6 +520,50 @@
               <item name="pass" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="popWindows" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="pass" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="popWindows" type="462c0819:PsiDirectoryNode" />
+              <item name="fontstylePopWindows" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="pass" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="popWindows" type="462c0819:PsiDirectoryNode" />
+              <item name="fontstylePopWindows" type="462c0819:PsiDirectoryNode" />
+              <item name="bean" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="pass" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="popWindows" type="462c0819:PsiDirectoryNode" />
+              <item name="fontstylePopWindows" type="462c0819:PsiDirectoryNode" />
+              <item name="impls" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
@@ -473,6 +615,37 @@
               <item name="layouts" type="462c0819:PsiDirectoryNode" />
               <item name="activities" type="462c0819:PsiDirectoryNode" />
               <item name="layout" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+              <item name="fragments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+              <item name="fragments" type="462c0819:PsiDirectoryNode" />
+              <item name="layout" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+              <item name="popwindows" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -623,7 +796,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.16871166" weight="0.24128686" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.16871166" visible="true" weight="0.24664879" />
       <window_info id="Structure" order="2" sideWeight="0.83128834" side_tool="true" weight="0.19839142" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -632,13 +805,13 @@
       <window_info id="Resources Explorer" order="7" weight="0.3297587" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" weight="0.4735294" />
-      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49798927" weight="0.76911765" />
+      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49798927" weight="0.6220588" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32941177" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.60119045" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32794118" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5020107" side_tool="true" weight="0.69264704" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.3779412" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.38235295" />
       <window_info anchor="bottom" id="Find" order="8" weight="0.32205883" />
       <window_info anchor="bottom" id="Android Profiler" order="9" weight="0.84117645" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" weight="0.3297587" />
@@ -650,343 +823,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/style/StrikethroughSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyStrikethroughSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="6" column="55" lean-forward="true" selection-start-line="6" selection-start-column="55" selection-end-line="6" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/style/StyleSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyStyleSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/style/UnderlineSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="34" column="49" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyUnderlineSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="6" column="44" lean-forward="true" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/java/lang/Deprecated.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/content/Intent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="4599" column="31" selection-start-line="4599" selection-start-column="31" selection-end-line="4599" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/configs/PathConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/configs/ScreenConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/configs/RequestCodeConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/enumtype/CustomTypeEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/ImageFormatTools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="154" column="38" lean-forward="true" selection-start-line="154" selection-start-column="38" selection-end-line="154" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spanUtils/SpanToXmlUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="154" column="55" lean-forward="true" selection-start-line="154" selection-start-column="55" selection-end-line="154" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/CustomSpanFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/NoCopySpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hanks/lineheightedittext-library/1.0/f598d861b137f97d5e115f4621408314b7327508/lineheightedittext-library-1.0-sources.jar!/com/hanks/lineheightedittext/TextWatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="26" column="42" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/widget/EditText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="62" column="67" lean-forward="true" selection-start-line="62" selection-start-column="67" selection-end-line="62" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/widget/TextView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="688">
-          <caret line="10478" lean-forward="true" selection-start-line="10469" selection-start-column="4" selection-end-line="10478" />
-          <folding>
-            <element signature="e#95806#95807#0" expanded="true" />
-            <element signature="e#95834#95835#0" expanded="true" />
-            <element signature="e#97280#97281#0" expanded="true" />
-            <element signature="e#97310#97311#0" expanded="true" />
-            <element signature="e#175840#175841#0" expanded="true" />
-            <element signature="e#175901#175902#0" expanded="true" />
-            <element signature="e#399713#399714#0" expanded="true" />
-            <element signature="e#399772#399773#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hanks/lineheightedittext-library/1.0/f598d861b137f97d5e115f4621408314b7327508/lineheightedittext-library-1.0-sources.jar!/com/hanks/lineheightedittext/LineHeightEditText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1814">
-          <caret line="75" column="30" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="30" />
-          <folding>
-            <element signature="e#5830#5831#0" expanded="true" />
-            <element signature="e#5876#5877#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/BitmapUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="132" column="26" selection-start-line="132" selection-start-column="26" selection-end-line="132" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="517" column="20" selection-start-line="517" selection-start-column="20" selection-end-line="517" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2181#2182#0" expanded="true" />
-            <element signature="e#2243#2244#0" expanded="true" />
-            <element signature="e#3154#3155#0" expanded="true" />
-            <element signature="e#3182#3183#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/PhotoUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="875">
-          <caret line="38" column="60" selection-start-line="38" selection-start-column="60" selection-end-line="38" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/callbacks/OnImageClickListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/impls/LongClickableSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/ShadeManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyImageSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="119" column="5" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/activities/layout/test_activity_edittext.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="27" column="42" lean-forward="true" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/PSTextWatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="99" column="53" selection-start-line="99" selection-start-column="45" selection-end-line="99" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#12943#12944#0" expanded="true" />
-            <element signature="e#13008#13009#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/Selection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="182" column="29" selection-start-line="182" selection-start-column="29" selection-end-line="182" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/content/Context.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="93" column="22" selection-start-line="93" selection-start-column="22" selection-end-line="93" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/utils/SoftKeyboardUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="54" column="41" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="422" column="37" selection-start-line="422" selection-start-column="37" selection-end-line="422" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/MenuPopWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/widget/PopupWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="1306" column="16" selection-start-line="1306" selection-start-column="16" selection-end-line="1306" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/ClickableImageSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="16" column="50" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/CenterImageSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/style/ImageSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="57" column="42" selection-start-line="57" selection-start-column="42" selection-end-line="57" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/style/DynamicDrawableSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="68" column="57" selection-start-line="68" selection-start-column="57" selection-end-line="68" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/style/ReplacementSpan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/movementMethods/ClickableLinkMovementMethod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="43" column="14" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/view/ViewConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13000">
-          <caret line="562" column="22" selection-start-line="562" selection-start-column="22" selection-end-line="562" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/analyseOfficeActivity/adapter/LineAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1825">
-          <caret line="98" column="30" selection-start-line="98" selection-start-column="19" selection-end-line="98" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/text/method/LinkMovementMethod.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -1045,14 +881,377 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/psEditText/MyLinkMovementMethod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="91" column="42" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="42" />
+        <state relative-caret-position="450">
+          <caret line="40" column="44" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
           <folding>
             <element signature="e#1338#1339#0" expanded="true" />
             <element signature="e#1372#1373#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/scatteredFragment/view/ScatterFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/FragmentsHostActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1508">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/base/ActionBarFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.activity/activity/1.0.0/28eb83e6a29ac3fbb87aa632cfa0e644a313f491/activity-1.0.0-sources.jar!/androidx/activity/ComponentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="284" column="16" selection-start-line="284" selection-start-column="16" selection-end-line="284" selection-end-column="16" />
+          <folding>
+            <element signature="e#10719#10720#0" expanded="true" />
+            <element signature="e#10775#10776#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ScatterLikeListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="8" column="65" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/FileUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="52" column="25" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-172">
+          <caret line="32" column="15" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/PassOpenedActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="256" column="19" selection-start-line="256" selection-start-column="19" selection-end-line="256" selection-end-column="19" />
+          <folding>
+            <element signature="e#2886#2887#0" expanded="true" />
+            <element signature="e#2941#2942#0" expanded="true" />
+            <element signature="e#3293#3294#0" expanded="true" />
+            <element signature="e#3348#3349#0" expanded="true" />
+            <element signature="e#3676#3677#0" expanded="true" />
+            <element signature="e#3731#3732#0" expanded="true" />
+            <element signature="e#4055#4056#0" expanded="true" />
+            <element signature="e#4110#4111#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/TextViewFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3625">
+          <caret line="188" column="16" selection-start-line="188" selection-start-column="16" selection-end-line="188" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/PhotoUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="725">
+          <caret line="38" column="60" selection-start-line="38" selection-start-column="60" selection-end-line="38" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/BitmapUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3900">
+          <caret line="165" column="27" selection-start-line="165" selection-start-column="27" selection-end-line="165" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/actionbar_pass_open_viewpager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="775">
+          <caret line="31" column="20" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/PassOpenBaseFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/presenter/PassDetailPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1075">
+          <caret line="56" column="51" selection-start-line="56" selection-start-column="51" selection-end-line="56" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/view/impls/IPassDetailView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/FolderListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1675">
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/ImageFormatTools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_folder.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="14" selection-end-column="40" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_fragment_grid_pass_folder.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/graphics/Typeface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="1009" column="27" selection-start-line="1009" selection-start-column="27" selection-end-line="1009" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/impls/OnTypefaceChangeListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/adapter/FolderGridAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-933">
+          <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/mainActivity/fragments/passFoldersFragment/view/PassFolderFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="47" column="8" lean-forward="true" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/itemviews/layout/item_popwindow_text_choose.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/bean/TextTypeface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/configs/TypefaceConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/typefaceUtils/TypefaceUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/base/NormalFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/observer/State.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#302#303#0" expanded="true" />
+            <element signature="e#334#335#0" expanded="true" />
+            <element signature="e#946#947#0" expanded="true" />
+            <element signature="e#977#978#0" expanded="true" />
+            <element signature="e#1025#1026#0" expanded="true" />
+            <element signature="e#1065#1066#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/observers/base/Observer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerItemFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1625">
+          <caret line="171" column="14" selection-start-line="171" selection-start-column="14" selection-end-line="171" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/TtfGridAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="75" column="115" selection-start-line="75" selection-start-column="115" selection-end-line="75" selection-end-column="115" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.core/core/1.1.0/4ae37fad1fe95b42aa47a720908df37ba5d3c85e/core-1.1.0-sources.jar!/androidx/core/widget/PopupWindowCompat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="65" column="23" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/activities/passOpenedActivity/fragments/ViewPagerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="556" selection-start-line="556" selection-end-line="556" />
+          <folding>
+            <element signature="e#2836#2837#0" expanded="true" />
+            <element signature="e#2891#2892#0" expanded="true" />
+            <element signature="e#3486#3487#0" expanded="true" />
+            <element signature="e#3535#3536#0" expanded="true" />
+            <element signature="e#3676#3677#0" expanded="true" />
+            <element signature="e#3724#3725#0" expanded="true" />
+            <element signature="e#17245#17246#0" expanded="true" />
+            <element signature="e#17290#17291#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/popwindows/layout/pop_seekbar_fontsize.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/view/popWindows/fontstylePopWindows/FontSizePopWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-145">
+          <caret line="70" column="5" lean-forward="true" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+          <folding>
+            <element signature="e#2577#2578#0" expanded="true" />
+            <element signature="e#2618#2619#0" expanded="true" />
+            <element signature="e#2841#2842#0" expanded="true" />
+            <element signature="e#2882#2883#0" expanded="true" />
+            <element signature="e#2668#2669#0" expanded="true" />
+            <element signature="e#2725#2726#0" expanded="true" />
+            <element signature="e#2511#2512#0" expanded="true" />
+            <element signature="e#2591#2592#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/viewAndModels/Shader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="326" column="19" selection-start-line="326" selection-start-column="19" selection-end-line="326" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/shade/viewAndModels/ShadeView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="482" column="123" lean-forward="true" selection-start-line="482" selection-start-column="123" selection-end-line="482" selection-end-column="123" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/ClickableImageSpan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="79" column="20" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pass/util/spans/customSpans/MyImageSpan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="82" column="46" selection-start-line="82" selection-start-column="46" selection-end-line="82" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_viewpager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_text_view.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="20" column="46" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layouts/fragments/layout/fragment_pass_viewpager_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1025">
+          <caret line="41" column="46" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
   </component>
 </project>

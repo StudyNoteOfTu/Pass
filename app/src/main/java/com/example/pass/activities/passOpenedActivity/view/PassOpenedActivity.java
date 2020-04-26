@@ -6,10 +6,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.pass.R;
+import com.example.pass.activities.mainActivity.fragments.mineFragment.view.MineFragment;
+import com.example.pass.activities.mainActivity.fragments.passFoldersFragment.view.PassFolderFragment;
+import com.example.pass.activities.mainActivity.fragments.scatteredFragment.view.ScatterFragment;
 import com.example.pass.activities.passOpenedActivity.bean.TopNum1.ItemBean;
 import com.example.pass.activities.passOpenedActivity.bean.TopNumOver1.HBean;
 import com.example.pass.activities.passOpenedActivity.bean.TopNumOver1.ItemH1;
 import com.example.pass.activities.passOpenedActivity.fragments.FolderListFragment;
+import com.example.pass.activities.passOpenedActivity.fragments.PassOpenBaseFragment;
 import com.example.pass.activities.passOpenedActivity.fragments.ScatterLikeListFragment;
 import com.example.pass.activities.passOpenedActivity.fragments.TextViewFragment;
 import com.example.pass.activities.passOpenedActivity.fragments.ViewPagerFragment;
@@ -18,6 +22,8 @@ import com.example.pass.activities.passOpenedActivity.presenter.PassDetailPresen
 import com.example.pass.activities.passOpenedActivity.view.impls.IPassDetailView;
 import com.example.pass.base.ActionBarFragment;
 import com.example.pass.base.BaseActivity;
+import com.example.pass.base.BaseFragment;
+import com.example.pass.util.FileUtil;
 
 import java.util.List;
 
@@ -61,15 +67,39 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
     private void initFragments() {
         mFolderListFragment = new FolderListFragment();
         mFolderListFragment.setActionBar(getSupportActionBar());
+        mFolderListFragment.setOnBackPressedListener(new PassOpenBaseFragment.OnBackPressedListener() {
+            @Override
+            public void onBackPressed(ActionBarFragment fromFragment) {
+                pressBack(fromFragment);
+            }
+        });
 
         mScatterLikeListFragment = new ScatterLikeListFragment();
         mScatterLikeListFragment.setActionBar(getSupportActionBar());
+        mScatterLikeListFragment.setOnBackPressedListener(new PassOpenBaseFragment.OnBackPressedListener() {
+            @Override
+            public void onBackPressed(ActionBarFragment fromFragment) {
+                pressBack(fromFragment);
+            }
+        });
 
         mViewPagerFragment = new ViewPagerFragment();
         mViewPagerFragment.setActionBar(getSupportActionBar());
+        mViewPagerFragment.setOnBackPressedListener(new PassOpenBaseFragment.OnBackPressedListener() {
+            @Override
+            public void onBackPressed(ActionBarFragment fromFragment) {
+                pressBack(fromFragment);
+            }
+        });
 
         mTextViewFragment = new TextViewFragment();
         mTextViewFragment.setActionBar(getSupportActionBar());
+        mTextViewFragment.setOnBackPressedListener(new PassOpenBaseFragment.OnBackPressedListener() {
+            @Override
+            public void onBackPressed(ActionBarFragment fromFragment) {
+                pressBack(fromFragment);
+            }
+        });
     }
 
 
@@ -106,44 +136,69 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
 
     @Override
     public void getTop2(int top, HBean.H4.H3 object) {
-        h1List = mPresenter.transformBeanToList(object);
-        Log.d(TAG, "getTop2");
-        mFragment = mFolderListFragment;
-        getSupportFragmentManager().beginTransaction().add(R.id.container, mFragment).commit();
-        mFolderListFragment.setData(top, object, new FolderListFragment.ItemClickCallback() {
+        runOnUiThread(new Runnable() {
             @Override
-            public void onClick(ItemH1 item) {
-                clickItem(item);
+            public void run() {
+                h1List = mPresenter.transformBeanToList(object);
+                Log.d(TAG, "getTop2");
+                mFragment = mFolderListFragment;
+                getSupportFragmentManager().beginTransaction().add(R.id.container, mFragment).commit();
+                //设置标题
+                switchTitle(mFolderListFragment);
+                //传递数据
+                mFolderListFragment.setData(top, object, new FolderListFragment.ItemClickCallback() {
+                    @Override
+                    public void onClick(ItemH1 item) {
+                        clickItem(item);
+                    }
+                });
             }
         });
     }
 
     @Override
     public void getTop3(int top, HBean.H4 object) {
-        h1List = mPresenter.transformBeanToList(object);
-        Log.d(TAG, "getTop3");
-        mFragment = mFolderListFragment;
-        getSupportFragmentManager().beginTransaction().add(R.id.container, mFragment).commit();
-        mFolderListFragment.setData(top, object, new FolderListFragment.ItemClickCallback() {
+        runOnUiThread(new Runnable() {
             @Override
-            public void onClick(ItemH1 item) {
-                clickItem(item);
+            public void run() {
+                h1List = mPresenter.transformBeanToList(object);
+                Log.d(TAG, "getTop3");
+                mFragment = mFolderListFragment;
+                getSupportFragmentManager().beginTransaction().add(R.id.container, mFragment).commit();
+                //设置标题
+                switchTitle(mFolderListFragment);
+                //传递数据
+                mFolderListFragment.setData(top, object, new FolderListFragment.ItemClickCallback() {
+                    @Override
+                    public void onClick(ItemH1 item) {
+                        clickItem(item);
+                    }
+                });
             }
         });
     }
 
     @Override
     public void getTop4(int top, HBean object) {
-        h1List = mPresenter.transformBeanToList(object);
-        Log.d(TAG, "getTop4");
-        mFragment = mFolderListFragment;
-        getSupportFragmentManager().beginTransaction().add(R.id.container, mFragment).commit();
-        mFolderListFragment.setData(top, object, new FolderListFragment.ItemClickCallback() {
+        runOnUiThread(new Runnable() {
             @Override
-            public void onClick(ItemH1 item) {
-                clickItem(item);
+            public void run() {
+                h1List = mPresenter.transformBeanToList(object);
+                Log.d(TAG, "getTop4");
+                mFragment = mFolderListFragment;
+                getSupportFragmentManager().beginTransaction().add(R.id.container, mFragment).commit();
+                //设置标题
+                switchTitle(mFolderListFragment);
+                //传递数据
+                mFolderListFragment.setData(top, object, new FolderListFragment.ItemClickCallback() {
+                    @Override
+                    public void onClick(ItemH1 item) {
+                        clickItem(item);
+                    }
+                });
             }
         });
+
     }
 
     private void clickItem(ItemH1 item) {
@@ -165,12 +220,61 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
     private void jumpToViewPagerFragment(int selectIndex) {
         if (mFragment != null) {
             mViewPagerFragment = new ViewPagerFragment();
+            mViewPagerFragment.setOnBackPressedListener(new PassOpenBaseFragment.OnBackPressedListener() {
+                @Override
+                public void onBackPressed(ActionBarFragment fromFragment) {
+                    pressBack(fromFragment);
+                }
+            });
             mViewPagerFragment.initData(path, h1List, selectIndex);
             mViewPagerFragment.setActionBar(getSupportActionBar());
             getSupportFragmentManager().beginTransaction().hide(mFragment).add(R.id.container, mViewPagerFragment).commit();
             mFragment = mViewPagerFragment;
+        }
+    }
 
+    private void pressBack(ActionBarFragment fromFragment) {
+        Log.d(TAG,"on Back Pressed and jump to target fragment");
+        mFragment = fromFragment;
+        if (fromFragment instanceof ViewPagerFragment){
+            jumpToFragment(mFolderListFragment);
+        }else if (fromFragment instanceof TextViewFragment){
+            finish();
+        }else if (fromFragment instanceof ScatterLikeListFragment){
+            finish();
+        }else if (fromFragment instanceof FolderListFragment){
+            finish();
         }
 
+
     }
+
+    private void jumpToFragment(ActionBarFragment toFragment) {
+        //判断当前显示的Fragment是不是切换的Fragment
+        if (mFragment != toFragment) {
+            //判断切换的Fragment是否已经添加过
+
+            //切到新标题
+            switchTitle(toFragment);
+
+            if (!toFragment.isAdded()) {
+                //如果没有，则先把当前的Fragment隐藏，把切换的Fragment添加上
+                getSupportFragmentManager().beginTransaction().hide(mFragment)
+                        .add(R.id.container, toFragment).commit();
+            } else {
+                //如果已经添加过，则先把当前的Fragment隐藏，把切换的Fragment显示出来
+                getSupportFragmentManager().beginTransaction()
+                        .hide(mFragment).show(toFragment).commit();
+            }
+            mFragment = toFragment;
+        }
+    }
+
+    private void switchTitle(ActionBarFragment toFragment) {
+        if (toFragment instanceof FolderListFragment){
+            toFragment.switchTitle(FileUtil.getFolderName(path));
+        }
+    }
+
+
 }

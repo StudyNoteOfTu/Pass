@@ -1,7 +1,9 @@
 package com.example.pass.activities.passOpenedActivity.fragments;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +39,8 @@ public class ViewPagerItemFragment extends NormalFragment implements Observer<St
     ShadeRelativeLayout shadeRelativeLayout;
 
     ShadeManager shadeManager;
+
+    String typeface;
 
 
     @Override
@@ -165,6 +169,10 @@ public class ViewPagerItemFragment extends NormalFragment implements Observer<St
         }
         tv_title.setText(title);
         tv_content.setText(content);
+        //设置字体
+        if (!TextUtils.isEmpty(typeface)){
+            tv_content.setTypeface(Typeface.createFromFile(typeface));
+        }
 
         List<Shader> shaders = new ArrayList<>();
         Shader shader;
@@ -218,6 +226,10 @@ public class ViewPagerItemFragment extends NormalFragment implements Observer<St
                 if (tv_content != null)tv_content.setTextSize(state.getFontSize());
                 break;
 
+            case TYPEFACE:
+                typeface = state.getTypeface();
+                if (tv_content != null) tv_content.setTypeface(Typeface.createFromFile(state.getTypeface()));
+                break;
         }
 
     }

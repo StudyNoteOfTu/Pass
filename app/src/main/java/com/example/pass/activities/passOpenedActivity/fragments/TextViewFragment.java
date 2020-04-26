@@ -2,24 +2,19 @@ package com.example.pass.activities.passOpenedActivity.fragments;
 
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.core.widget.PopupWindowCompat;
-import androidx.fragment.app.Fragment;
 
 import com.example.pass.R;
-import com.example.pass.activities.passOpenedActivity.observer.State;
-import com.example.pass.base.ActionBarFragment;
 import com.example.pass.callbacks.LoadObjectCallback;
 import com.example.pass.util.FileUtil;
 import com.example.pass.util.officeUtils.MyXmlWriter;
@@ -30,14 +25,14 @@ import com.example.pass.util.shade.util.ShadePaintManager;
 import com.example.pass.util.shade.viewAndModels.ShadeRelativeLayout;
 import com.example.pass.util.shade.viewAndModels.ShadeView;
 import com.example.pass.util.shade.viewAndModels.Shader;
-import com.example.pass.view.popWindows.FontSizePopWindow;
+import com.example.pass.view.popWindows.fontstylePopWindows.FontSizePopWindow;
 import com.example.pass.view.popWindows.MenuPopWindow;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextViewFragment extends ActionBarFragment {
+public class TextViewFragment extends PassOpenBaseFragment {
 
     private TextView textView;
     private ShadeView shadeView;
@@ -243,6 +238,16 @@ public class TextViewFragment extends ActionBarFragment {
                 @Override
                 public void onClick(View v) {
                     showMenuPopWindow(v);
+                }
+            });
+
+            //返回键
+            (customView.findViewById(R.id.img_back)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnBackPressedListener != null){
+                        mOnBackPressedListener.onBackPressed(TextViewFragment.this);
+                    }
                 }
             });
 

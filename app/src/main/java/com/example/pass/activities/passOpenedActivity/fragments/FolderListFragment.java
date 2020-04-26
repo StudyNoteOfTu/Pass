@@ -2,8 +2,10 @@ package com.example.pass.activities.passOpenedActivity.fragments;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,7 +23,7 @@ import com.example.pass.base.ActionBarFragment;
 
 import java.util.List;
 
-public class FolderListFragment extends ActionBarFragment {
+public class FolderListFragment extends PassOpenBaseFragment {
 
     RecyclerView recyclerView;
     TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
@@ -86,6 +88,27 @@ public class FolderListFragment extends ActionBarFragment {
 
     @Override
     public void switchTitle(String title) {
+
+        if (mActionBar != null) {
+            mActionBar.setCustomView(R.layout.actionbar_pass_open_viewpager);
+            mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            View customView= mActionBar.getCustomView();
+            ((TextView)customView.findViewById(R.id.tv_title)).setText(title);
+
+            //右边按键不显示
+            (customView.findViewById(R.id.img_menu)).setVisibility(View.INVISIBLE);
+
+            //返回键
+            (customView.findViewById(R.id.img_back)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnBackPressedListener != null){
+                        mOnBackPressedListener.onBackPressed(FolderListFragment.this);
+                    }
+                }
+            });
+
+        }
 
     }
 }

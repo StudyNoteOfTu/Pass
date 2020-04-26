@@ -32,6 +32,13 @@ public class PassFolderFragment extends BaseFragment<IPassFolderView, PassFolder
     private FolderGridAdapter mAdapter;
 
     @Override
+    protected int setLayoutId() {
+        return R.layout.fragment_pass_folder;
+    }
+
+
+
+    @Override
     protected PassFolderPresenter<IPassFolderView> createPresenter() {
         return new PassFolderPresenter<>();
     }
@@ -51,10 +58,6 @@ public class PassFolderFragment extends BaseFragment<IPassFolderView, PassFolder
         if (mPresenter != null)mPresenter.loadLocalFolder();
     }
 
-    @Override
-    protected int setLayoutId() {
-        return R.layout.fragment_pass_folder;
-    }
 
     @Override
     public void switchTitle(String title) {
