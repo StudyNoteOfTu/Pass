@@ -2,20 +2,20 @@ package com.example.pass.activities.mainActivity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.example.pass.R;
 import com.example.pass.activities.mainActivity.fragments.mineFragment.view.MineFragment;
 import com.example.pass.activities.mainActivity.fragments.passFoldersFragment.view.PassFolderFragment;
 import com.example.pass.activities.mainActivity.fragments.scatteredFragment.view.ScatterFragment;
+import com.example.pass.aop.annotations.BehaviorTrace;
+import com.example.pass.aop.permissionTrace.PermissionTrace;
 import com.example.pass.base.BaseFragment;
 
 public class FragmentsHostActivity extends AppCompatActivity {
@@ -33,6 +33,7 @@ public class FragmentsHostActivity extends AppCompatActivity {
 
     private BaseFragment mFragment;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,19 @@ public class FragmentsHostActivity extends AppCompatActivity {
         //设置切换监听器
         setListener();
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                initPermission();
+            }
+        }).start();
+
+
+    }
+
+    @PermissionTrace
+    private void initPermission() {
+        Log.d("PermissionTest","this time has permission");
     }
 
     private void setListener() {
@@ -68,6 +82,8 @@ public class FragmentsHostActivity extends AppCompatActivity {
         });
     }
 
+    //拦截，性能同级
+    @BehaviorTrace("更新fragment")
     private void initFragment(){
         mScatterFragment = new ScatterFragment();
         mScatterFragment.setActionBar(getSupportActionBar());
@@ -82,7 +98,6 @@ public class FragmentsHostActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.container,mFragment).commit();
         mFragment.switchTitle("首页");
     }
-
 
 
     private void switchFragment(BaseFragment fragment) {
@@ -109,7 +124,9 @@ public class FragmentsHostActivity extends AppCompatActivity {
         }
     }
 
+    @BehaviorTrace(value = "更新views")
     private void initViews() {
+
         radioGroup = findViewById(R.id.radioGroup);
         mRBScatter = findViewById(R.id.rbScatter);
         mRBPass = findViewById(R.id.rbPass);
