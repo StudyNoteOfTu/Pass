@@ -6,9 +6,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.pass.R;
-import com.example.pass.activities.mainActivity.fragments.mineFragment.view.MineFragment;
-import com.example.pass.activities.mainActivity.fragments.passFoldersFragment.view.PassFolderFragment;
-import com.example.pass.activities.mainActivity.fragments.scatteredFragment.view.ScatterFragment;
 import com.example.pass.activities.passOpenedActivity.bean.TopNum1.ItemBean;
 import com.example.pass.activities.passOpenedActivity.bean.TopNumOver1.HBean;
 import com.example.pass.activities.passOpenedActivity.bean.TopNumOver1.ItemH1;
@@ -17,12 +14,10 @@ import com.example.pass.activities.passOpenedActivity.fragments.PassOpenBaseFrag
 import com.example.pass.activities.passOpenedActivity.fragments.ScatterLikeListFragment;
 import com.example.pass.activities.passOpenedActivity.fragments.TextViewFragment;
 import com.example.pass.activities.passOpenedActivity.fragments.ViewPagerFragment;
-import com.example.pass.activities.passOpenedActivity.fragments.ViewPagerItemFragment;
 import com.example.pass.activities.passOpenedActivity.presenter.PassDetailPresenter;
 import com.example.pass.activities.passOpenedActivity.view.impls.IPassDetailView;
 import com.example.pass.base.ActionBarFragment;
 import com.example.pass.base.BaseActivity;
-import com.example.pass.base.BaseFragment;
 import com.example.pass.util.FileUtil;
 
 import java.util.List;
@@ -45,7 +40,7 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
     String path;
 
     //所有需要展示的H1
-    List<HBean.H4.H3.H2.H1> h1List;
+//    List<HBean.H4.H3.H2.H1> h1List;
 
     @Override
     protected int setLayoutId() {
@@ -59,8 +54,7 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
 
         initFragments();
 
-        mPresenter.getDetail(path);
-
+        mPresenter.getFileDetail(path);
 
     }
 
@@ -125,13 +119,13 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
         Log.d(TAG, "getTop0");
         mFragment = mTextViewFragment;
         getSupportFragmentManager().beginTransaction().add(R.id.container, mFragment).commit();
-        mTextViewFragment.setData(path, spannableStringBuilder);
+        mPresenter.initTextDetailModel(path,spannableStringBuilder);
+        mTextViewFragment.setData(path, mPresenter);
     }
 
     @Override
     public void getTop1(int top, List<ItemBean> object) {
         Log.d(TAG, "getTop1");
-
     }
 
     @Override
@@ -139,7 +133,8 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                h1List = mPresenter.transformBeanToList(object);
+//                h1List = mPresenter.transformBeanToList(object);
+                mPresenter.initTextDetailModel(path,mPresenter.transformBeanToList(object));
                 Log.d(TAG, "getTop2");
                 mFragment = mFolderListFragment;
                 getSupportFragmentManager().beginTransaction().add(R.id.container, mFragment).commit();
@@ -161,7 +156,8 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                h1List = mPresenter.transformBeanToList(object);
+//                h1List = mPresenter.transformBeanToList(object);
+                mPresenter.initTextDetailModel(path,mPresenter.transformBeanToList(object));
                 Log.d(TAG, "getTop3");
                 mFragment = mFolderListFragment;
                 getSupportFragmentManager().beginTransaction().add(R.id.container, mFragment).commit();
@@ -183,7 +179,8 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                h1List = mPresenter.transformBeanToList(object);
+//                h1List = mPresenter.transformBeanToList(object);
+                mPresenter.initTextDetailModel(path,mPresenter.transformBeanToList(object));
                 Log.d(TAG, "getTop4");
                 mFragment = mFolderListFragment;
                 getSupportFragmentManager().beginTransaction().add(R.id.container, mFragment).commit();
@@ -198,17 +195,15 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
                 });
             }
         });
-
     }
 
     private void clickItem(ItemH1 item) {
         //获取click的item在arraylist中是什么
+        List<HBean.H4.H3.H2.H1> h1List = mPresenter.getH1List();
         if (h1List != null) {
             for (int i = 0; i < h1List.size(); i++) {
                 //判断item在哪一个
-                Log.d("2020413DATA2", "index = " + i);
                 if (item.getData() == h1List.get(i)) {
-                    Log.d("2020413DATA", "same！！！！ ,index = " + i);
                     //开始跳转
                     jumpToViewPagerFragment(i);
                     break;
@@ -226,7 +221,7 @@ public class PassOpenedActivity extends BaseActivity<IPassDetailView, PassDetail
                     pressBack(fromFragment);
                 }
             });
-            mViewPagerFragment.initData(path, h1List, selectIndex);
+            mViewPagerFragment.initData(path,selectIndex,mPresenter);
             mViewPagerFragment.setActionBar(getSupportActionBar());
             getSupportFragmentManager().beginTransaction().hide(mFragment).add(R.id.container, mViewPagerFragment).commit();
             mFragment = mViewPagerFragment;

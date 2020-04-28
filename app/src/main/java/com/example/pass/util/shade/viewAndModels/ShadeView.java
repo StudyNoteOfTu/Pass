@@ -530,6 +530,10 @@ public class ShadeView extends View implements ShadeManager.OnLocateCallBack {
         return SpanToXmlUtil.transformAllSpanToXmlFile(new SpannableStringBuilder(mSpannable));
     }
 
+    public SpannableStringBuilder getSpannable(){
+        return new SpannableStringBuilder(mSpannable);
+    }
+
     public void setEditable(boolean isEditable) {
         this.isEditable = isEditable;
     }

@@ -20,6 +20,8 @@ import com.example.pass.activities.passOpenedActivity.bean.TopNumOver1.HBean;
 import com.example.pass.activities.passOpenedActivity.bean.TopNumOver1.ParentInterface;
 import com.example.pass.activities.passOpenedActivity.observer.PagerStateObserverable;
 import com.example.pass.activities.passOpenedActivity.observer.State;
+import com.example.pass.activities.passOpenedActivity.presenter.PassDetailPresenter;
+import com.example.pass.activities.passOpenedActivity.view.impls.IPassDetailView;
 import com.example.pass.callbacks.LoadObjectCallback;
 import com.example.pass.util.FileUtil;
 import com.example.pass.util.officeUtils.MyXmlWriter;
@@ -61,7 +63,7 @@ public class ViewPagerFragment extends PassOpenBaseFragment {
     private String path;
     private int selectedIndex;
 
-    private List<HBean.H4.H3.H2.H1> h1List;
+//    private List<HBean.H4.H3.H2.H1> h1List;
 
     private List<ViewPagerItemFragment> viewPagerItemFragmentList;
 
@@ -78,6 +80,11 @@ public class ViewPagerFragment extends PassOpenBaseFragment {
      * 当前字体样式（由路径标识）
      */
     private String currentTypefaceTagWithPath = "";
+
+    /**
+     * 从Activity传来的表现层的引用
+     */
+    private PassDetailPresenter<IPassDetailView> passDetailPresenter;
 
     @Override
     protected int setLayoutId() {
@@ -171,6 +178,7 @@ public class ViewPagerFragment extends PassOpenBaseFragment {
         List<ShaderBean> shaderBeans = ShaderXmlTool.analyseXml(path + File.separator + "shader" + "/shade.shader");
         viewPagerItemFragmentList = new ArrayList<>();
         ViewPagerItemFragment fragment;
+        List<HBean.H4.H3.H2.H1> h1List = passDetailPresenter.getH1List();
         for (int i = 0; i < h1List.size(); i++) {
             fragment = new ViewPagerItemFragment();
 //            fragment.setData(isShow, h1List.get(i).h1Text, h1List.get(i).detail, shaderBeans);
@@ -216,8 +224,6 @@ public class ViewPagerFragment extends PassOpenBaseFragment {
      * 保存所有文件和方片
      */
     private void saveShaders() {
-        Log.d("2020418SaveShaders", "save shaders path = " + path);
-//        ShaderXmlTool.createXml(shaderBeans, FileUtil.getParentPath(FileUtil.getParentPath(path))+File.separator+"shader","shade");
         List<ShaderBean> shaderBeans = new ArrayList<>();
         ShaderBean bean;
         for (ViewPagerItemFragment fragment : viewPagerItemFragmentList) {
@@ -229,8 +235,8 @@ public class ViewPagerFragment extends PassOpenBaseFragment {
                 shaderBeans.add(bean);
             }
         }
-        //获取到所有shader之后，存入数据
-        ShaderXmlTool.createXml(shaderBeans, path + File.separator + "shader", "shade");
+//        //获取到所有shader之后，存入数据
+//        ShaderXmlTool.createXml(shaderBeans, path + File.separator + "shader", "shade");
 
         //存储所有文字信息
         //拿到所有viewpagerItemFragment
@@ -238,149 +244,154 @@ public class ViewPagerFragment extends PassOpenBaseFragment {
             //更新h1信息
             fragment.refreshH1();
         }
+
+        passDetailPresenter.saveShadersAndText(shaderBeans);
+
+
         //将bean重新整理
         //尝试获取顶层，而后获取底层
-        if (h1List.size() != 0) {
-            HBean.H4.H3.H2.H1 h1 = h1List.get(0);
-            ParentInterface rootParent = h1.parent;
-            while (rootParent != null) {
-                if (rootParent.getParent() != null) {
-                    rootParent = (ParentInterface) rootParent.getParent();
-                } else {
-                    break;
-                }
-            }
 
-            SpannableStringBuilder xmlStringBuilder = new SpannableStringBuilder();
-
-            //首先写入文件头
-            xmlStringBuilder.append(XmlTags.getXmlBegin());
-
-            //接下来写入各行字段
-
-            DataContainedSpannableStringBuilder sb;
-            List<String> xmlList;
-            //获取rootparent，开始遍历
-            if (rootParent instanceof HBean) {
-                for (HBean.H4 h4 : ((HBean) rootParent).h4List) {
-                    //写入标题字段
-                    sb = h4.h4Text;
-                    createXmlStringLine(xmlStringBuilder, sb);
-                    for (HBean.H4.H3 h3 : h4.h3List) {
-                        sb = h3.h3Text;
-                        createXmlStringLine(xmlStringBuilder, sb);
-                        for (HBean.H4.H3.H2 h2 : h3.h2List) {
-                            sb = h2.h2Text;
-                            createXmlStringLine(xmlStringBuilder, sb);
-                            for (HBean.H4.H3.H2.H1 h11 : h2.h1List) {
-                                //写入标题数据
-                                sb = h11.h1Text;
-                                createXmlStringLine(xmlStringBuilder, sb);
-                                //写入内容
-                                Log.d("2020419SpanToXmlUtil", "" + h11.h1Text);
-                                if (h11.detail != null) {
-                                    Log.d("2020419SpanToXmlUtil", "" + h11.detail.toString());
-                                    xmlList = SpanToXmlUtil.editableToXml(h11.detail);
-                                    for (String s : xmlList) {
-                                        xmlStringBuilder.append(s);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } else if (rootParent instanceof HBean.H4) {
-                for (HBean.H4.H3 h3 : ((HBean.H4) rootParent).h3List) {
-                    sb = h3.h3Text;
-                    createXmlStringLine(xmlStringBuilder, sb);
-                    for (HBean.H4.H3.H2 h2 : h3.h2List) {
-                        sb = h2.h2Text;
-                        createXmlStringLine(xmlStringBuilder, sb);
-                        for (HBean.H4.H3.H2.H1 h11 : h2.h1List) {
-                            //写入标题数据
-                            sb = h11.h1Text;
-                            createXmlStringLine(xmlStringBuilder, sb);
-                            //写入内容
-                            Log.d("2020419SpanToXmlUtil", "" + h11.h1Text);
-                            if (h11.detail != null) {
-                                Log.d("2020419SpanToXmlUtil", "" + h11.detail.toString());
-                                xmlList = SpanToXmlUtil.editableToXml(h11.detail);
-                                for (String s : xmlList) {
-                                    xmlStringBuilder.append(s);
-                                }
-                            }
-                        }
-                    }
-                }
-            } else if (rootParent instanceof HBean.H4.H3) {
-                for (HBean.H4.H3.H2 h2 : ((HBean.H4.H3) rootParent).h2List) {
-                    sb = h2.h2Text;
-                    createXmlStringLine(xmlStringBuilder, sb);
-                    for (HBean.H4.H3.H2.H1 h11 : h2.h1List) {
-                        //写入标题数据
-                        sb = h11.h1Text;
-                        createXmlStringLine(xmlStringBuilder, sb);
-                        //写入内容
-                        Log.d("2020419SpanToXmlUtil", "" + h11.h1Text);
-                        if (h11.detail != null) {
-                            Log.d("2020419SpanToXmlUtil", "" + h11.detail.toString());
-                            xmlList = SpanToXmlUtil.editableToXml(h11.detail);
-                            for (String s : xmlList) {
-                                xmlStringBuilder.append(s);
-                            }
-                        }
-                    }
-                }
-            } else if (rootParent instanceof HBean.H4.H3.H2) {
-                for (HBean.H4.H3.H2.H1 h11 : ((HBean.H4.H3.H2) rootParent).h1List) {
-                    //写入标题数据
-                    sb = h11.h1Text;
-                    createXmlStringLine(xmlStringBuilder, sb);
-                    //写入内容
-                    Log.d("2020419SpanToXmlUtil", "" + h11.h1Text);
-                    if (h11.detail != null) {
-                        Log.d("2020419SpanToXmlUtil", "" + h11.detail.toString());
-                        xmlList = SpanToXmlUtil.editableToXml(h11.detail);
-                        for (String s : xmlList) {
-                            xmlStringBuilder.append(s);
-                        }
-                    }
-                }
-            }
-            xmlStringBuilder.append(XmlTags.getXmlEnd());
-
-            //写入文件
-            MyXmlWriter.compileLinesToXml(xmlStringBuilder.toString(), path + "/final", "final", new LoadObjectCallback<String>() {
-                @Override
-                public void onStart() {
-
-                }
-
-                @Override
-                public void onFinish(String result) {
-                    Log.d("OnFinishTest", result);
-                }
-
-                @Override
-                public void onError(String error) {
-
-                }
-            });
-        }
+//        if (h1List.size() != 0) {
+//            HBean.H4.H3.H2.H1 h1 = h1List.get(0);
+//            ParentInterface rootParent = h1.parent;
+//            while (rootParent != null) {
+//                if (rootParent.getParent() != null) {
+//                    rootParent = (ParentInterface) rootParent.getParent();
+//                } else {
+//                    break;
+//                }
+//            }
+//
+//            SpannableStringBuilder xmlStringBuilder = new SpannableStringBuilder();
+//
+//            //首先写入文件头
+//            xmlStringBuilder.append(XmlTags.getXmlBegin());
+//
+//            //接下来写入各行字段
+//
+//            DataContainedSpannableStringBuilder sb;
+//            List<String> xmlList;
+//            //获取rootparent，开始遍历
+//            if (rootParent instanceof HBean) {
+//                for (HBean.H4 h4 : ((HBean) rootParent).h4List) {
+//                    //写入标题字段
+//                    sb = h4.h4Text;
+//                    createXmlStringLine(xmlStringBuilder, sb);
+//                    for (HBean.H4.H3 h3 : h4.h3List) {
+//                        sb = h3.h3Text;
+//                        createXmlStringLine(xmlStringBuilder, sb);
+//                        for (HBean.H4.H3.H2 h2 : h3.h2List) {
+//                            sb = h2.h2Text;
+//                            createXmlStringLine(xmlStringBuilder, sb);
+//                            for (HBean.H4.H3.H2.H1 h11 : h2.h1List) {
+//                                //写入标题数据
+//                                sb = h11.h1Text;
+//                                createXmlStringLine(xmlStringBuilder, sb);
+//                                //写入内容
+//                                Log.d("2020419SpanToXmlUtil", "" + h11.h1Text);
+//                                if (h11.detail != null) {
+//                                    Log.d("2020419SpanToXmlUtil", "" + h11.detail.toString());
+//                                    xmlList = SpanToXmlUtil.editableToXml(h11.detail);
+//                                    for (String s : xmlList) {
+//                                        xmlStringBuilder.append(s);
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            } else if (rootParent instanceof HBean.H4) {
+//                for (HBean.H4.H3 h3 : ((HBean.H4) rootParent).h3List) {
+//                    sb = h3.h3Text;
+//                    createXmlStringLine(xmlStringBuilder, sb);
+//                    for (HBean.H4.H3.H2 h2 : h3.h2List) {
+//                        sb = h2.h2Text;
+//                        createXmlStringLine(xmlStringBuilder, sb);
+//                        for (HBean.H4.H3.H2.H1 h11 : h2.h1List) {
+//                            //写入标题数据
+//                            sb = h11.h1Text;
+//                            createXmlStringLine(xmlStringBuilder, sb);
+//                            //写入内容
+//                            Log.d("2020419SpanToXmlUtil", "" + h11.h1Text);
+//                            if (h11.detail != null) {
+//                                Log.d("2020419SpanToXmlUtil", "" + h11.detail.toString());
+//                                xmlList = SpanToXmlUtil.editableToXml(h11.detail);
+//                                for (String s : xmlList) {
+//                                    xmlStringBuilder.append(s);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            } else if (rootParent instanceof HBean.H4.H3) {
+//                for (HBean.H4.H3.H2 h2 : ((HBean.H4.H3) rootParent).h2List) {
+//                    sb = h2.h2Text;
+//                    createXmlStringLine(xmlStringBuilder, sb);
+//                    for (HBean.H4.H3.H2.H1 h11 : h2.h1List) {
+//                        //写入标题数据
+//                        sb = h11.h1Text;
+//                        createXmlStringLine(xmlStringBuilder, sb);
+//                        //写入内容
+//                        Log.d("2020419SpanToXmlUtil", "" + h11.h1Text);
+//                        if (h11.detail != null) {
+//                            Log.d("2020419SpanToXmlUtil", "" + h11.detail.toString());
+//                            xmlList = SpanToXmlUtil.editableToXml(h11.detail);
+//                            for (String s : xmlList) {
+//                                xmlStringBuilder.append(s);
+//                            }
+//                        }
+//                    }
+//                }
+//            } else if (rootParent instanceof HBean.H4.H3.H2) {
+//                for (HBean.H4.H3.H2.H1 h11 : ((HBean.H4.H3.H2) rootParent).h1List) {
+//                    //写入标题数据
+//                    sb = h11.h1Text;
+//                    createXmlStringLine(xmlStringBuilder, sb);
+//                    //写入内容
+//                    Log.d("2020419SpanToXmlUtil", "" + h11.h1Text);
+//                    if (h11.detail != null) {
+//                        Log.d("2020419SpanToXmlUtil", "" + h11.detail.toString());
+//                        xmlList = SpanToXmlUtil.editableToXml(h11.detail);
+//                        for (String s : xmlList) {
+//                            xmlStringBuilder.append(s);
+//                        }
+//                    }
+//                }
+//            }
+//            xmlStringBuilder.append(XmlTags.getXmlEnd());
+//
+//            //写入文件
+//            MyXmlWriter.compileLinesToXml(xmlStringBuilder.toString(), path + "/final", "final", new LoadObjectCallback<String>() {
+//                @Override
+//                public void onStart() {
+//
+//                }
+//
+//                @Override
+//                public void onFinish(String result) {
+//                    Log.d("OnFinishTest", result);
+//                }
+//
+//                @Override
+//                public void onError(String error) {
+//
+//                }
+//            });
+//        }
     }
 
     /**
      * 创建单行xmlString
      */
-    private void createXmlStringLine(SpannableStringBuilder xmlStringBuilder, DataContainedSpannableStringBuilder sb) {
-        xmlStringBuilder.append(XmlTags.getLineBegin(sb.getKey(), sb.getValue()));
-        xmlStringBuilder.append(XmlTags.getBlockBegin());
-        xmlStringBuilder.append(XmlTags.getTextBegin());
-        xmlStringBuilder.append(sb.toString());
-        xmlStringBuilder.append(XmlTags.getTextEnd());
-        xmlStringBuilder.append(XmlTags.getBlockEnd());
-        xmlStringBuilder.append(XmlTags.getLineEnd());
-    }
+//    private void createXmlStringLine(SpannableStringBuilder xmlStringBuilder, DataContainedSpannableStringBuilder sb) {
+//        xmlStringBuilder.append(XmlTags.getLineBegin(sb.getKey(), sb.getValue()));
+//        xmlStringBuilder.append(XmlTags.getBlockBegin());
+//        xmlStringBuilder.append(XmlTags.getTextBegin());
+//        xmlStringBuilder.append(sb.toString());
+//        xmlStringBuilder.append(XmlTags.getTextEnd());
+//        xmlStringBuilder.append(XmlTags.getBlockEnd());
+//        xmlStringBuilder.append(XmlTags.getLineEnd());
+//    }
 
 
     /**
@@ -408,15 +419,12 @@ public class ViewPagerFragment extends PassOpenBaseFragment {
      * 初始化数据
      *
      * @param path
-     * @param h1List
      * @param selectIndex
      */
-    public void initData(String path, List<HBean.H4.H3.H2.H1> h1List, int selectIndex) {
-        this.h1List = h1List;
+    public void initData(String path, int selectIndex,PassDetailPresenter<IPassDetailView> presenter) {
+        this.passDetailPresenter = presenter;
         this.path = path;
         this.selectedIndex = selectIndex;
-        Log.d("2020419RootParentTest", "h1 list size = " + h1List.size());
-
     }
 
 

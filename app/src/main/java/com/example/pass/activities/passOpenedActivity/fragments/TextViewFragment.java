@@ -15,6 +15,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.core.widget.PopupWindowCompat;
 
 import com.example.pass.R;
+import com.example.pass.activities.passOpenedActivity.presenter.PassDetailPresenter;
+import com.example.pass.activities.passOpenedActivity.view.impls.IPassDetailView;
 import com.example.pass.callbacks.LoadObjectCallback;
 import com.example.pass.util.FileUtil;
 import com.example.pass.util.officeUtils.MyXmlWriter;
@@ -44,12 +46,14 @@ public class TextViewFragment extends PassOpenBaseFragment {
     private RelativeLayout tabBar;
 
     private String path;
-    private SpannableStringBuilder sb;
 
 
     private ShadeManager shadeManager;
 
     private ShadeRelativeLayout shadeRelativeLayout;
+
+    //Presenter引用
+    private PassDetailPresenter<IPassDetailView> passDetailPresenter;
 
 
     //初始状态：不可编辑，可视
@@ -64,7 +68,6 @@ public class TextViewFragment extends PassOpenBaseFragment {
         String folderName= FileUtil.getFolderName(path);
         folderName =  folderName.substring(0,folderName.lastIndexOf("_"));
         switchTitle(folderName);
-
 
         tabBar = mContentView.findViewById(R.id.tabbar);
         textView = mContentView.findViewById(R.id.textView);
@@ -113,28 +116,9 @@ public class TextViewFragment extends PassOpenBaseFragment {
                     shader.getWidth(),shader.getHeight());
             shaderBeans.add(bean);
         }
-        //存入方片
-        ShaderXmlTool.createXml(shaderBeans,path+File.separator+"shader","shade");
-        //存入当前页面文字信息
-        String xml = shadeView.getXmlString();
-        //存入文件
-        //覆盖
-        MyXmlWriter.compileLinesToXml(xml,path+"/final","final" , new LoadObjectCallback<String>() {
-            @Override
-            public void onStart() {
-
-            }
-
-            @Override
-            public void onFinish(String result) {
-                Log.d("OnFinishTest",result);
-            }
-
-            @Override
-            public void onError(String error) {
-
-            }
-        });
+        //存入当前页面Shader和文字信息
+        SpannableStringBuilder spannableStringBuilder = shadeView.getSpannable();
+        passDetailPresenter.saveShadersAndText(shaderBeans,spannableStringBuilder);
     }
 
     private void changeSeeState() {
@@ -181,9 +165,9 @@ public class TextViewFragment extends PassOpenBaseFragment {
     }
 
 
-    public void setData(String path,SpannableStringBuilder spannableStringBuilder){
+    public void setData(String path, PassDetailPresenter<IPassDetailView> passDetailPresenter){
         this.path = path;
-        this.sb = spannableStringBuilder;
+        this.passDetailPresenter = passDetailPresenter;
 
         new Thread(new Runnable() {
             @Override
@@ -194,12 +178,13 @@ public class TextViewFragment extends PassOpenBaseFragment {
                 myActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        textView.setText(spannableStringBuilder);
+                        SpannableStringBuilder sb = passDetailPresenter.getSpannable();
+                        textView.setText(sb);
                         shadeRelativeLayout.setShadeView(shadeView);
                         shadeRelativeLayout.setSendTouchView(textView);
                         shadeManager = ShadeManager.newInstance();
                         ShadeManager.setCurrentShadeManager(shadeManager);//设置shademanager为当前shademanager
-                        List<ShaderBean> shaderBeans= ShaderXmlTool.analyseXml(path+ File.separator+"shader"+"/shade.shader");
+                        List<ShaderBean> shaderBeans = passDetailPresenter.getShaderBeans(path);
                         List<Shader> shaders = new ArrayList<>();
                         Shader shader;
                         for (ShaderBean shaderBean : shaderBeans) {
@@ -213,7 +198,7 @@ public class TextViewFragment extends PassOpenBaseFragment {
 
                         shadeManager.setHolder(textView);
                         shadeManager.setOnLocateCallBack(shadeView);
-                        shadeView.init(shaders,textView,shadeManager,spannableStringBuilder,ShadePaintManager.getPaint(true));
+                        shadeView.init(shaders,textView,shadeManager,sb,ShadePaintManager.getPaint(true));
 
                         isEdit = false;
                         isShow = true;

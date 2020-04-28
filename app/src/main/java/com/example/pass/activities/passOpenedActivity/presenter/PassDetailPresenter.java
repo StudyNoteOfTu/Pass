@@ -4,10 +4,14 @@ import android.text.SpannableStringBuilder;
 
 import com.example.pass.activities.passOpenedActivity.bean.TopNum1.ItemBean;
 import com.example.pass.activities.passOpenedActivity.bean.TopNumOver1.HBean;
+import com.example.pass.activities.passOpenedActivity.model.TextDetailModel;
 import com.example.pass.activities.passOpenedActivity.model.PassModel;
 import com.example.pass.activities.passOpenedActivity.view.impls.IPassDetailView;
 import com.example.pass.base.BasePresenter;
+import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderBean;
+import com.example.pass.util.officeUtils.shadeInfoUtils.ShaderXmlTool;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +19,21 @@ public class PassDetailPresenter<T extends IPassDetailView> extends BasePresente
 
     private PassModel passModel;
 
+    private TextDetailModel textDetailModel;
+
     public PassDetailPresenter() {
         passModel = new PassModel();
+        textDetailModel = new TextDetailModel();
     }
 
-    public void getDetail(String path) {
+
+    //------------------------解析文件，获得数据----------------------------------
+
+    /**
+     * 解析文件内容，解析到h1单元
+     * @param path 文件相对根路径
+     */
+    public void getFileDetail(String path) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -67,7 +81,9 @@ public class PassDetailPresenter<T extends IPassDetailView> extends BasePresente
 
     }
 
-    //将得到的TopNumOver1对象转成可以逐个展现的对象List，应当作引用
+    /**
+     * 将得到的TopNumOver1对象转成可以逐个展现的对象List，应当作引用
+     */
     public List<HBean.H4.H3.H2.H1> transformBeanToList(Object obj){
         List<HBean.H4.H3.H2.H1> resultList = new ArrayList<>();
         //进行遍历，拿到所有的h1,注意list是有顺序的
@@ -93,5 +109,68 @@ public class PassDetailPresenter<T extends IPassDetailView> extends BasePresente
         }
         return resultList;
     }
+
+
+    /**
+     * 获得遮罩文件解析结果
+     * @param path 文件相对根路径
+     * @return
+     */
+    public List<ShaderBean> getShaderBeans(String path){
+        return ShaderXmlTool.analyseXml(path+ File.separator+"shader"+"/shade.shader");
+    }
+
+
+    //-----------------------必须在Activity中 初始化数据Model------------------------------
+
+    /**
+     * 设置H1Model必须的一些数据
+     * @param path 文件路径
+     * @param list H1集合
+     */
+    public void initTextDetailModel(String path, List<HBean.H4.H3.H2.H1> list){
+        textDetailModel.setH1List(list);
+        textDetailModel.setPath(path);
+    }
+
+    public void initTextDetailModel(String path, SpannableStringBuilder spannableStringBuilder){
+        textDetailModel.setSpannableStringBuilder(spannableStringBuilder);
+        textDetailModel.setPath(path);
+    }
+
+
+    //----------------------------------用在Fragment中（子View层）-------------------------------------
+
+
+    /**
+     * 存入所有Text、Shader信息
+     */
+    public void saveShadersAndText(List<ShaderBean> shaderBeans){
+        textDetailModel.writeShaders(shaderBeans);
+        textDetailModel.writeTextInfo();
+    }
+
+    /**
+     * 存入所有Text、Shader信息
+     */
+    public void saveShadersAndText(List<ShaderBean> shaderBeans,SpannableStringBuilder spannable){
+        textDetailModel.writeShaders(shaderBeans);
+        textDetailModel.writeTextInfo(spannable);
+    }
+
+    /**
+     * 获得h1List
+     */
+    public List<HBean.H4.H3.H2.H1> getH1List(){
+        return textDetailModel.getH1List();
+    }
+
+    /**
+     * 获得spannable
+     */
+    public SpannableStringBuilder getSpannable(){
+        return textDetailModel.getSpannableStringBuilder();
+    }
+
 
 }
