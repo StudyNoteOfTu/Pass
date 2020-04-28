@@ -24,7 +24,7 @@ public class MyImageSpan extends ClickableImageSpan implements CustomSpan, Touch
     public float y;//canvas上真实top
     public int bottom;//canvas上真实bottom
 
-    //显示图片的路径标识
+    //显示图片的路径标识，应该作为相对父路径下的子路径
     private String imgUrl;
 
     private WeakReference<Drawable> mDrawableRef;

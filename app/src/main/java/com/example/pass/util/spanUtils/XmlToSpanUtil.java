@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Environment;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,6 +25,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -94,7 +96,7 @@ public class XmlToSpanUtil {
 
                         if (tagBegin.equalsIgnoreCase("pic")) {
                             String path = xmlPullParser.nextText();
-                            Bitmap bitmap = FileUtil.getLocalBitmap(path);
+                            Bitmap bitmap = FileUtil.getLocalBitmap(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+path);
                             if (bitmap != null) {
 //                                ImageSpan imageSpan = new ImageSpan(context, bitmap);
                                 MyImageSpan imageSpan = new MyImageSpan(context,bitmap,path);

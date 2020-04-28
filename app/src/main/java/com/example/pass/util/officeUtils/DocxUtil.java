@@ -195,8 +195,12 @@ public class DocxUtil {
 
         String picturePath = FileUtil.createFile(dir_path, "image"+presentPicture + ".jpg");
         FileUtil.writePicture(picturePath, pictureBytes);
+        String relativePicturePath = dir_path+File.separator+"image"+presentPicture+".jpg";
+        Log.d("2020428","relativePicPath = "+relativePicturePath);
         presentPicture++;
-        String imageString = XmlTags.getPicBegin() + picturePath + XmlTags.getPicEnd();
+//        String imageString = XmlTags.getPicBegin() + picturePath + XmlTags.getPicEnd();
+        //写入的是相对路径
+        String imageString = XmlTags.getPicBegin() + relativePicturePath + XmlTags.getPicEnd();
         try {
             output.write(imageString.getBytes());
         } catch (Exception e) {

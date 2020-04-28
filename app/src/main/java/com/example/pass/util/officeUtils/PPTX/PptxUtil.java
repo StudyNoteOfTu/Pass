@@ -292,7 +292,7 @@ public class PptxUtil {
     private static void writePptxPicture(String dir,String name, FileOutputStream output, byte[] pictureBytes,String picName) {
 //        String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator+ PathConfig.PPT_PICS_PATH;
         String dir_path = dir+File.separator+"Pics";
-        File dirFile = new File(dir_path);
+        File dirFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator+dir_path);
         if (!dirFile.exists()) {
             dirFile.mkdirs();
         }
@@ -300,7 +300,10 @@ public class PptxUtil {
         String picturePath = FileUtil.createFile(dir_path, picName);
         Log.d("test","copy picture , target path is "+picturePath);
         FileUtil.writePicture(picturePath, pictureBytes);
-        String imageString = XmlTags.getPicBegin() + picturePath + XmlTags.getPicEnd();
+        String relativePicPath = dir+File.separator+"Pics"+File.separator+picName;
+        Log.d("2020428","relativePicPath = "+relativePicPath);
+//        String imageString = XmlTags.getPicBegin() + picturePath + XmlTags.getPicEnd();
+        String imageString = XmlTags.getPicBegin() + relativePicPath + XmlTags.getPicEnd();
         Log.d("test","pic tag is "+imageString);
         try {
             output.write(XmlTags.getLineBegin("", "").getBytes());
